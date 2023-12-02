@@ -25,7 +25,8 @@ try{
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                 " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
                 + " request.isAsyncStarted() " + request.isAsyncStarted()
-            + " CompletableAsync Async Sesson  !!!! CompletableAsync Async Sesson  !!!!  CompletableAsync  Async Sesson  !!!!  " +new Date().toLocaleString()  );
+            + " CompletableAsync Async Sesson  !!!! CompletableAsync Async Sesson  !!!!  CompletableAsync  Async Sesson  !!!!  " +new Date().toLocaleString()+
+            "\n"+ "    Runtime.getRuntime().availableProcessors() " +   Runtime.getRuntime().availableProcessors());
     } catch (Exception e) {
 // TODO: 17.11.2023 ERROR joiner
         subClassWriterErros.
