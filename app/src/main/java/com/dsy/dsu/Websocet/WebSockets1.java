@@ -40,7 +40,7 @@ public class WebSockets1 {
     Integer PublicId;
 
     WebSocket webSocketAndroid;
-    ClassRegistraAsyncBroadcast classRegistraAsyncBroadcast;
+
 
     public WebSockets1(Context context, int  publicId) {
         this.context = context;
@@ -57,7 +57,7 @@ public class WebSockets1 {
    public   void методИнициализацииwebsocets ( ){
          try{
 
-             classRegistraAsyncBroadcast=new ClassRegistraAsyncBroadcast();
+
              okHttpClient=new OkHttpClient();
              Request request=new Request.Builder().url("ws://192.168.254.40:8080/jboss-1.0-SNAPSHOT/sousavtodorwebsocket").build();
              echolistener=new EchoWebsocket();
@@ -119,13 +119,6 @@ public class WebSockets1 {
         public void onMessage(WebSocket webSocket, ByteString bytes) {
             super.onMessage(webSocket, bytes);
             try{
-
-                classRegistraAsyncBroadcast.metodSendBroadCastFroAsyns(context,"KEEP");
-
-                Log.d(context.getClass().getName(), "\n"
-                        + " время: " + new Date()+"\n+" +
-                        " Класс в процессе... " +  this.getClass().getName()+"\n"+
-                        " метод в процессе... " + Thread.currentThread().getStackTrace()[2].getMethodName());
 
             context.getMainExecutor().execute(new Runnable() {
                 @Override

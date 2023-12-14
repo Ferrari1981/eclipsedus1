@@ -21,12 +21,8 @@ import androidx.fragment.app.FragmentResultListener;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LifecycleOwner;
 
-import com.dsy.dsu.BroadcastRecievers.ClassRegistraAsyncBroadcast;
-import com.dsy.dsu.BusinessLogicAll.ClassCreatePublicWorkManager;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
-import com.dsy.dsu.BusinessLogicAll.SubClass_Connection_BroadcastReceiver_Sous_Asyns_Glassfish;
 import com.dsy.dsu.OrdersTransports.Window.MainActivityOrdersTransports;
-import com.dsy.dsu.Services.MyIntentServiceWebSocet;
 import com.dsy.dsu.Tabels.MainActivity_List_Tabels;
 import com.dsy.dsu.AdmissionMaterials.Window.MainActivity_AdmissionMaterials;
 import com.dsy.dsu.CommitsPayments.MainActivity_CommitPay;

@@ -69,13 +69,17 @@
         android:id="@+id/floatingActionButtonВФагментеReadandWrite"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="5dp"
+        android:layout_marginTop="675dp"
         android:layout_marginEnd="10dp"
         android:layout_marginBottom="1dp"
         android:clickable="true"
         android:src="@drawable/icon_dsu1_chat_messgae_sync_up"
         app:fabSize="mini"
         app:layout_constraintBottom_toBottomOf="@+id/editTextТелоНаписаногоСообщенияДругимСотрудникам"
-        app:layout_constraintEnd_toEndOf="@+id/recycleview_for_chat_read_write" />
+        app:layout_constraintEnd_toEndOf="@+id/recycleview_for_chat_read_write"
+        app:layout_constraintStart_toEndOf="@+id/editTextТелоНаписаногоСообщенияДругимСотрудникам"
+        app:layout_constraintTop_toTopOf="parent" />
 
 
     <androidx.recyclerview.widget.RecyclerView
