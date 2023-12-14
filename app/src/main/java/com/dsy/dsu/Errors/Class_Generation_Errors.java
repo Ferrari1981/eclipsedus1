@@ -54,7 +54,7 @@ public class Class_Generation_Errors {
         Long PезультатВставкиНовойОшибки = 0l;
         try {
             if (context != null) {
-                Long Версия = new SubClassUpVersionDATA().МетодПовышаемВерсииMODIFITATION_Client("errordsu1"
+                Long ВерсияДанных = new SubClassUpVersionDATA().МетодПовышаемВерсииMODIFITATION_Client("errordsu1"
                         , context );
                 Long UUID = (Long)
                         new Class_Generation_UUID(context).МетодГенерацииUUID();
@@ -71,7 +71,7 @@ public class Class_Generation_Errors {
                 classGrudSqlOperationsОшибки.contentValuesДляSQLBuilder_Для_GRUD_Операций.put("LineError", ЛинияОшибки);
                 classGrudSqlOperationsОшибки.contentValuesДляSQLBuilder_Для_GRUD_Операций.put("user_update", ПубличныйIDДляАсих);
                 classGrudSqlOperationsОшибки.contentValuesДляSQLBuilder_Для_GRUD_Операций.put("UUID", UUID);
-                classGrudSqlOperationsОшибки.contentValuesДляSQLBuilder_Для_GRUD_Операций.put("current_table", Версия);
+                classGrudSqlOperationsОшибки.contentValuesДляSQLBuilder_Для_GRUD_Операций.put("current_table", ВерсияДанных);
                 final Object ТекущаяВерсияПрограммы = BuildConfig.VERSION_CODE;
                 Integer ЛокальнаяВерсияПОСравнение = Integer.parseInt(ТекущаяВерсияПрограммы.toString());
                 classGrudSqlOperationsОшибки.contentValuesДляSQLBuilder_Для_GRUD_Операций.put("whose_error", ЛокальнаяВерсияПОСравнение);

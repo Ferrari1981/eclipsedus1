@@ -12,6 +12,7 @@ import com.dsy.dsu.BusinessLogicAll.Class_Generations_PUBLIC_CURRENT_ID;
 
 import com.dsy.dsu.BusinessLogicAll.Class_Generator_One_WORK_MANAGER;
 import com.dsy.dsu.OneSignals.ClassOneSingnalGenerator;
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 
@@ -115,9 +116,9 @@ public class MyFirebaseMessagingService extends FirebaseMessagingService {
         try{
         /////
 
-/*        String КлючДляFirebaseNotification="2a1819db-60c8-4ca3-a752-1b6cd9cadfa1";
+        String КлючДляFirebaseNotification="2a1819db-60c8-4ca3-a752-1b6cd9cadfa1";
 
-   FirebaseMessaging.getInstance().subscribeToTopic("adroid");
+/*   FirebaseMessaging.getInstance().subscribeToTopic("adroid");
 
             RemoteMessage rm = new RemoteMessage.Builder(КлючДляFirebaseNotification)
                     .setMessageId("myApp_" + + System.currentTimeMillis())

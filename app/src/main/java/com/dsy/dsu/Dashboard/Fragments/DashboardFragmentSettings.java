@@ -44,7 +44,7 @@ import com.dsy.dsu.BusinessLogicAll.Class_Generations_PUBLIC_CURRENT_ID;
 import com.dsy.dsu.BusinessLogicAll.Class_Generator_One_WORK_MANAGER;
 import com.dsy.dsu.BusinessLogicAll.Class_MODEL_synchronized;
 import com.dsy.dsu.CnangeServers.PUBLIC_CONTENT;
-import com.dsy.dsu.BusinessLogicAll.Websocet.WebSocketss;
+import com.dsy.dsu.Websocet.WebSockets1;
 import com.dsy.dsu.Tabels.MainActivity_New_Templates;
 import com.dsy.dsu.Services.ServiceUpdatePoОбновлениеПО;
 import com.dsy.dsu.Errors.MainActivity_Errors;
@@ -323,52 +323,7 @@ public class DashboardFragmentSettings extends  DialogFragment {
 
     // TODO: 15.08.2023  Бизнес Логика Фрагмета Настройки
     class ClassBiznesLogikaSettings{
-
         // TODO: 15.08.2023 тест код для 1С
-        private void методДляТетсирования1С() {
-            try{
-                Log.d(this.getClass().getName(), "   методДляТетсирования1С");
-                WebSocketss webSocketListener=new WebSocketss();
-
-/*    WebSocketss.ClassOkHttpОбычныйПинг classOkHttpОбычныйПинг= webSocketListener.new ClassOkHttpОбычныйПинг();
-
-            classOkHttpОбычныйПинг .методОбычногоПодключениявOkHttp(this);*/
-
-
-                // TODO: 06.06.2023
-
-                WebSocketss.классИнициализацииКлиентаWebSocerts классИнициализацииКлиентаWebSocerts= webSocketListener.new классИнициализацииКлиентаWebSocerts();
-
-                классИнициализацииКлиентаWebSocerts.методИнициализацииwebsocets(getActivity());
-
-
-/*  new Class_Get_Json_1C(getApplicationContext(),"http://uat.dsu1.ru:55080/dds/hs/apidrp/objects")
-          .МетодОтправляемJSONОт1СТестирование("userapi","User4321api",new StringBuffer("[ {  \"id\" : null,  \"chosen_organization\" : 0,  \"current_table\" : 273,  \"date_update\" : \"2022-11-27 10:33:20.737\",  \"fullname\" : \"Общество с ограниченной ответственностью СОЮЗ АВТОДОР\",  \"inn\" : \"3711025287\",  \"kpp\" : \"371101001\",  \"name\" : \"ООО СОЮЗ АВТОДОР\",  \"user_update\" : 8,  \"uuid\" : 2} ]"));
-            Log.i(this.getClass().getName(), "    holder. ФдагЧтоУжеОдинРАзБылПервыйПроход ");*/
-
-                Log.d(this.getClass().getName(), "   методДляТетсирования1С");
-            } catch (Exception e) {
-                e.printStackTrace();
-                Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
-                        + Thread.currentThread().getStackTrace()[2].getLineNumber());
-                new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(), Thread.currentThread().getStackTrace()[2].getMethodName(),
-                        Thread.currentThread().getStackTrace()[2].getLineNumber());
-
-            }
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
         private void методНастройкиВнешнегоВида() {
             try{
 
@@ -901,8 +856,9 @@ try{
                         @Override
                         public void onClick(View v) {
                             try {
-                                Intent Интент_Меню = new Intent(getContext(), MainActivity_Errors.class);
-                                Интент_Меню.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);//////FLAG_ACTIVITY_SINGLE_TOP
+                                Intent Интент_Меню = new Intent(getActivity(), MainActivity_Errors.class);
+                                Интент_Меню.setAction("com.CallBackSettingsFragment");
+                                Интент_Меню.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP| Intent.FLAG_ACTIVITY_NEW_TASK);//////FLAG_ACTIVITY_SINGLE_TOP
                                  startActivity(Интент_Меню);
                                 Log.d(this.getClass().getName(), "" +
                                         "                     case R.id.ПунктМенюПервый:");

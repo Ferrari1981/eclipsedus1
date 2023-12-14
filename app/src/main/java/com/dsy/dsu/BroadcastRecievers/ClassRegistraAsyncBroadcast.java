@@ -23,9 +23,13 @@ try{
                 broadCastForAsyncWorkMangerMyReceiver
                 = new BroadCastForAsyncWorkMangerMyReceiver();
 
-        IntentFilter intentFilter = new IntentFilter();
-        context.   registerReceiver( broadCastForAsyncWorkMangerMyReceiver  , intentFilter);
-
+        IntentFilter intentFilter = new IntentFilter( Intent.ACTION_SCREEN_ON);
+    intentFilter.addAction(Intent.ACTION_SCREEN_ON);
+    intentFilter.addAction(Intent.ACTION_SCREEN_OFF);
+    intentFilter.addAction(Intent.ACTION_BOOT_COMPLETED);
+    intentFilter.addAction(Intent.ACTION_REBOOT);
+    intentFilter.addAction(Intent.ACTION_SHUTDOWN);
+    context.   registerReceiver( broadCastForAsyncWorkMangerMyReceiver  , intentFilter);
     Log.d(context.getClass().getName(), "\n"
             + " время: " + new Date()+"\n+" +
             " Класс в процессе... " +  this.getClass().getName()+"\n"+
@@ -40,13 +44,14 @@ try{
                 Thread.currentThread().getStackTrace()[2].getLineNumber());
     }
 }
-    public void metodSendBroadCastFroAsyns(@NonNull Context context){
+    public void metodSendBroadCastFroAsyns(@NonNull Context context,@NonNull String setAction){
         try{
             // TODO: 08.10.2023
 
 
             Intent intentBroadCastForAsyncWorkMangerMyReceiver = new Intent(context,BroadCastForAsyncWorkMangerMyReceiver.class);
             intentBroadCastForAsyncWorkMangerMyReceiver.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            intentBroadCastForAsyncWorkMangerMyReceiver.setAction(setAction);
             Bundle extras = new Bundle();
             extras.putString("send_data", "test");
             intentBroadCastForAsyncWorkMangerMyReceiver.putExtras(extras);

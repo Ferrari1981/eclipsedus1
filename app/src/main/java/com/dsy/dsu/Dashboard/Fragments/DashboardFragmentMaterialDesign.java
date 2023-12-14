@@ -26,6 +26,7 @@ import com.dsy.dsu.BusinessLogicAll.ClassCreatePublicWorkManager;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.BusinessLogicAll.SubClass_Connection_BroadcastReceiver_Sous_Asyns_Glassfish;
 import com.dsy.dsu.OrdersTransports.Window.MainActivityOrdersTransports;
+import com.dsy.dsu.Services.MyIntentServiceWebSocet;
 import com.dsy.dsu.Tabels.MainActivity_List_Tabels;
 import com.dsy.dsu.AdmissionMaterials.Window.MainActivity_AdmissionMaterials;
 import com.dsy.dsu.CommitsPayments.MainActivity_CommitPay;
@@ -147,10 +148,6 @@ public class DashboardFragmentMaterialDesign extends  DialogFragment  {
         super.onStop();
         try{
 
-            metodStartingWormNAger();
-
-           // metodRegistraAsyncBroadcast();
-
             Log.d(this.getClass().getName(),"\n" + " class "
                     + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
@@ -169,48 +166,7 @@ public class DashboardFragmentMaterialDesign extends  DialogFragment  {
 
     // TODO: 07.10.2023  метод первой запуска Work Manager Public и его перввая регистарция
 
-    private void metodStartingWormNAger() {
-        try{
-        // TODO: 07.10.2023
-        Integer ПубличныйIDДляФрагмента = new SubClass_Connection_BroadcastReceiver_Sous_Asyns_Glassfish().МетодПолучениеяПубличногоID(getContext());
 
-        new ClassCreatePublicWorkManager(getContext()).metodSimpelStartingPublicWorkManger(getContext(),ПубличныйIDДляФрагмента );
-        Log.d(this.getClass().getName(),"\n" + " class "
-                + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n");
-    } catch (Exception e) {
-        e.printStackTrace();
-        Log.e(getContext().getClass().getName(),
-                "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                        " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-        new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(),
-                this.getClass().getName().toString(), Thread.currentThread().getStackTrace()[2].getMethodName().toString(),
-                Thread.currentThread().getStackTrace()[2].getLineNumber());
-    }
-    }
-    private void metodRegistraAsyncBroadcast() {
-        try{
-
-            ClassRegistraAsyncBroadcast classRegistraAsyncBroadcast=new ClassRegistraAsyncBroadcast();
-
-            classRegistraAsyncBroadcast.metodRegistraBroadCastFroAsyns(getActivity());
-
-           ///classRegistraAsyncBroadcast.metodSendBroadCastFroAsyns(getActivity());
-            Log.d(this.getClass().getName(),"\n" + " class "
-                    + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n");
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e(getContext().getClass().getName(),
-                    "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                            " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-            new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(),
-                    this.getClass().getName().toString(), Thread.currentThread().getStackTrace()[2].getMethodName().toString(),
-                    Thread.currentThread().getStackTrace()[2].getLineNumber());
-        }
-    }
 
 
 

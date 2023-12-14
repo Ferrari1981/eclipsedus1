@@ -1,6 +1,7 @@
 package com.dsy.dsu.Errors;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -13,8 +14,8 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
-import android.os.storage.StorageManager;
-import android.os.storage.StorageVolume;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
@@ -31,17 +32,19 @@ import androidx.fragment.app.FragmentTransaction;
 
 
 import com.dsy.dsu.AllDatabases.SQLTE.GetSQLiteDatabase;
+import com.dsy.dsu.BootAndAsync.MainActivityBootAndAsync;
+import com.dsy.dsu.BusinessLogicAll.Class_Sendiing_Errors;
 import com.dsy.dsu.BusinessLogicAll.Permissions.ClassPermissions;
+import com.dsy.dsu.Dashboard.Fragments.DashboardFragmentMaterialDesign;
 import com.dsy.dsu.Dashboard.Fragments.DashboardFragmentSettings;
+import com.dsy.dsu.Dashboard.MainActivity_Dashboard;
 import com.dsy.dsu.R;
 import com.google.android.material.button.MaterialButton;
-import com.google.common.util.concurrent.AtomicDouble;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -51,8 +54,6 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
 import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.ExecutionException;
 import java.util.function.Consumer;
@@ -77,11 +78,16 @@ public class MainActivity_Errors extends AppCompatActivity  {
 
   private   File fileNewPhotoFromCameraX;
 
+  private Activity activity;
+
+  private  String СтатусЗадачи;
     @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         try {
                 super.onCreate(savedInstanceState);
+            // TODO: 12.12.2023
+            activity=this;
             setContentView(R.layout.activitymain_errors); ///activitymain_viewlogin  /// fragment_dashboard
             getSupportActionBar().hide(); ///скрывать тул бар
             fragmentManager = getSupportFragmentManager();
@@ -121,6 +127,8 @@ public class MainActivity_Errors extends AppCompatActivity  {
         try{
         // TODO: 04.10.2023 разрешения для всего
         new ClassPermissions(this,ALL_PERSSION_CODE,CAMERA_PERSSION_CODE);
+
+            СтатусЗадачи=getIntent().getAction();
 
             // TODO: 12.12.2023  staring biscce logic
             biccessLogicActivityError=new BiccessLogicActivityError();
@@ -168,7 +176,7 @@ public class MainActivity_Errors extends AppCompatActivity  {
            // TODO: 28.06.2023 очищаем таблиц
             biccessLogicActivityError.   МетодУдаланиеОшибок(sqLiteDatabase );
             // TODO: 22.09.2023  exit error fragment
-            biccessLogicActivityError.    методвыходизОшибок();
+            biccessLogicActivityError.    metodCallBackkFragemtSettings();
         }
         Log.d(this.getClass().getName(),"\n" + " class FaceAPp " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
@@ -276,9 +284,13 @@ public class MainActivity_Errors extends AppCompatActivity  {
                 @Override
                 public void onClick(View v) {
                     try{
+                        if (    СтатусЗадачи.equalsIgnoreCase("com.CallBackSettingsFragment")) {
+                            metodCallBackkFragemtSettings();
 
-                        методвыходизОшибок();
+                        } else     if (    СтатусЗадачи.equalsIgnoreCase("com.CallBackBootAndAsync")) {
 
+                            metodCallBackkFragemtBoot();
+                        }
 
                         Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
@@ -325,7 +337,11 @@ public class MainActivity_Errors extends AppCompatActivity  {
                                     @Override
                                     public void run() {
                                         if (stringBufferEror.length()>0) {
+
+                                            biccessLogicActivityError. metodSendErrorsToMail(stringBufferEror);
+
                                             biccessLogicActivityError. metodInfoPhone(stringBufferEror);
+
                                             biccessLogicActivityError.    metodScreenErrorForUsers(stringBufferEror);
 
                                             biccessLogicActivityError.    metodButtonEnables();
@@ -372,21 +388,38 @@ public class MainActivity_Errors extends AppCompatActivity  {
 
 
 
-        private void методвыходизОшибок() {
+        private void metodCallBackkFragemtSettings() {
             try{
                 // TODO Запусукаем Фргамент НАстройки  dashbord
-                DashboardFragmentSettings dashboardFragmentSettings = DashboardFragmentSettings.newInstance();
-                Bundle data=new Bundle();
-                dashboardFragmentSettings.setArguments(data);
-                fragmentTransaction.remove(dashboardFragmentSettings);
-                String fragmentNewImageNameaddToBackStack=   dashboardFragmentSettings.getClass().getName();
-                fragmentTransaction.addToBackStack(fragmentNewImageNameaddToBackStack);
-                Fragment FragmentУжеЕСтьИлиНЕт=     fragmentManager.findFragmentByTag(fragmentNewImageNameaddToBackStack);
-                if (FragmentУжеЕСтьИлиНЕт==null) {
-                    dashboardFragmentSettings.show(fragmentManager, "DashboardFragmentSettings");
-                    // TODO: 01.08.2023
+                // TODO Запусукаем Фргамент НАстройки  dashbord
+                Intent IntentStartFaceApp = new Intent();
+                IntentStartFaceApp.setClass(getApplication(), MainActivity_Dashboard.class);
+                IntentStartFaceApp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);/// FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(IntentStartFaceApp);
+                Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                        " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                        " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n");
+                Log.d(this.getClass().getName(), " Ошибок Нет. время :   " +new Date().toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :"
+                        + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
+                        + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                // TODO: 01.09.2021 метод вызова
+                new   Class_Generation_Errors(getApplicationContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(),
+                        this.getClass().getName(), Thread.currentThread().getStackTrace()[2].getMethodName(),
+                        Thread.currentThread().getStackTrace()[2].getLineNumber());
+            }
+        }
+        private void metodCallBackkFragemtBoot() {
+            try{
+                // TODO Запусукаем Фргамент НАстройки  dashbord
+                Intent IntentStartFaceApp = new Intent();
+                IntentStartFaceApp.setClass(getApplication(), MainActivityBootAndAsync.class);
+                IntentStartFaceApp.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_SINGLE_TOP);/// FLAG_ACTIVITY_SINGLE_TOP
+                startActivity(IntentStartFaceApp);
 
-                }
+
                 Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                         " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                         " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n");
@@ -474,7 +507,8 @@ public class MainActivity_Errors extends AppCompatActivity  {
 
 
 
-        private String metodInfoPhone( @NotNull StringBuffer stringBufferEror) {
+        @SuppressLint("SuspiciousIndentation")
+        private String metodInfoPhone(@NotNull StringBuffer stringBufferEror) {
             String ИнфоТелефон=null;
             try{
               ИнфоТелефон = Build.MANUFACTURER
@@ -604,6 +638,71 @@ public class MainActivity_Errors extends AppCompatActivity  {
                     Thread.currentThread().getStackTrace()[2].getLineNumber());
 
         return new StringBuffer();
+        }
+
+
+        // TODO: 12.12.2023 метод Посылаешь данные на Почту
+        protected void metodSendErrorsToMail(@NonNull  StringBuffer БуерДляОшибок ) {
+                materialButtonОтправка.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        try{
+                        //TODO полывоаем ошибки на почту
+                        Vibrator v2 = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                            v2.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+                        } else {
+                            //deprecated in API 26
+                            v2.vibrate(50);
+                        }
+                        // TODO: 06.07.2023  оправлем ощибку на почту
+                        МетодПосылаемОшибкиНапочту(БуерДляОшибок);
+
+                        Log.d(this.getClass().getName(), " Ошибок Нет. время :   " +new Date().toString());
+
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" +
+                                Thread.currentThread().getStackTrace()[2].getMethodName() +
+                                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                        new   Class_Generation_Errors(getApplicationContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(),
+                                this.getClass().getName(), Thread.currentThread().getStackTrace()[2].getMethodName(),
+                                Thread.currentThread().getStackTrace()[2].getLineNumber());
+///////
+                    }
+                    }
+                });
+
+
+
+        }
+
+        protected void МетодПосылаемОшибкиНапочту(@NonNull StringBuffer БуерДляОшибок) {
+            try{
+                Integer   ПубличноеID  = preferences.getInt("ПубличноеID",0);
+                БуерДляОшибок.append("\n")
+                        .append(" текущий пользователь : ").append("\n")
+                        .append(ПубличноеID).append("\n")
+                        .append(" время отправки: ").append("\n")
+                        .append(new Date())
+                        .append("\n");
+                // TODO: 06.07.2023  оправлем ощибки на ПОЧТУ
+                // TODO: 06.07.2023  оправлем ощибки на ПРЧТУ
+                new Class_Sendiing_Errors(getApplicationContext())
+                        .МетодПослываемОшибкиАдминистаторуПо(БуерДляОшибок,activity,ПубличноеID,   sqLiteDatabase );
+
+                Log.d(this.getClass().getName(), " Ошибок Нет. время :   " +new Date().toString());
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :"
+                        + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
+                        + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                // TODO: 01.09.2021 метод вызова
+                new   Class_Generation_Errors(getApplicationContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(),
+                        this.getClass().getName(), Thread.currentThread().getStackTrace()[2].getMethodName(),
+                        Thread.currentThread().getStackTrace()[2].getLineNumber());
+            }
+
         }
 
 

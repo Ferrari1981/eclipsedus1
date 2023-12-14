@@ -18,19 +18,29 @@ public class BroadCastForAsyncWorkMangerMyReceiver extends BroadcastReceiver {
     public void onReceive(Context context, Intent intent) {
         try{
         // TODO: This method is called when the BroadcastReceiver is receiving
-
+            Integer ПубличныйIDДляФрагмента = new SubClass_Connection_BroadcastReceiver_Sous_Asyns_Glassfish()
+                    .МетодПолучениеяПубличногоID(context);
 
             Toast.makeText(context, "ООО Союз-Автодор work Background !!! "+"\n"+new Date().toLocaleString().toString(), Toast.LENGTH_LONG).show();
 
 
+         if(intent.getAction().equalsIgnoreCase("KEEP"))  {
+
+             // TODO: 14.12.2023 KEEP
+             new ClassCreatePublicWorkManager(context).paspisaniyWorkMangerKEEP(context,ПубличныйIDДляФрагмента );
+
+            }else {
+             // TODO: 14.12.2023 REPLACE
+             new ClassCreatePublicWorkManager(context).paspisaniyWorkMangerREPLACE(context,ПубличныйIDДляФрагмента );
+
+         }
+
             Log.d(context.getClass().getName(), "\n"
                     + " Starting.... время: " + new Date()+"\n+" +
                     " Класс в процессе... " +  this.getClass().getName()+"\n"+
-                    " метод в процессе... " + Thread.currentThread().getStackTrace()[2].getMethodName());
+                    " метод в процессе... " + Thread.currentThread().getStackTrace()[2].getMethodName()+
+                    " intent.getAction() " +intent.getAction());
             // TODO: 07.10.2023
-            Integer ПубличныйIDДляФрагмента = new SubClass_Connection_BroadcastReceiver_Sous_Asyns_Glassfish().МетодПолучениеяПубличногоID(context);
-
-            new ClassCreatePublicWorkManager(context).metodCallFronBroadCastAsynsPublicWorkManger(context,ПубличныйIDДляФрагмента );
 
 
             Log.d(context.getClass().getName(), "\n"
@@ -39,7 +49,6 @@ public class BroadCastForAsyncWorkMangerMyReceiver extends BroadcastReceiver {
                     " метод в процессе... " + Thread.currentThread().getStackTrace()[2].getMethodName());
     } catch (Exception e) {
             e.printStackTrace();
-            ///метод запись ошибок в таблицу
             Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
                     " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
             new Class_Generation_Errors(context.getApplicationContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(),

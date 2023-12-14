@@ -760,9 +760,11 @@ public class ServiceUpdatePoОбновлениеПО extends IntentService {////
                 if (РежимРаботыСлужбыОбновлениеПО==true) {
                     Message message = handlerUpdatePO.obtainMessage();
                     message.what = 20;
+                    message.arg1=ЛокальнаяВерсияПО;
                     message.sendToTarget();
                 }else {
                     Message message = handlerUpdatePO.obtainMessage();
+                    message.arg1=ЛокальнаяВерсияПО;
                     message.what = 40;
                     message.sendToTarget();
 

@@ -32,6 +32,8 @@ import androidx.core.content.ContextCompat;
 
 import com.dsy.dsu.AllDatabases.SQLTE.GetSQLiteDatabase;
 import com.dsy.dsu.BootAndAsync.MainActivityBootAndAsync;
+import com.dsy.dsu.BroadcastRecievers.ClassRegistraAsyncBroadcast;
+import com.dsy.dsu.BroadcastRecievers.Registraziyreciver;
 import com.dsy.dsu.BusinessLogicAll.Class_Clears_Tables;
 import com.dsy.dsu.BusinessLogicAll.Class_Connections_Server;
 import com.dsy.dsu.BusinessLogicAll.Class_Find_Setting_User_Network;
@@ -145,6 +147,9 @@ public class MainActivityPasswords extends AppCompatActivity {
 
             // TODO: 14.08.2023 создаем папку для BinaryFile CommitPay1C Соласования
             new ClassCreateFolderCommitPays1C(getApplicationContext()).МетодCreateFoldersBinaty();
+
+            // TODO: 12.12.2023  регистируем бродкасресивер
+         //new Registraziyreciver().staringregistraziyreciver(activity);
 
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
@@ -687,6 +692,9 @@ public class MainActivityPasswords extends AppCompatActivity {
 
 
     }
+
+
+
 }
 
 
