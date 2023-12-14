@@ -11,6 +11,7 @@ import androidx.work.Data;
 import androidx.work.ExistingWorkPolicy;
 import androidx.work.NetworkType;
 import androidx.work.OneTimeWorkRequest;
+import androidx.work.WorkInfo;
 import androidx.work.WorkManager;
 
 import com.dsy.dsu.Errors.Class_Generation_Errors;
@@ -35,6 +36,24 @@ public class Class_Generator_One_WORK_MANAGER extends  Class_GRUD_SQL_Operations
         Uri uri = Uri.parse("content://data/data/com.dsy.dsu/databases/Database DSU-1.db");
         try {
 
+            if (!WorkManager.getInstance(context).getWorkInfosByTag(ИмяСлужбыСинхронизацииОдноразовая).get().isEmpty()) {
+                Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                        " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                        " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n");
+
+                WorkInfo  workInfo=   WorkManager.getInstance(context).getWorkInfosByTag(ИмяСлужбыСинхронизацииОдноразовая).get() .get(0);
+
+                if (workInfo.getState().compareTo(WorkInfo.State.RUNNING)!=0) {
+                    Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n");
+                }
+            }
+
+
+
+
+
             Constraints constraintsЗапускСинхОдноразоваяСлужба = new Constraints.Builder()
                     .setRequiredNetworkType(NetworkType.CONNECTED)
                     .setRequiresBatteryNotLow(false)
@@ -46,8 +65,10 @@ public class Class_Generator_One_WORK_MANAGER extends  Class_GRUD_SQL_Operations
                             .setInputData(myDataSingleWorker)
                             .addTag(ИмяСлужбыСинхронизацииОдноразовая)
                             .build();//      .setExpedited(OutOfQuotaPolicy.RUN_AS_NON_EXPEDITED_WORK_REQUEST)
+
             WorkManager.getInstance(context).enqueueUniqueWork(ИмяСлужбыСинхронизацииОдноразовая,
                     ExistingWorkPolicy.KEEP, OneTimeWorkЗапускФОновойСинхрониазциииИзНУтриТабеля);
+
 //////////20.15
             Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +

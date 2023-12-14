@@ -53,12 +53,20 @@ import com.dsy.dsu.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.jakewharton.rxbinding4.view.RxView;
 
 import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.CompletableObserver;
+import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Function;
+import io.reactivex.rxjava3.functions.Predicate;
+import io.reactivex.rxjava3.internal.util.BlockingIgnoringReceiver;
 import io.reactivex.rxjava3.subjects.PublishSubject;
 import io.reactivex.rxjava3.subjects.Subject;
+import kotlin.Unit;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -606,86 +614,140 @@ try{
 
             class SubClassAsyncVisual{
                 private void методStartingAsyncVisuals() {
-                    КнопкаОбменДанными.setOnClickListener(new View.OnClickListener() {
-                        @Override
-                        public void onClick(View v) {
-                            try {
-                                final Integer[] ФинальныйРезультатФоновойСинхронизации = {0};
-                                ProgressDialog progressDialogДляСинхронизации;
-                                progressDialogДляСинхронизации = new ProgressDialog(getActivity());
-                                progressDialogДляСинхронизации.setTitle("Обмен данными");
-                                progressDialogДляСинхронизации.setProgressStyle(ProgressDialog.STYLE_SPINNER);
-                                progressDialogДляСинхронизации.setProgress(0);
-                                progressDialogДляСинхронизации.setCanceledOnTouchOutside(false);
-                                progressDialogДляСинхронизации.setMessage("В процессе ....");
 
 
-                                handlerAsync.post(() -> {
-                                    boolean СтатусСетиВыбранныйПользователем =
-                                            new Class_Find_Setting_User_Network(getContext()).МетодПроветяетКакуюУстановкуВыбралПользовательСети();
-                                    Log.d(this.getClass().getName(), "  РезультатПроВеркиУстановкиПользователяРежимРаботыСети "
-                                            + СтатусСетиВыбранныйПользователем);
-                                    Class_Connections_Server class_connections_serverПингаСерераИзАктивтиМеню = new Class_Connections_Server(getActivity());
-                                    PUBLIC_CONTENT public_contentЗапусСинхрониазцииИМеню = new PUBLIC_CONTENT(getContext());
+                    RxView.clicks(  КнопкаОбменДанными)
+                            .throttleFirst(3, TimeUnit.SECONDS)
+                            .filter(s -> !s.toString().isEmpty())
+                            .map(new Function<Unit, Object>() {
+                                @Override
+                                public Object apply(Unit unit) throws Throwable {
+                                    Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n" );
+                                    return    КнопкаОбменДанными;
+                                }
+                            })
+                            .doOnError(new io.reactivex.rxjava3.functions.Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Throwable {
+                                    throwable.printStackTrace();
+                                    Log.e(getContext().getClass().getName(),
+                                            "Ошибка " + throwable + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                                                    " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                                    new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(throwable.toString(),
+                                            this.getClass().getName().toString(), Thread.currentThread().getStackTrace()[2].getMethodName().toString(),
+                                            Thread.currentThread().getStackTrace()[2].getLineNumber());
+                                }
+                            })
+                            .onErrorComplete(new Predicate<Throwable>() {
+                                @Override
+                                public boolean test(Throwable throwable) throws Throwable {
+                                    throwable.printStackTrace();
+                                    Log.e(getContext().getClass().getName(),
+                                            "Ошибка " + throwable + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                                                    " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                                    new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(throwable.toString(),
+                                            this.getClass().getName().toString(), Thread.currentThread().getStackTrace()[2].getMethodName().toString(),
+                                            Thread.currentThread().getStackTrace()[2].getLineNumber());
+                                    return false;
+                                }
+                            })
+                            .subscribe( GetNameSingleAsync1c-> {
 
-                                    if (СтатусСетиВыбранныйПользователем == true) {
-                                        Boolean СтатусСервераСоюзаВключенИлиНЕт =
-                                                class_connections_serverПингаСерераИзАктивтиМеню.МетодПингаСервераРаботаетИлиНет(getContext());
-                                        if (СтатусСервераСоюзаВключенИлиНЕт == true) {
-                                            // TODO: 23.08.2023
+                                try{
+                                ///todo revboot
+                                ProgressDialog  progressDialogДляСинхронизации = new ProgressDialog(getActivity());
+                                Completable.complete().blockingSubscribe(new CompletableObserver() {
+                                    @Override
+                                    public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+                                        handlerAsync.post(() -> {
+                                            progressDialogДляСинхронизации.setTitle("Обмен данными");
+                                            progressDialogДляСинхронизации.setProgressStyle(ProgressDialog.STYLE_SPINNER);
+                                            progressDialogДляСинхронизации.setProgress(0);
+                                            progressDialogДляСинхронизации.setCanceledOnTouchOutside(false);
+                                            progressDialogДляСинхронизации.setMessage("В процессе ....");
                                             if (!progressDialogДляСинхронизации.isShowing()) {
                                                 progressDialogДляСинхронизации.show();
                                             }
+                                        });
 
-                                            Integer ПубличныйIDДляОдноразовойСинхрониазции =
-                                                    new Class_Generations_PUBLIC_CURRENT_ID().ПолучениеПубличногоТекущегоПользователяID(getActivity());
+                                    }
+
+                                    @Override
+                                    public void onComplete() {
+                                        boolean СтатусСетиВыбранныйПользователем =
+                                                new Class_Find_Setting_User_Network(getContext()).МетодПроветяетКакуюУстановкуВыбралПользовательСети();
+
+                                        Class_Connections_Server class_connections_serverПингаСерераИзАктивтиМеню = new Class_Connections_Server(getActivity());
 
 
-                                            Data myDataSingleWorker = new Data.Builder()
-                                                    .putInt("ПубличныйID", ПубличныйIDДляОдноразовойСинхрониазции)
-                                                    .putBoolean("StartSingleWorker", true)
-                                                    .build();
+                                        if (СтатусСетиВыбранныйПользователем == true) {
+                                            Boolean СтатусСервераСоюзаВключенИлиНЕт =
+                                                    class_connections_serverПингаСерераИзАктивтиМеню.МетодПингаСервераРаботаетИлиНет(getContext());
+                                            if (СтатусСервераСоюзаВключенИлиНЕт == true) {
+                                                // TODO: 23.08.2023
 
-                                            // TODO: 02.08.2022
-                                            // TODO: 02.08.2022
-                                            new Class_Generator_One_WORK_MANAGER(getContext()).МетодОдноразовыйЗапускВоерМенеджера(getContext(),myDataSingleWorker);
-                                            // TODO: 26.06.2022
-                                            Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                                                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                                                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
-                                                    + " ПубличныйIDДляОдноразовойСинхрониазции " + ПубличныйIDДляОдноразовойСинхрониазции);
+
+                                                Integer ПубличныйIDДляОдноразовойСинхрониазции =
+                                                        new Class_Generations_PUBLIC_CURRENT_ID().ПолучениеПубличногоТекущегоПользователяID(getActivity());
+
+
+                                                Data myDataSingleWorker = new Data.Builder()
+                                                        .putInt("ПубличныйID", ПубличныйIDДляОдноразовойСинхрониазции)
+                                                        .putBoolean("StartSingleWorker", true)
+                                                        .build();
+
+                                                // TODO: 02.08.2022
+                                                // TODO: 02.08.2022
+                                                new Class_Generator_One_WORK_MANAGER(getContext()).МетодОдноразовыйЗапускВоерМенеджера(getContext(),myDataSingleWorker);
+                                                // TODO: 26.06.2022
+                                                Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                                                        " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                                                        " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
+                                                        + " ПубличныйIDДляОдноразовойСинхрониазции " + ПубличныйIDДляОдноразовойСинхрониазции);
+
+
+
+                                            } else {
+                                                getActivity().runOnUiThread(new Runnable() {
+                                                    @Override
+                                                    public void run() {
+                                                        Toast toast = Toast.makeText(getContext(), "Сервер выкл. !!!", Toast.LENGTH_LONG);
+                                                        toast.setGravity(Gravity.BOTTOM, 0, 40);
+                                                        toast.show();
+                                                    }
+                                                });
+                                            }
+                                            // TODO: 14.12.2023
+
                                             handlerAsync.postDelayed(() -> {
                                                 progressDialogДляСинхронизации.dismiss();
                                                 progressDialogДляСинхронизации.cancel();
                                             }, 3000);
-
-
-                                        } else {
-                                            getActivity().runOnUiThread(new Runnable() {
-                                                @Override
-                                                public void run() {
-                                                    Toast toast = Toast.makeText(getContext(), "Сервер выкл. !!!", Toast.LENGTH_LONG);
-                                                    toast.setGravity(Gravity.BOTTOM, 0, 40);
-                                                    toast.show();
-                                                }
-                                            });
                                         }
                                     }
+
+                                    @Override
+                                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                                        e.printStackTrace();
+                                        Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                                                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                                        new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
+                                                Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+                                    }
                                 });
+
                             } catch (Exception e) {
-                                e.printStackTrace();
-                                Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                                        " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-                                new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
-                                        Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+                        e.printStackTrace();
+                        Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                        new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
+                                Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
 
-                            }
+                    }
 
-                        }
-                    });
-
-
-
+                            });
 
 
                 }
