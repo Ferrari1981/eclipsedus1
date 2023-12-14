@@ -21,7 +21,7 @@ public class BroadCastForAsyncWorkMangerMyReceiver extends BroadcastReceiver {
             Integer ПубличныйIDДляФрагмента = new SubClass_Connection_BroadcastReceiver_Sous_Asyns_Glassfish()
                     .МетодПолучениеяПубличногоID(context);
 
-            Toast.makeText(context, "ООО Союз-Автодор work Background !!! "+"\n"+new Date().toLocaleString().toString(), Toast.LENGTH_LONG).show();
+           // Toast.makeText(context, "ООО Союз-Автодор work Background !!! "+"\n"+new Date().toLocaleString().toString(), Toast.LENGTH_LONG).show();
 
 
          if(intent.getAction().equalsIgnoreCase("KEEP"))  {
