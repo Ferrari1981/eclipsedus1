@@ -1469,17 +1469,21 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
             Completable.complete().blockingSubscribe(new CompletableObserver() {
                 @Override
                 public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
-                    // TODO: 21.08.2023  только GET
-                    metofstartingGetParallel(  );
+
+                    // TODO: 14.12.2023  топль POSt
+                    metofstartingPostSingle();
 
                     Log.w(this.getClass().getName(), " doOnTerminate ОБРАБОТКА ВСЕХ ТАБЛИЦ ЛистТаблицыОбмена.stream().reduce(0, (a, b) -> a + b).intValue()"
                             + ЛистТаблицыОбмена.stream().reduce(0l, (a, b) -> a + b).longValue()+ " sqLiteDatabase.isOpen() " +sqLiteDatabase.isOpen());
+
+
+
                 }
 
                 @Override
                 public void onComplete() {
-                    // TODO: 14.12.2023  топль POSt
-                    metofstartingPostSingle();
+                    // TODO: 21.08.2023  только GET
+                    metofstartingGetParallel(  );
 
                     Log.w(this.getClass().getName(), " doOnTerminate ОБРАБОТКА ВСЕХ ТАБЛИЦ ЛистТаблицыОбмена.stream().reduce(0, (a, b) -> a + b).intValue()"
                             + ЛистТаблицыОбмена.stream().reduce(0l, (a, b) -> a + b).longValue()+ " sqLiteDatabase.isOpen() " +sqLiteDatabase.isOpen());
@@ -1671,13 +1675,13 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
 
 
 
-            Проценты = new Class_Visible_Processing_Async(context).ГенерируемПРОЦЕНТЫДляAsync(ПозицияТекущейТаблицы, ГлавныеТаблицыСинхронизации.size());
+         /*   Проценты = new Class_Visible_Processing_Async(context).ГенерируемПРОЦЕНТЫДляAsync(ПозицияТекущейТаблицы, ГлавныеТаблицыСинхронизации.size());
             // TODO: 02.05.2023  Ответ Обратно ПрограссБару
-            методCallBackPrograssBars(2, Проценты, ИмяТаблицыоТВерсияДанныхОтSqlServer,ПозицияТекущейТаблицы);
+            методCallBackPrograssBars(2, Проценты, ИмяТаблицыоТВерсияДанныхОтSqlServer,ПозицияТекущейТаблицы);*/
 
             ЛистТаблицыОбмена.add(РезультатТаблицыОбмена);
             // TODO: 12.07.2023
-            ПозицияТекущейТаблицы++;
+           // ПозицияТекущейТаблицы++;
             Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"+
