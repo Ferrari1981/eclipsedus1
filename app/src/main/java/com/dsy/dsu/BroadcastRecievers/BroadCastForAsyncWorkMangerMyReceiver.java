@@ -23,17 +23,9 @@ public class BroadCastForAsyncWorkMangerMyReceiver extends BroadcastReceiver {
 
            // Toast.makeText(context, "ООО Союз-Автодор work Background !!! "+"\n"+new Date().toLocaleString().toString(), Toast.LENGTH_LONG).show();
 
-
-         if(intent.getAction().equalsIgnoreCase("KEEP"))  {
-
-             // TODO: 14.12.2023 KEEP
-             new ClassCreatePublicWorkManager(context).paspisaniyWorkMangerKEEP(context,ПубличныйIDДляФрагмента );
-
-            }else {
              // TODO: 14.12.2023 REPLACE
              new ClassCreatePublicWorkManager(context).paspisaniyWorkMangerREPLACE(context,ПубличныйIDДляФрагмента );
 
-         }
 
             Log.d(context.getClass().getName(), "\n"
                     + " Starting.... время: " + new Date()+"\n+" +
