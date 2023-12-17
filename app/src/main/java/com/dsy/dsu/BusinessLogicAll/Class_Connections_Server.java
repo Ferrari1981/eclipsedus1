@@ -55,7 +55,12 @@ public class Class_Connections_Server  extends  Class_GRUD_SQL_Operations {
             throws ExecutionException, InterruptedException, TimeoutException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
          Boolean результатПрозвонаСокетом = false;
         try {
+            SharedPreferences.Editor editor = preferences.edit();
+            editor.putString("ИмяСервера", null);
+            editor.putInt("ИмяПорта",0);
+
             Map<Integer,String> concurrentHashMapАдресаПодключенияКСерверу   =  new PUBLIC_CONTENT(КонтекстКоторыйДляСинхронизации).getМассивПортовСервера();
+
             for (Map.Entry<Integer,String> entry : concurrentHashMapАдресаПодключенияКСерверу.entrySet()) {
                 Integer   ИмяПорта =    entry.getKey();
                 String     ИмяСервера=     entry.getValue();
@@ -77,11 +82,15 @@ public class Class_Connections_Server  extends  Class_GRUD_SQL_Operations {
                     // TODO: 16.12.2021  положитльеный результат пинга
                     if (БуферПолучениеДанныхРЕальныйСтатусРАботыSQLServer>0) {
                         результатПрозвонаСокетом = true;
-                        SharedPreferences.Editor editor = preferences.edit();
+
                         editor.putString("ИмяСервера",  ИмяСервера);
                         editor.putInt("ИмяПорта",ИмяПорта);
                         editor.apply();
+
                         Log.e(Class_MODEL_synchronized.class.getName(), " ИмяСервера" + ИмяСервера+ "ИмяПорта " +ИмяПорта+editor);
+
+
+                        // TODO: 15.12.2023 ВЫХОД ИЗ ЦИКЛА ВЫХОД ИЗ ЦИКЛА
                         break;
                     }else{
                         результатПрозвонаСокетом = false;
