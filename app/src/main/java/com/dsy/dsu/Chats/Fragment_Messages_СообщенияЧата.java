@@ -43,6 +43,7 @@ import com.dsy.dsu.BusinessLogicAll.SubClassGET_FIO;
 import com.dsy.dsu.OneSignals.ClassOneSingnalGenerator;
 import com.dsy.dsu.CnangeServers.PUBLIC_CONTENT;
 import com.dsy.dsu.R;
+import com.dsy.dsu.Services.ServiceOneSignalForFirebase;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 
 import java.text.SimpleDateFormat;
@@ -89,7 +90,7 @@ public class Fragment_Messages_СообщенияЧата extends Fragment {
     private WorkInfo WorkInfoИнформацияОЗапущенойСлужбеОдноразовая;
     // TODO: 29.06.2022
     private ProgressBar progressBarДляЧатаСообщения;
-
+    private  String КлючДляFirebaseNotification = "2a1819db-60c8-4ca3-a752-1b6cd9cadfa1";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -1522,23 +1523,24 @@ try {
 
             try{
                 ///
-                String КлючДляFirebaseNotification="2a1819db-60c8-4ca3-a752-1b6cd9cadfa1";
-                // TODO: 17.12.2021
-                Integer  ПубличныйIDДляФрагмента=   new Class_Generations_PUBLIC_CURRENT_ID().ПолучениеПубличногоТекущегоПользователяID(getContext());
+                Integer  ПубличныйIDДляФрагмента=   new Class_Generations_PUBLIC_CURRENT_ID()
+                        .ПолучениеПубличногоТекущегоПользователяID(getActivity());
+                Bundle bundleregsit=new Bundle();
+                bundleregsit.putInt("ПубличныйIDДляФрагмента",ПубличныйIDДляФрагмента);
+                bundleregsit.putString("КлючДляFirebaseNotification",КлючДляFirebaseNotification);
+                ///
+                Intent intentstartServiceOneSignal=new Intent(getActivity(),
+                        ServiceOneSignalForFirebase.class);
+                intentstartServiceOneSignal.putExtras(bundleregsit);
+                intentstartServiceOneSignal.setAction("com.registariionesignal.net");
 
-                new ClassOneSingnalGenerator(getContext()).
-                        МетодПовторногоЗапускаFacebaseCloud_And_OndeSignal(КлючДляFirebaseNotification,ПубличныйIDДляФрагмента);
+                Log.d(this.getClass().getName(), "\n"
+                        + " время: " + new Date()+"\n+" +
+                        " Класс в процессе... " +  this.getClass().getName()+"\n"+
+                        " метод в процессе... " + Thread.currentThread().getStackTrace()[2].getMethodName());
 
-
-                //TODO ФУТУРЕ ЗАВЕРШАЕМ
-                Log.d(this.getClass().getName(), "  МетодПовторногоЗапускаFacebaseCloud_And_OndeSignal(КлючДляFirebaseNotification,0); " +
-                        " РезультатЗаписиНовогоIDОтСервреаOneSignal  " );
-
-
-                //
             } catch (Exception e) {
                 e.printStackTrace();
-                ///метод запись ошибок в ВсеСтрокиJSONДляВставкиОтСервера
                 Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
                         " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
                 new   Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),

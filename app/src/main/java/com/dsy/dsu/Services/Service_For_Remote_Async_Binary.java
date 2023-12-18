@@ -321,10 +321,20 @@ try{
 
     public void МетодРегистрацииУстройсвоНАFirebaseAndOneSignal(@NotNull String КлючДляFirebaseNotification) {
         try{
-            Integer  ПубличныйIDДляФрагмента=   new Class_Generations_PUBLIC_CURRENT_ID()
+          Integer  ПубличныйIDДляФрагмента=   new Class_Generations_PUBLIC_CURRENT_ID()
                     .ПолучениеПубличногоТекущегоПользователяID(getApplicationContext());
-            new ClassOneSingnalGenerator(getApplicationContext()).
-                    МетодПовторногоЗапускаFacebaseCloud_And_OndeSignal(КлючДляFirebaseNotification,ПубличныйIDДляФрагмента);
+                    Bundle bundleregsit=new Bundle();
+                    bundleregsit.putInt("ПубличныйIDДляФрагмента",ПубличныйIDДляФрагмента);
+                    bundleregsit.putString("КлючДляFirebaseNotification",КлючДляFirebaseNotification);
+                    ///
+            Intent intentstartServiceOneSignal=new Intent(getApplicationContext(),
+                    ServiceOneSignalForFirebase.class);
+            intentstartServiceOneSignal.putExtras(bundleregsit);
+            intentstartServiceOneSignal.setAction("com.registariionesignal.net");
+
+        startService(intentstartServiceOneSignal);
+
+
             //TODO ФУТУРЕ ЗАВЕРШАЕМ
             Log.d(this.getClass().getName(), "  МетодПовторногоЗапускаFacebaseCloud_And_OndeSignal(КлючДляFirebaseNotification,0); " +
                     " РезультатЗаписиНовогоIDОтСервреаOneSignal  " );

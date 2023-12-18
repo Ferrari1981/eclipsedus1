@@ -2,11 +2,8 @@ package com.dsy.dsu.OneSignals;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.os.Build;
-import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
@@ -54,8 +51,10 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
  public class ClassOneSingnalGenerator {
      private Context context;
-     private  String НовыйКлючОтOneSingnal = null;
+
      private  Class_Generator_One_WORK_MANAGER class_generator_one_work_manager;
+
+     String НовыйКлючОтOneSingnal;
 
      private SQLiteDatabase sqLiteDatabase ;
     public ClassOneSingnalGenerator(@NonNull  Context context) {
@@ -229,7 +228,7 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
                         ! СтарыйКлючОтOneSignal.
                                 equalsIgnoreCase(НовыйКлючОтOneSingnal)) {
                     // TODO: 04.01.2022  ПРИШЕЛ НОВЫЙ КЛЮЧ И ЕГО НАДО ЗАПИСАТЬ ДЛЯ ONESINGNAL
-                    new Класс_ЗаписываетНовоеЗначениееслиОноИзменилосьНаСервреаOneSignalДляТекущегоПользователя(context,
+                    new writernewKeyOneSignal(context,
                             НовыйКлючОтOneSingnal,  sqLiteDatabase);
                     Log.w("OneSignalExample", " ВНИМАНИЕ !!!!!!  ЗАПИСЬ НОВОГО КЛЮЧА ДЛЯ ДАННОГО ПОЛЬЗОВАТЕЛЯ ONESIGNAL " +
                             "РезультатЗаписиНовогоIDОтСервреаOneSignal " + "\n"
@@ -447,11 +446,11 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 // TODO: 15.12.2021 КЛАСС ЗАПИСЫВАЕТ ЕСЛИ ИЗМЕННЕНОЕ ЗНАЧЕНИЕ НА СЕРВЕРА ДЛЯ ТЕКУЩЕГО ПОЛЬЗВОАТЕЛЯ ИЗМЕНИЛОСЬ НА ONESIGNAL
 
-   class Класс_ЗаписываетНовоеЗначениееслиОноИзменилосьНаСервреаOneSignalДляТекущегоПользователя{
+   class writernewKeyOneSignal {
        private SQLiteDatabase sqLiteDatabase ;
-       public Класс_ЗаписываетНовоеЗначениееслиОноИзменилосьНаСервреаOneSignalДляТекущегоПользователя(Context context,
-                                                                                                      String НовыйIdОТСервтераOneSignal,
-                                                                                                      SQLiteDatabase sqLiteDatabase ) {
+       public writernewKeyOneSignal(Context context,
+                                    String НовыйIdОТСервтераOneSignal,
+                                    SQLiteDatabase sqLiteDatabase ) {
            Class_GRUD_SQL_Operations   class_grud_sql_operationsОбновлениеДляТаблицыOneSignal=new Class_GRUD_SQL_Operations(context);
            Class_GRUD_SQL_Operations        class_grud_sql_operationsПовышаемВерсиюДанныхДляOneSignal=new Class_GRUD_SQL_Operations(context);
            try{
