@@ -20,6 +20,7 @@ import com.dsy.dsu.BusinessLogicAll.DATE.Class_Generation_Data;
 
 import com.dsy.dsu.CnangeServers.PUBLIC_CONTENT;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
+import com.dsy.dsu.SSL.SSL1;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -36,7 +37,10 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.KeyManagementException;
+import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
+import java.security.SecureRandom;
+import java.security.UnrecoverableKeyException;
 import java.text.SimpleDateFormat;
 import java.time.YearMonth;
 import java.util.ArrayList;
@@ -54,9 +58,11 @@ import java.util.zip.GZIPOutputStream;
 
 import javax.crypto.NoSuchPaddingException;
 import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.TrustManager;
+import javax.net.ssl.TrustManagerFactory;
 import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Call;
@@ -550,47 +556,10 @@ import okio.BufferedSink;
             // TODO: 11.03.2023 новый тест код
             // MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-            OkHttpClient.Builder builderOkhttpPing = new OkHttpClient.Builder();
-
-            // TODO: 15.12.2023 sstart test
-            TrustManager x509TrustManager = new X509TrustManager() {
-                @Override
-                public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) {
-                    Log.i(this.getClass().getName(),  " Атоманически установкаОбновление ПО "+
-                            Thread.currentThread().getStackTrace()[2].getMethodName()+
-                            " время " +new Date().toLocaleString() );
-                }
-
-                @Override
-                public void checkServerTrusted(java.security.cert.X509Certificate[] chain, String authType) {
-                    Log.i(this.getClass().getName(),  " Атоманически установкаОбновление ПО "+
-                            Thread.currentThread().getStackTrace()[2].getMethodName()+
-                            " время " +new Date().toLocaleString() );
-                }
-
-                @Override
-                public java.security.cert.X509Certificate[] getAcceptedIssuers() {
-                    Log.i(this.getClass().getName(),  " Атоманически установкаОбновление ПО "+
-                            Thread.currentThread().getStackTrace()[2].getMethodName()+
-                            " время " +new Date().toLocaleString() );
-                    return new java.security.cert.X509Certificate[] {};
-                }
-            };
-
-            SSLContext sslContext = SSLContext.getInstance("SSL");
-            sslContext.init(null, new TrustManager[] { x509TrustManager }, new java.security.SecureRandom());
-            builderOkhttpPing.sslSocketFactory(sslContext.getSocketFactory(), (X509TrustManager) x509TrustManager);
-
-            builderOkhttpPing.hostnameVerifier(new HostnameVerifier() {
-                @Override
-                public boolean verify(String hostname, SSLSession session) {
-                    return true;
-                }
-            });
-
+            OkHttpClient.Builder builderokhtttp = new OkHttpClient.Builder();
 
             // TODO: 15.12.2023 end test
-            OkHttpClient okHttpClientПинг = builderOkhttpPing.addInterceptor(new Interceptor() {
+            OkHttpClient okHttpClientПинг = builderokhtttp.addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
                             // TODO: 26.08.2021 НОВЫЙ ВЫЗОВ НОВОГО КЛАСС GRUD - ОПЕРАЦИИ
