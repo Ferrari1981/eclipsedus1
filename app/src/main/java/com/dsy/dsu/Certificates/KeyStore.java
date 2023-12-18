@@ -20,6 +20,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLEngine;
 import javax.net.ssl.SSLSession;
@@ -46,7 +47,7 @@ public class KeyStore {
     void startingkeyStore (){
 try{
 
-    TrustManager[] trustAllCerts = new TrustManager[]{
+ /*   TrustManager[] trustAllCerts = new TrustManager[]{
             new X509TrustManager() {
                 @Override
                 public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) {
@@ -75,10 +76,21 @@ try{
 
     OkHttpClient.Builder builderokhtttp = new OkHttpClient.Builder();
     SSLContext sslContext = SSLContext.getInstance("SSL");
-    sslContext.init(null, trustAllCerts, new java.security.SecureRandom());
-    builderokhtttp.sslSocketFactory(sslContext.getSocketFactory(), (X509TrustManager) trustAllCerts[0] );
+    sslContext.init(null, trustAllCerts, new java.security.SecureRandom());*/
 
-    builderokhtttp.hostnameVerifier((hostname, session) -> true);
+
+    OkHttpClient.Builder builderokhtttp = new OkHttpClient.Builder();
+    java.security.KeyStore    getkeyStore=getKeyCert();
+    SSLContext sslContext = SSLContext.getInstance("SSL");
+    TrustManagerFactory trustManagerFactory=TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+    trustManagerFactory.init(getkeyStore);
+    KeyManagerFactory keyManagerFactory=KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+    keyManagerFactory.init(getkeyStore,"secret".toCharArray());
+    sslContext.init(keyManagerFactory.getKeyManagers(),trustManagerFactory.getTrustManagers(),new SecureRandom());
+
+    builderokhtttp.sslSocketFactory(sslContext.getSocketFactory());
+
+   // builderokhtttp.hostnameVerifier((hostname, session) -> true);
 
     OkHttpClient okHttpClient = builderokhtttp.build();
     Dispatcher dispatcher= okHttpClient.dispatcher();
