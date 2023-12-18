@@ -637,14 +637,20 @@ public class MainActivityPasswords extends AppCompatActivity {
          Long ЗаписьВSuccesLogin=       методЗаписьВSuccesLogin(БуферПубличныйIDОтСервера, v);//Integer ПолученинныйПубличныйID
          // TODO: 29.09.2023 SuccesLogin
              if (  ЗаписьВSuccesLogin>0  ) {
+
+                 Log.d(this.getClass().getName(), " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                         " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber()+
+                         " Класс  :" + Thread.currentThread().getStackTrace()[2].getClassName()   + " ЗаписьВSuccesLogin " +ЗаписьВSuccesLogin);
+
+
                  Long ЗаписьВSettingTabel=       методЗаписьВSettingTabel(БуферПубличныйIDОтСервера, v);//Integer ПолученинныйПубличныйID
                  // TODO: 29.09.2023 SettingTabel
-                 if (   ЗаписьВSettingTabel>0 ) {
+
 
                      методЗаписываемПубличныйID(БуферПубличныйIDОтСервера);
 
                      методВходВFaceApp(БуферПубличныйIDОтСервера);
-                 }
+
              }
          Log.d(this.getClass().getName(), " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
                  " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber()+

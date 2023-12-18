@@ -599,7 +599,7 @@ import okio.BufferedSink;
                             Request newRequest = builder.build();
                             return chain.proceed(newRequest);
                         }
-                    }).connectTimeout(5, TimeUnit.SECONDS)
+                    }).connectTimeout(3, TimeUnit.SECONDS)
                     .writeTimeout(2, TimeUnit.MINUTES)
                     .readTimeout(2, TimeUnit.MINUTES)
                     .build();

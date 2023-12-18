@@ -1,5 +1,6 @@
 package com.dsy.dsu.Providers;
 
+import android.annotation.SuppressLint;
 import android.content.ContentProvider;
 import android.content.ContentProviderOperation;
 import android.content.ContentProviderResult;
@@ -280,6 +281,7 @@ public class ContentProviderForDataBaseCurrentOperations extends ContentProvider
     }
 
     // TODO: 22.11.2022 INSERT
+    @SuppressLint("SuspiciousIndentation")
     @Override
     public int bulkInsert(@NonNull Uri uri, @NonNull ContentValues[] values) {
         Integer РезультатМассовогоВсатвкиДанныхФинал=0;
