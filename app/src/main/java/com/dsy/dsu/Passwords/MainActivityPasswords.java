@@ -138,6 +138,13 @@ public class MainActivityPasswords extends AppCompatActivity {
 // TODO: 13.09.2023 очистка ТАБЛИЦ с паролями  
             new Class_Clears_Tables(getApplicationContext(), null, null)
                     .методОчисткаТаблицыSuccesslogin("successlogin", getApplicationContext());
+
+            // TODO: 13.09.2023 очистка ТАБЛИЦ с паролями
+            new Class_Clears_Tables(getApplicationContext(), null, null)
+                    .методОчисткаТаблицыSuccesslogin("settings_tabels", getApplicationContext());
+
+
+
             // TODO: 12.04.2023  messageGet
             messageGet();
 
@@ -647,9 +654,11 @@ public class MainActivityPasswords extends AppCompatActivity {
                  // TODO: 29.09.2023 SettingTabel
 
 
+                 if (ЗаписьВSettingTabel>0) {
                      методЗаписываемПубличныйID(БуферПубличныйIDОтСервера);
 
                      методВходВFaceApp(БуферПубличныйIDОтСервера);
+                 }
 
              }
          Log.d(this.getClass().getName(), " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
