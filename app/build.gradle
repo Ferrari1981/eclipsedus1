@@ -296,4 +296,8 @@ dependencies {
     def websocet_version = "1.5.4"
     implementation "org.java-websocket:Java-WebSocket:$websocet_version"
 
+    def unit_version = "4.12"
+    testImplementation "org.junit.jupiter:junit-jupiter-api:5$unit_version"
+    testRuntimeOnly "org.junit.jupiter:junit-jupiter-engine:$unit_version"
+
 }
