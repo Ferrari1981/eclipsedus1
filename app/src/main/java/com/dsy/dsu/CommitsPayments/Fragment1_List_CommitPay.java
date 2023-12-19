@@ -179,7 +179,7 @@ public class Fragment1_List_CommitPay extends Fragment   {
 
             ПубличныйidPay = new Class_Generations_PUBLIC_CURRENT_ID().ПолучениеПубличногоТекущегоПользователяID(getContext());
          /// ПубличныйidPay = 14;
-        ///    ПубличныйidPay=96;
+        //  ПубличныйidPay=96;
             // TODO: 15.08.2023
             Log.d(this.getClass().getName(),"\n" + " class "
                     + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
@@ -217,6 +217,9 @@ public class Fragment1_List_CommitPay extends Fragment   {
             bottomNavigationAsync.setTitle("Обновить");
             bottomNavigationSearch = bottomnavigationActivicommit_search.findViewById(R.id.bottomNavigationSearch);
             bottomNavigationSearch.setTitle("Поиск");
+            bottomNavigationSearch.setEnabled(false);
+            bottomNavigationSearch.setClickable(false);
+
             progressBarCommitPay = view.findViewById(R.id.prograessbarcommitpaydown); /////КНОПКА ТАБЕЛЬНОГО УЧЕТА
             recyclerViewСогласование1С = view.findViewById(R.id.recycleviewcommitpay);
             relativeLayout_recyreview= view.findViewById(R.id.relativeLayout_recyreview);
@@ -311,6 +314,8 @@ public class Fragment1_List_CommitPay extends Fragment   {
             if (jsonNode1сСогласованияAllRows!=null) {
 
                 BisnesLogica1Согласование.МетодКпопкаСоЗачкомКраснымДополнительныйСтатус(jsonNode1сСогласованияAllRows);
+
+                BisnesLogica1Согласование. setEnableSearchMechi(jsonNode1сСогласованияAllRows);
 
                 BisnesLogica1Согласование. МетодПерегрузкаRecyceView();
 
@@ -898,6 +903,26 @@ public class Fragment1_List_CommitPay extends Fragment   {
                 bottomnavigationActivicommit_search.requestLayout();
                 bottomnavigationActivicommit_search.refreshDrawableState();
 
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                        " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
+                        Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+            }
+        }
+        @SuppressLint("RestrictedApi")
+        private void setEnableSearchMechi(@NonNull JsonNode jsonNode1сСогласованияRow)
+        {
+            try {
+                // TODO: 09.03.2022
+                if (jsonNode1сСогласованияRow.size()>0) {
+                    bottomNavigationSearch.setEnabled(true);
+                    bottomNavigationSearch.setClickable(true);
+                }
+                Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                        " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                        " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n" );
             } catch (Exception e) {
                 e.printStackTrace();
                 Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
@@ -2324,7 +2349,6 @@ private void МетодISNUllПолучениеДанныхОт1сДляСогл
                 recyclerViewСогласование1С.forceLayout();
                 linearLayout_commitpay.requestLayout();
                 linearLayout_commitpay.forceLayout();
-
                 progressBarCommitPay.setVisibility(View.INVISIBLE);
             } catch (Exception e) {
                 e.printStackTrace();
