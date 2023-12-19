@@ -179,7 +179,7 @@ public class Fragment1_List_CommitPay extends Fragment   {
 
             ПубличныйidPay = new Class_Generations_PUBLIC_CURRENT_ID().ПолучениеПубличногоТекущегоПользователяID(getContext());
          /// ПубличныйidPay = 14;
-
+        ///    ПубличныйidPay=96;
             // TODO: 15.08.2023
             Log.d(this.getClass().getName(),"\n" + " class "
                     + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
@@ -885,15 +885,15 @@ public class Fragment1_List_CommitPay extends Fragment   {
                 // TODO: 09.03.2022
                 if (jsonNode1сСогласованияRow!=null) {
                     if (  jsonNode1сСогласованияRow.size()>0) {
-                        bottomnavigationActivicommit_search.getOrCreateBadge(R.id.id_commitasync).setBackgroundColor(Color.parseColor("#008080"));
-                        bottomnavigationActivicommit_search.getOrCreateBadge(R.id.id_commitasync).setNumber(jsonNode1сСогласованияRow.size());//.getOrCreateBadge(R.id.id_taskHome).setVisible(true);
+                        bottomnavigationActivicommit_search.getOrCreateBadge(R.id.bottomNavigationAsync).setBackgroundColor(Color.parseColor("#008080"));
+                        bottomnavigationActivicommit_search.getOrCreateBadge(R.id.bottomNavigationAsync).setNumber(jsonNode1сСогласованияRow.size());//.getOrCreateBadge(R.id.id_taskHome).setVisible(true);
                     } else {
-                        bottomnavigationActivicommit_search.getOrCreateBadge(R.id.id_commitasync).setBackgroundColor(Color.RED)        ;
-                        bottomnavigationActivicommit_search.getOrCreateBadge(R.id.id_commitasync).setNumber(0);//.getOrCreateBadge(R.id.id_taskHome).setVisible(true);
+                        bottomnavigationActivicommit_search.getOrCreateBadge(R.id.bottomNavigationAsync).setBackgroundColor(Color.RED)        ;
+                        bottomnavigationActivicommit_search.getOrCreateBadge(R.id.bottomNavigationAsync).setNumber(0);//.getOrCreateBadge(R.id.id_taskHome).setVisible(true);
                     }
                 }else {
-                    bottomnavigationActivicommit_search.getOrCreateBadge(R.id.id_commitasync).setBackgroundColor(Color.RED)        ;
-                    bottomnavigationActivicommit_search.getOrCreateBadge(R.id.id_commitasync).setNumber(0);//.getOrCreateBadge(R.id.id_taskHome).setVisible(true);
+                    bottomnavigationActivicommit_search.getOrCreateBadge(R.id.bottomNavigationAsync).setBackgroundColor(Color.RED)        ;
+                    bottomnavigationActivicommit_search.getOrCreateBadge(R.id.bottomNavigationAsync).setNumber(0);//.getOrCreateBadge(R.id.id_taskHome).setVisible(true);
                 }
                 bottomnavigationActivicommit_search.requestLayout();
                 bottomnavigationActivicommit_search.refreshDrawableState();
@@ -930,7 +930,7 @@ public class Fragment1_List_CommitPay extends Fragment   {
         // TODO: 28.02.2022 начало  MyViewHolderДляЧата
         protected class MyViewHolder extends RecyclerView.ViewHolder {// TODO: 28.02.2022 начало  MyViewHolderДляЧата
             // TODO: 28.02.2022
-            private       TextView textView1, textView2, textView3, textView4, textView5Намеклатура, textView6, textView7Sum;
+            private       TextView textView1, textView2, textView3, textView4, textView5Намеклатура, textorganizationvalue, textvalueSUM;
             private      TextView textViewКонтрагент,textViewЦФО,textViewДДС,TextViewНамелклатура;
             private      MaterialCardView cardviewmatireacommitpay;
             private      MaterialButton КнопкаСогласованиеОтказ,КнопкаУспешноеСогласования;
@@ -967,8 +967,8 @@ public class Fragment1_List_CommitPay extends Fragment   {
                         textView3 = itemView.findViewById(R.id.text2_valuepay);
                         textView4 = itemView.findViewById(R.id.text3_valuepay);
                         textView5Намеклатура = itemView.findViewById(R.id.text4_valuepay);
-                        textView6 = itemView.findViewById(R.id.text5_valuepay);
-                        textView7Sum = itemView.findViewById(R.id.text6_valuepay);
+                        textorganizationvalue = itemView.findViewById(R.id.textorganizationvalue);
+                       textvalueSUM = itemView.findViewById(R.id.textvalueSUM);
                         textViewКонтрагент = itemView.findViewById(R.id.text2_polamoneybudchetheader);
                         textViewЦФО = itemView.findViewById(R.id.text1_polamoneybudchetheader);
                         textViewДДС = itemView.findViewById(R.id.text3_polamoneybudchetheader);
@@ -1762,7 +1762,7 @@ public class Fragment1_List_CommitPay extends Fragment   {
                 try {
                     // TODO: 02.03.2022#1// TODO: 02.03.2022#1// TODO: 02.03.2022#1// TODO: 02.03.2022#1// TODO: 02.03.2022#1// TODO: 02.03.2022#1// TODO: 02.03.2022#1
 
-                    if (jsonNode1сСогласованияRow!=null &&   holder.textView6!=null ) {
+                    if (jsonNode1сСогласованияRow!=null &&   holder.textorganizationvalue !=null ) {
                         //TODO
                         String ПерваяСтрочкаЗначения = jsonNode1сСогласованияRow.get("organization").asText();
                         // TODO: 02.03.2022
@@ -1770,8 +1770,8 @@ public class Fragment1_List_CommitPay extends Fragment   {
                         // TODO: 02.03.2022
                         Log.i(this.getClass().getName(), " organization ПерваяСтрочкаЗначения " + ПерваяСтрочкаЗначения);
                         // TODO: 28.02.2022
-                        holder.textView6.setText(ПерваяСтрочкаЗначения);
-                        holder.textView6.setTag(ПерваяСтрочкаЗначения);
+                        holder.textorganizationvalue.setText(ПерваяСтрочкаЗначения);
+                        holder.textorganizationvalue.setTag(ПерваяСтрочкаЗначения);
                     }
 
                     // TODO: 28.02.2022*/
@@ -1801,7 +1801,7 @@ public class Fragment1_List_CommitPay extends Fragment   {
                 try {
                     // TODO: 02.03.2022#1// TODO: 02.03.2022#1// TODO: 02.03.2022#1// TODO: 02.03.2022#1// TODO: 02.03.2022#1// TODO: 02.03.2022#1// TODO: 02.03.2022#1
 
-                    if (jsonNode1сСогласованияRow!=null &&  holder.textView7Sum !=null ) {
+                    if (jsonNode1сСогласованияRow!=null &&  holder.textvalueSUM !=null ) {
                         //TODO
                         String ПерваяСтрочкаЗначения = jsonNode1сСогласованияRow.get("sum").asText();
                         // TODO: 02.03.2022
@@ -1809,8 +1809,8 @@ public class Fragment1_List_CommitPay extends Fragment   {
                         // TODO: 02.03.2022
                         Log.i(this.getClass().getName(), "  sum ПерваяСтрочкаЗначения " + ПерваяСтрочкаЗначения);
                         // TODO: 28.02.2022
-                        holder.textView7Sum.setText(ПерваяСтрочкаЗначения.toString()+ " руб");
-                        holder.textView7Sum.setTag(ПерваяСтрочкаЗначения);
+                        holder.textvalueSUM.setText(ПерваяСтрочкаЗначения.toString()+ " руб");
+                        holder.textvalueSUM.setTag(ПерваяСтрочкаЗначения);
                     }
 
                     // TODO: 28.02.2022*/

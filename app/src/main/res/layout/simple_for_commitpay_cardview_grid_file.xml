@@ -93,7 +93,7 @@
                     android:checkMark="?android:attr/textCheckMark"
                     android:foregroundGravity="center"
                     android:gravity="left|center_vertical"
-                    android:hint=" данные номер №"
+                    android:tooltipText=" данные номер №"
                     android:minHeight="20dp"
                     android:singleLine="false"
                     android:textAlignment="gravity"
@@ -156,7 +156,7 @@
                     android:checkMark="?android:attr/textCheckMark"
                     android:foregroundGravity="center"
                     android:gravity="left|center_vertical"
-                    android:hint=" данные цфо"
+                    android:tooltipText="данные цфо"
                     android:minHeight="20dp"
                     android:singleLine="false"
                     android:textAlignment="gravity"
@@ -218,7 +218,7 @@
                     android:checkMark="?android:attr/textCheckMark"
                     android:foregroundGravity="center"
                     android:gravity="left|center_vertical"
-                    android:hint="данные контрагент"
+                    android:tooltipText="данные контрагент"
                     android:minHeight="20dp"
                     android:singleLine="false"
                     android:textAlignment="gravity"
@@ -259,7 +259,7 @@
                     android:checkMark="?android:attr/textCheckMark"
                     android:foregroundGravity="left"
                     android:gravity="center_vertical"
-                    android:hint="Статья ДДС"
+                    android:hint="Статья ддс"
                     android:minHeight="20dp"
                     android:singleLine="false"
                     android:textAlignment="gravity"
@@ -283,7 +283,7 @@
                     android:checkMark="?android:attr/textCheckMark"
                     android:foregroundGravity="center"
                     android:gravity="left|center_vertical"
-                    android:hint="данные статья ддс"
+                    android:tooltipText="данные статья ддс"
                     android:minHeight="20dp"
                     android:singleLine="false"
                     android:textAlignment="gravity"
@@ -346,7 +346,7 @@
                     android:checkMark="?android:attr/textCheckMark"
                     android:foregroundGravity="center"
                     android:gravity="left|center_vertical"
-                    android:hint="данные название платежа"
+                    android:tooltipText="данные название платежа"
                     android:minHeight="20dp"
                     android:singleLine="false"
                     android:textAlignment="gravity"
@@ -395,7 +395,7 @@
                     android:visibility="visible" />
 
                 <TextView
-                    android:id="@+id/text5_valuepay"
+                    android:id="@+id/textorganizationvalue"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -408,7 +408,7 @@
                     android:checkMark="?android:attr/textCheckMark"
                     android:foregroundGravity="center"
                     android:gravity="left|center_vertical"
-                    android:hint="данные организация"
+                    android:tooltipText="данные организация"
                     android:minHeight="20dp"
                     android:singleLine="false"
                     android:textAlignment="gravity"
@@ -459,7 +459,7 @@
                     android:visibility="visible" />
 
                 <TextView
-                    android:id="@+id/text6_valuepay"
+                    android:id="@+id/textvalueSUM"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_alignParentTop="true"
@@ -473,12 +473,12 @@
                     android:checkMark="?android:attr/textCheckMark"
                     android:foregroundGravity="center"
                     android:gravity="left|center_vertical"
-                    android:hint="данные сумма"
+                    android:tooltipText="данные сумма"
                     android:minHeight="20dp"
                     android:singleLine="false"
                     android:textAlignment="gravity"
-                    android:textColor="#000000"
-                    android:textSize="14sp"
+                    android:textColor="#2B0560"
+                    android:textSize="15sp"
                     android:textStyle="bold"
                     android:visibility="visible" />
             </RelativeLayout>
@@ -585,16 +585,12 @@
                     style="@style/Widget.MaterialComponents.ExtendedFloatingActionButton.Icon"
                     android:layout_width="wrap_content"
                     android:layout_height="37dp"
-
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
                     android:layout_marginBottom="5dp"
-
                     android:layout_alignParentLeft="true"
                     android:layout_alignParentTop="true"
-
                     android:backgroundTint="#BC576B"
-
                     android:layout_weight="1"
                     android:clickable="true"
                     android:drawableLeft="@drawable/icon_dsu1_commitpayrollback"
@@ -619,12 +615,9 @@
                     android:layout_weight="1"
                     android:layout_alignParentRight="true"
                     android:layout_alignParentTop="true"
-
                     android:layout_marginStart="5dp"
                     android:layout_marginEnd="5dp"
-
                     android:backgroundTint="#537A7A"
-
                     android:clickable="true"
                     android:drawableLeft="@drawable/icon_dsu1_commitpay_success"
                     android:focusable="auto"
@@ -638,7 +631,6 @@
                     android:visibility="visible"
                     app:cornerRadius='15dp'
                     tools:visibility="visible" />
-
             </RelativeLayout>
 
         </TableRow>
