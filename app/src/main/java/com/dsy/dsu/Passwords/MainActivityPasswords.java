@@ -38,6 +38,7 @@ import com.dsy.dsu.BusinessLogicAll.Class_Clears_Tables;
 import com.dsy.dsu.BusinessLogicAll.Class_Connections_Server;
 import com.dsy.dsu.BusinessLogicAll.Class_Find_Setting_User_Network;
 import com.dsy.dsu.BusinessLogicAll.CreateFolderBinatySave.ClassCreateFolderCommitPays1C;
+import com.dsy.dsu.BusinessLogicAll.CreateFolderBinatySave.ClassDeleteErrorFile;
 import com.dsy.dsu.BusinessLogicAll.Errors.ClassCreateFileForError;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.BusinessLogicAll.Class_MODEL_synchronized;
@@ -101,9 +102,7 @@ public class MainActivityPasswords extends AppCompatActivity {
             // TODO: 04.10.2023 разрешения для всего
             new ClassPermissions(this,ALL_PERSSION_CODE,CAMERA_PERSSION_CODE);
 
-            // TODO: 07.10.2023  create file for ERROR
-            ClassCreateFileForError classCreateFileForError=new ClassCreateFileForError();
-            classCreateFileForError.metodCreateFileForError(this);
+
 
             /* TODO: 06.09.2023 tabase */
             sqLiteDatabase = GetSQLiteDatabase.SqliteDatabase();
@@ -124,7 +123,18 @@ public class MainActivityPasswords extends AppCompatActivity {
                     getBaseContext().getResources().getConfiguration();
             config.setLocale(locale);
             createConfigurationContext(config);
-            Log.d(getPackageName().getClass().getName(), " onCreate(Bundle savedInstanceState)  MainActivityPasswords ");
+
+
+            // TODO: 19.12.2023 удаляем файл ошибоок
+            ClassDeleteErrorFile classDeleteErrorFile=new ClassDeleteErrorFile(getApplicationContext());
+            classDeleteErrorFile.МетодDeleteFolders();
+
+// TODO: 19.12.2023 создаем  файл ошибоок
+            // TODO: 07.10.2023  create file for ERROR
+            ClassCreateFileForError classCreateFileForError=new ClassCreateFileForError();
+            classCreateFileForError.metodCreateFileForError(this);
+
+
             КнопкаВходавСистему = (Button) findViewById(R.id.КнопкаВходаВПриложение);/////кнопка входа на сервер
             КнопкаВходавСистему.setVisibility(View.VISIBLE);
             ПрогрессБарДляВходаСистему = (ProgressBar) findViewById(R.id.progressBarДляWIFI); ////програссбар при аунтификации при входе в системму
@@ -155,8 +165,6 @@ public class MainActivityPasswords extends AppCompatActivity {
             // TODO: 14.08.2023 создаем папку для BinaryFile CommitPay1C Соласования
             new ClassCreateFolderCommitPays1C(getApplicationContext()).МетодCreateFoldersBinaty();
 
-            // TODO: 12.12.2023  регистируем бродкасресивер
-         //new Registraziyreciver().staringregistraziyreciver(activity);
 
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
