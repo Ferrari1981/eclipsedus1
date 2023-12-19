@@ -62,6 +62,7 @@ import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.core.Scheduler;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Action;
+import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.functions.Predicate;
 import io.reactivex.rxjava3.parallel.ParallelFlowable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
@@ -1561,7 +1562,20 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
             int КоличествоПотоков=Runtime.getRuntime().availableProcessors();;
 
         ParallelFlowable parallelFlowableAsync
-                = Flowable.fromIterable( public_contentДатыДляГлавныхТаблицСинхронизации.ВерсииВсехСерверныхТаблиц.keySet()).parallel(КоличествоПотоков);
+                = Flowable.fromIterable( public_contentДатыДляГлавныхТаблицСинхронизации.ВерсииВсехСерверныхТаблиц.keySet())
+                .map(new Function<String, Object>() {
+                    @Override
+                    public Object apply(String s) throws Throwable {
+                        if(!s.equalsIgnoreCase("errordsu1")){
+                            Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                            return s;
+                        }
+                        return new String();
+                    }
+                }).filter(fil->!fil.toString().isEmpty())
+                .parallel(КоличествоПотоков);
 
         parallelFlowableAsync
                             .runOn(schedulers)
