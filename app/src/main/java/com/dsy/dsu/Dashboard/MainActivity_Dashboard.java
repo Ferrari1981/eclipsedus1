@@ -33,8 +33,8 @@ import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.Services.ServiceUpdatePoОбновлениеПО;
 import com.dsy.dsu.Dashboard.Fragments.DashboardFragmentMaterialDesign;
 import com.dsy.dsu.R;
-import com.dsy.dsu.Websocet.WebSocet2;
-import com.dsy.dsu.Websocet.WebSockets1;
+
+
 
 import java.util.Date;
 
@@ -539,26 +539,6 @@ try{
 
 // TODO: 15.11.2023 test metod
 
-
-        void testingCode(){
-           // AllTestsBusinessLogic allTestsBusinessLogic=new AllTestsBusinessLogic();       allTestsBusinessLogic.new ClassGetFileProvider().методGetFileProvider();
-            try {
-
-              /*  WebSocet2 webSocet2=new WebSocet2(getApplicationContext());
-
-                webSocet2.connectToWebSocket();*/
-
-
-                WebSockets1 webSockets1=new WebSockets1( getApplicationContext(),5);
-                webSockets1.new классИнициализацииКлиентаWebSocerts().методИнициализацииwebsocets();
-
-
-            } catch (Exception e) {
-                throw new RuntimeException(e);
-            }
-
-
-        }
 
 
 

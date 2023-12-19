@@ -293,8 +293,8 @@ dependencies {
     //TODO annotations NestedScrollView
     implementation 'androidx.core:core:1.8.0'
 
-    def websocet_version = "1.5.4"
-    implementation "org.java-websocket:Java-WebSocket:$websocet_version"
+/*    def websocet_version = "1.5.4"
+    implementation "org.java-websocket:Java-WebSocket:$websocet_version"*/
 
 
 

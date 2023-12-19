@@ -1,3 +1,4 @@
+/*
 package com.dsy.dsu.Websocet;
 
 import android.content.Context;
@@ -102,3 +103,4 @@ Context context;
     }
 
 }
+*/
