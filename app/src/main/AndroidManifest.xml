@@ -161,9 +161,68 @@
         tools:ignore="MissingClass">
 
 
+
+
+
         <meta-data
             android:name="com.google.android.gms.car.application"
             android:resource="@xml/automotive_app_desc" />
+
+
+
+        <activity
+            android:name=".CommitingPrices.View.MainActivityCommitingPrices"
+            android:exported="true"
+            android:grantUriPermissions="true"
+            android:label="Согласование цены"
+            android:theme="@style/Theme.MaterialComponents.DayNight.DarkActionBar">
+        <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.USER_PRESENT" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+
+            <action android:name="android.intent.action.PACKAGE_INSTALL" />
+            <action android:name="android.intent.action.PACKAGE_ADDED" />
+            <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            <action android:name="android.intent.action.USER_PRESENT" />
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+
+            <category android:name="android.intent.category.DEFAULT" />
+
+            <action android:name="android.intent.action.PACKAGE_INSTALL" />
+            <action android:name="android.intent.action.PACKAGE_ADDED" />
+            <action android:name="android.intent.action.DOWNLOAD_COMPLETE" />
+            <action android:name="android.intent.action.BOOT_COMPLETED" />
+            <action android:name="android.intent.action.LOCKED_BOOT_COMPLETED" />
+            <action android:name="android.intent.action.QUICKBOOT_POWERON" />
+            <action android:name="com.htc.intent.action.QUICKBOOT_POWERON" />
+            <action android:name="android.intent.action.USER_PRESENT" />
+            <action android:name="android.permission.FOREGROUND_SERVICE" />
+            <action android:name="android.permission.INSTANT_APP_FOREGROUND_SERVICE" />
+            <action android:name="android.intent.action._BOOT_COMPLETED" />
+            <action android:name="android.intent.action.EDIT" />
+            <action android:name="android.intent.action.INSERT" />
+            <action android:name="android.intent.action.DELETE" />
+            <action android:name="android.intent.action.WEB_SEARCH" />
+            <action android:name="android.intent.action.SEND" />
+            <action android:name="android.intent.action.APP_ERROR" />
+            <action android:name="android.intent.action.OPEN_DOCUMENT" />
+            <action android:name="android.intent.action.SYNC" />
+            <action android:name="android.intent.action.RUN" />
+            <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" />
+            <action android:name="android.permission.WAKE_LOCK" />
+        </intent-filter>/>
+        </activity>
+
+
+
+
+
+
 
 
 
@@ -178,7 +237,6 @@
             android:requestLegacyExternalStorage="true"
             android:showOnLockScreen="true"
             android:stopWithTask="false">
-
             <intent-filter>
                 <action android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
                 <action android:name="android.intent.action.USER_PRESENT" />
@@ -210,15 +268,7 @@
                 <action android:name="android.permission.FOREGROUND_SERVICE" />
                 <action android:name="android.intent.action.ACTION_EXTERNAL_APPLICATIONS_AVAILABLE" />
             </intent-filter>
-
-
-
         </service>
-
-
-
-
-
         <service
             android:name=".AdmissionMaterials.Service.ServiceCameraTake"
             android:directBootAware="true"

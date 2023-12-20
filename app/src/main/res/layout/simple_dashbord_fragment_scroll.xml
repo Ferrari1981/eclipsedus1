@@ -28,7 +28,7 @@
       <androidx.appcompat.widget.Toolbar
           android:id="@+id/toolbarcamera_dashbord"
           android:layout_width="match_parent"
-          android:layout_height="400dp"
+          android:layout_height="390dp"
           android:elevation="0dp"
           app:showAsAction="always"
           app:theme="@style/AppTheme">
@@ -168,7 +168,7 @@
                     app:strokeWidth="1dp" />
 
                 <com.google.android.material.button.MaterialButton
-                    android:id="@+id/КнопкаЦены"
+                    android:id="@+id/КнопкаСогласЦен"
                     style="@style/Widget.MaterialComponents.Button.TextButton.Icon"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -185,7 +185,7 @@
                     android:gravity="center"
                     android:minHeight="70dp"
                     android:paddingLeft="15dp"
-                    android:text="Цены"
+                    android:text="Согласования цен"
                     android:textColor="#000000"
                     android:textSize="14sp"
                     android:textStyle="normal"

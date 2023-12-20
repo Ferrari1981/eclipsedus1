@@ -45,7 +45,7 @@ public class DashboardFragmentMaterialDesign extends  DialogFragment  {
 
     private Animation animation1,animation2,animation3,animation4,animation5;
 
-    private MaterialButton КнопкаТабель, КнопкаСогласование ,  КнопкаПоступлениеМатериалов,КнопкаЗаявкаНаТранспорт;
+    private MaterialButton КнопкаТабель, КнопкаСогласование ,  КнопкаПоступлениеМатериалов,КнопкаЗаявкаНаТранспорт,КнопкаСогласЦен;
 
         private  TextView TextViewLogo;
     private LifecycleOwner lifecycleOwner;
@@ -230,6 +230,7 @@ public class DashboardFragmentMaterialDesign extends  DialogFragment  {
 
             КнопкаЗаявкаНаТранспорт   = (MaterialButton) view.findViewById(R.id.КнопкаЗаявкаНаТранспорт); /////КНОПКА ТАБЕЛЬНОГО УЧЕТА
             КнопкаСогласование         = (MaterialButton) view.findViewById(R.id.КнопкаСогласование); /////КНОПКА ТАБЕЛЬНОГО УЧЕТА
+            КнопкаСогласЦен         = (MaterialButton) view.findViewById(R.id.КнопкаСогласЦен); /////КНОПКА ТАБЕЛЬНОГО УЧЕТА
             КнопкаПоступлениеМатериалов         = (MaterialButton) view.findViewById(R.id.КнопкаПоступлениеМатериалов); /////КНОПКА ТАБЕЛЬНОГО УЧЕТА
             КнопкаТабель          = (MaterialButton) view.findViewById(R.id.КнопкаТабель); /////КНОПКА ТАБЕЛЬНОГО УЧЕТА
 
@@ -476,6 +477,35 @@ public class DashboardFragmentMaterialDesign extends  DialogFragment  {
                                         Thread.currentThread().getStackTrace()[2].getLineNumber());
                             }
                         }
+                    });
+
+// TODO: 20.12.2023  новая кнопка согласование цен
+                    КнопкаСогласЦен.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View v) {
+                            try {
+                                Intent intentЗапускСогласованиеЦены1С = new Intent();
+                                Bundle data = new Bundle();
+                                data.putBinder("callbackbinderdashbord", localBinderОбновлениеПО);
+                                intentЗапускСогласованиеЦены1С.putExtras(data);
+                                intentЗапускСогласованиеЦены1С.setClass(getContext(), MainActivity_CommitPay.class);//рабочий
+                                intentЗапускСогласованиеЦены1С.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                startActivity(intentЗапускСогласованиеЦены1С);
+                                Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                                        " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                                        " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n");
+
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                                Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
+                                        + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                                new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
+                                        Thread.currentThread().getStackTrace()[2].getMethodName(),
+                                        Thread.currentThread().getStackTrace()[2].getLineNumber());
+                            }
+                        }
+
+
                     });
 
                     // TODO: 21.08.2023  teo button
