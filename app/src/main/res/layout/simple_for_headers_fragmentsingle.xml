@@ -99,29 +99,28 @@
             android:minHeight="20dp">
 
 
-
-
             <com.google.android.material.button.MaterialButton
-                android:layout_column="0"
+                android:id="@+id/imageButtonbackotsingletabel"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/imageButtonbackotsingletabel"
-                android:gravity="center_vertical|center_horizontal"
-                android:textStyle="bold"
-                android:padding="1dp"
+                android:layout_column="0"
                 android:layout_margin="1dp"
-                android:textSize="13sp"
                 android:backgroundTint="#FFFFFF"
                 android:backgroundTintMode="screen"
-                app:cornerRadius="20dp"
+                android:gravity="center_vertical|center_horizontal"
+                android:padding="1dp"
                 android:stateListAnimator="@drawable/icon_dsu1_exit3_foreground"
                 android:textAlignment="center"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                app:cardCornerRadius="30dp"
+                app:cornerRadius="20dp"
                 app:icon="@drawable/icon_dsu1_exit3_foreground"
                 app:iconGravity="textEnd"
                 app:iconSize="40dp"
                 app:iconTint="#686565"
                 app:rippleColor="#F50057"
-                app:cardCornerRadius="30dp" />
+                tools:ignore="SpeakableTextPresentCheck" />
 
 
 

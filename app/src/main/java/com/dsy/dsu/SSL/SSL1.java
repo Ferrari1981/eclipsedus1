@@ -17,7 +17,9 @@ import java.util.concurrent.TimeUnit;
 
 import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
+import javax.net.ssl.TrustManager;
 import javax.net.ssl.TrustManagerFactory;
+import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -35,10 +37,11 @@ public class SSL1 {
         this.context = context;
     }
 
-    void startingkeyStore (){
+    public    OkHttpClient.Builder  getOkHttpClientBuilder  (){
+        OkHttpClient.Builder builderokhtttp=null;
         try{
 
- /*   TrustManager[] trustAllCerts = new TrustManager[]{
+    TrustManager[] trustAllCerts = new TrustManager[]{
             new X509TrustManager() {
                 @Override
                 public void checkClientTrusted(java.security.cert.X509Certificate[] chain, String authType) {
@@ -65,25 +68,25 @@ public class SSL1 {
     };
 
 
-    OkHttpClient.Builder builderokhtttp = new OkHttpClient.Builder();
+      builderokhtttp = new OkHttpClient.Builder();
     SSLContext sslContext = SSLContext.getInstance("SSL");
-    sslContext.init(null, trustAllCerts, new java.security.SecureRandom());*/
+    sslContext.init(null, trustAllCerts, null);
 
 
-            OkHttpClient.Builder builderokhtttp = new OkHttpClient.Builder();
+/*            OkHttpClient.Builder builderokhtttp = new OkHttpClient.Builder();
             java.security.KeyStore    getkeyStore=getKeyCert();
             SSLContext sslContext = SSLContext.getInstance("SSL");
             TrustManagerFactory trustManagerFactory=TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
             trustManagerFactory.init(getkeyStore);
             KeyManagerFactory keyManagerFactory=KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
             keyManagerFactory.init(getkeyStore,"secret".toCharArray());
-            sslContext.init(keyManagerFactory.getKeyManagers(),trustManagerFactory.getTrustManagers(),new SecureRandom());
+            sslContext.init(keyManagerFactory.getKeyManagers(),trustManagerFactory.getTrustManagers(),new SecureRandom());*/
 
             builderokhtttp.sslSocketFactory(sslContext.getSocketFactory());
 
             // builderokhtttp.hostnameVerifier((hostname, session) -> true);
 
-            OkHttpClient okHttpClient = builderokhtttp.build();
+  /*          OkHttpClient okHttpClient = builderokhtttp.build();
             Dispatcher dispatcher= okHttpClient.dispatcher();
             okHttpClient.newCall(new Request.Builder().url("https://expired.badssl.com/").build()).enqueue(new Callback() {
                 @Override
@@ -104,7 +107,7 @@ public class SSL1 {
             });
 
 
-            dispatcher.executorService().awaitTermination(1, TimeUnit.MINUTES);
+            dispatcher.executorService().awaitTermination(1, TimeUnit.MINUTES);*/
 
             Log.i(this.getClass().getName(),  " Атоманически установкаОбновление ПО "+
                     Thread.currentThread().getStackTrace()[2].getMethodName()+
@@ -200,11 +203,13 @@ InputStream fis = new FileInputStream(CertificatServer) *//* insert your file pa
                     Thread.currentThread().getStackTrace()[2].getLineNumber());
         }
 
+        return builderokhtttp;
+
     }
 
 
 
-    public java.security.KeyStore getKeyCert(){
+    private java.security.KeyStore getKeyCert(){
         java.security.KeyStore keyStore=null;
         try{
             keyStore= java.security.KeyStore.getInstance(java.security.KeyStore.getDefaultType());

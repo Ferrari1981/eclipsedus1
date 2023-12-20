@@ -558,6 +558,7 @@ import okio.BufferedSink;
 
             OkHttpClient.Builder builderokhtttp = new OkHttpClient.Builder();
 
+           /// OkHttpClient.Builder builderokhtttp=   new SSL1(context).getOkHttpClientBuilder();
             // TODO: 15.12.2023 end test
             OkHttpClient okHttpClientПинг = builderokhtttp.addInterceptor(new Interceptor() {
                         @Override
