@@ -299,7 +299,7 @@ dependencies {
 
 
     //TODO viewmodel mvmw
-
+  /*  def viewmodel_version = "2.5.0"*/
     // https://mvnrepository.com/artifact/androidx.lifecycle/lifecycle-viewmodel
     implementation group: 'androidx.lifecycle', name: 'lifecycle-viewmodel', version: '2.5.0'
 
