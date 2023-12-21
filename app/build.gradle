@@ -86,7 +86,7 @@ android {
     sourceSets {
         main {
             java {
-                srcDirs 'src\\main\\java', 'src\\main\\java\\com\\dsy\\dsu\\newJava', 'src\\main\\java\\com.dsy.dsu\\folder_for_JSON_B_P'
+                srcDirs 'src\\main\\java', 'src\\main\\java\\com\\dsy\\dsu\\newJava', 'src\\main\\java\\com.dsy.dsu\\folder_for_JSON_B_P', 'src\\main\\java\\com\\dsy\\dsu\\CommitingPrices\\BL', 'src\\main\\java\\2'
             }
             resources {
                 srcDirs 'src\\main\\resources', 'src\\main\\java\\com\\dsy\\dsu\\new2Java', 'src\\main\\resources\\Class_For_JSON_B_P'
