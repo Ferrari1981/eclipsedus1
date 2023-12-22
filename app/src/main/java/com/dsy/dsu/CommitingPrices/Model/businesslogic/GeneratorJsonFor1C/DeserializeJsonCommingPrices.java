@@ -11,15 +11,18 @@ import com.fasterxml.jackson.core.JsonToken;
 import com.fasterxml.jackson.databind.DeserializationContext;
 import com.fasterxml.jackson.databind.JsonDeserializer;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.deser.std.StdDeserializer;
 import com.fasterxml.jackson.databind.util.TokenBuffer;
 
 import java.io.IOException;
 
-public class DeserializeJsonCommingPrices extends JsonDeserializer<JsonNode> {
+public class DeserializeJsonCommingPrices extends StdDeserializer<JsonNode> {
     Context context;
-    public DeserializeJsonCommingPrices(Context context) {
-        this.context = context;
+
+    public DeserializeJsonCommingPrices(StdDeserializer<?> src) {
+        super(src);
     }
+
 
     @Override
     public JsonNode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {

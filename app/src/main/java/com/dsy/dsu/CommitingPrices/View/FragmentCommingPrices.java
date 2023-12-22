@@ -41,18 +41,23 @@ public class FragmentCommingPrices extends Fragment {
         try{
             GetJsonOt1cComminhgPrices cComminhgPrices=new GetJsonOt1cComminhgPrices();
 
-            InputStream inputStream1сСогласования=
-                    cComminhgPrices.startingGetJsonOt1cComminhgPrices(getContext(),"http://uat.dsu1.ru:55080/dds/hs/jsonto1ccena/listofdocuments",5);
+        /*    InputStream inputStream1сСогласования=
+                    cComminhgPrices.startingGetJsonOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5);*/
+
+            String string1сСогласования=
+                    cComminhgPrices.startingGetStringOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5);
 
 
-         int ResultDesi=   cComminhgPrices.DeserializerJson1cComminhgPrices(getContext(),inputStream1сСогласования);
 
 
+        // int ResultDesi=   cComminhgPrices.DeserializerJson1cComminhgPrices(getContext(),inputStream1сСогласования);
+
+/*
             Log.d(this.getClass().getName(),"\n"
                     + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()  + " inputStream1сСогласования  " +inputStream1сСогласования+
-                    " ResultDesi " +ResultDesi);
+                    " ResultDesi " +ResultDesi);*/
 
 
             Log.d(this.getClass().getName(),"\n"

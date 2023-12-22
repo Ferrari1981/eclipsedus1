@@ -14,6 +14,7 @@ public abstract  class GetJsonOt1cComminhgPricesParent {
 
   public abstract InputStream startingGetJsonOt1cComminhgPrices(@NotNull Context context, @NotNull String adress, @NotNull Integer PublicId);
 
+  public abstract String startingGetStringOt1cComminhgPrices(@NotNull Context context, @NotNull String adress, @NotNull Integer PublicId);
 
   public  abstract byte[] GenetarJsonGet1cComminhgPrices( @NotNull Context context, @NotNull LinkedHashMap<String,Long> linkedHashMapОтпавркаНа1с);
 

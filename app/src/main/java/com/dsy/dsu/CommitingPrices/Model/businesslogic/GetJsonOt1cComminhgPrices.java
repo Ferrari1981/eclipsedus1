@@ -34,6 +34,7 @@ import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
+import java.util.function.Consumer;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -45,6 +46,7 @@ import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
 import okhttp3.Response;
+import okio.ByteString;
 
 public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent {
 
@@ -152,6 +154,110 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
         return inputStreamCommingPrecies[0];
     }
 
+    @Override
+    public String startingGetStringOt1cComminhgPrices(@NonNull Context context, @NonNull String adress, @NonNull Integer PublicId) {
+        final String[] stringCommingPrecies = {null};
+        try{
+            // MediaType JSON = MediaType.parse("application/json; charset=utf-8");
+            OkHttpClient okHttpClient1cСогласованиеЦен = new OkHttpClient().newBuilder().addInterceptor(new Interceptor() {
+                        @Override
+                        public Response intercept(Chain chain) throws IOException {
+                            Request originalRequest = chain.request();
+                            Request.Builder builder = originalRequest.newBuilder()
+                                    .header("dsu1user", String.valueOf(PublicId))//TODO old ПубличныйIDДляФрагмента   или 8
+                                    .header("Authorization",
+                                            Credentials.basic("dsu1Admin", "dsu1Admin"));
+                            Request newRequest = builder.build();
+                            return chain.proceed(newRequest);
+                        }
+                    }).connectTimeout(3, TimeUnit.SECONDS)
+                    .writeTimeout(2, TimeUnit.MINUTES)
+                    .readTimeout(2, TimeUnit.MINUTES)
+                    .build();
+            // TODO: 25.10.2022 Диспечер
+            Dispatcher dispatcher=  okHttpClient1cСогласованиеЦен.dispatcher();
+
+
+// TODO: 22.12.2023 генерируем даным для 1с согласование цен
+            LinkedHashMap<String,Long> linkedHashMapОтпавркаНа1с=new LinkedHashMap<>();
+            linkedHashMapОтпавркаНа1с.put("dsu1user",PublicId.longValue());
+            byte[] dataforsend1cCommitPay=    GenetarJsonGet1cComminhgPrices(context,linkedHashMapОтпавркаНа1с);
+
+
+            RequestBody bodyДляОтправки1cСогласования =
+                    RequestBody.create(MediaType.parse("application/octet-stream; charset=utf-8"),dataforsend1cCommitPay);
+
+            Request requestGet1cСогласованииЦен = new Request.Builder()
+                    .post(bodyДляОтправки1cСогласования)
+                    .url(adress).build();
+            // TODO  Call callGET = client.newCall(requestGET);
+            okHttpClient1cСогласованиеЦен.newCall(requestGet1cСогласованииЦен).enqueue(new Callback() {
+                @Override
+                public void onFailure(@NonNull Call call, @NonNull IOException e) {
+                    Log.e(this.getClass().getName(), "  ERROR call  " + call + "  e" + e.toString());
+
+                    //TODO
+                    dispatcher.executorService().shutdown();
+                    //TODO закрываем п отоки
+                }
+                @Override
+                public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
+                    try{
+                        if (response.isSuccessful()) {
+                            String  ПришедшегоПотока =    response.header("stream_size");
+                            ПришедшегоПотока =     Optional.ofNullable(ПришедшегоПотока).map(String::valueOf).orElse("0");
+                            Long РазмерПришедшегоПотока = Long.parseLong(ПришедшегоПотока  );
+                            Integer КакаяКодировка = Integer.parseInt(   Optional.ofNullable(response.header("getcharsets"))
+                                    .map(String::new).orElse("0"));
+                            Boolean ФлагgZIPOutputStream =Boolean.parseBoolean (  Optional.ofNullable(response.header("GZIPOutputStream"))
+                                    .map(String::new).orElse("false"));
+
+
+                            ByteString asByteBuffer=    response.body().source().readByteString();
+
+                            stringCommingPrecies[0] =asByteBuffer.toString();
+
+                            Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()
+                                    + "     stringCommingPrecies[0] " +  stringCommingPrecies[0]);
+
+                            // TODO: 09.11.2023  close
+                            response.body().source().close();
+                            //TODO
+                            dispatcher.executorService().shutdown();
+                        }
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                        Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
+                                + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                        new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(),
+                                this.getClass().getName(), Thread.currentThread().getStackTrace()[2].getMethodName(),
+                                Thread.currentThread().getStackTrace()[2].getLineNumber());
+                    }
+                }
+            });
+            Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"  );
+
+            dispatcher.executorService().awaitTermination(1,TimeUnit.DAYS);
+
+
+            Log.d(this.getClass().getName(),"\n"
+                    + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                    " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+            new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
+                    Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+        }
+        return   stringCommingPrecies[0];
+    }
+
 
     // TODO: 21.12.2023 генерация джейсона
     @Override
@@ -195,14 +301,28 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
     public Integer DeserializerJson1cComminhgPrices(@NonNull Context context, @NonNull InputStream inputStream) {
 try{
     // TODO: 10.11.2023 starting Jakson JSON
-    StringWriter stringWriterJSONAndroid=    new StringWriter();
+/*    StringWriter stringWriterJSONAndroid=    new StringWriter();
     ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
     SimpleModule module = new SimpleModule();
     // TODO: 11.09.2023  какая текущап таблица
-    module.addDeserializer(JsonNode.class, new DeserializeJsonCommingPrices(context));
-    jsonGenerator.registerModule(module);
-    jsonGenerator.getFactory().createGenerator( stringWriterJSONAndroid ).useDefaultPrettyPrinter();
-    jsonGenerator.readValue(inputStream, new TypeReference<Object>() {});
+    module.addDeserializer(JsonNode.class, new DeserializeJsonCommingPrices());
+    jsonGenerator.registerModule(module);*/
+   /* jsonGenerator.getFactory().createGenerator( stringWriterJSONAndroid ).useDefaultPrettyPrinter();*/
+/*    jsonGenerator.readValue(inputStream, new TypeReference<Object>() {});
+    ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
+    JsonNode jsonNode=jsonGenerator.readTree(inputStream);*/
+
+/*    jsonNode.elements().forEachRemaining(new Consumer<JsonNode>() {
+        @Override
+        public void accept(JsonNode jsonNode) {
+            Log.d(this.getClass().getName(),"\n"
+                    + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()
+                    + " inputStream " +inputStream);
+        }
+    });*/
+
         Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
