@@ -16,17 +16,22 @@ import com.fasterxml.jackson.databind.util.TokenBuffer;
 
 import java.io.IOException;
 
-public class DeserializeJsonCommingPrices extends StdDeserializer<JsonNode> {
+public class DeserializeJsonCommingPrices extends StdDeserializer<Integer> {
     Context context;
 
     public DeserializeJsonCommingPrices(StdDeserializer<?> src) {
+
         super(src);
     }
-
+    public DeserializeJsonCommingPrices() {
+        this(null);
+    }
 
     @Override
-    public JsonNode deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
+    public Integer deserialize(JsonParser p, DeserializationContext ctxt) throws IOException, JacksonException {
+        Integer result = 0;
         try{
+           // JsonNode node = p.getCodec().readTree(p);
       // TokenBuffer tokenBuffer= ctxt.bufferAsCopyOfValue(p);
     /*     JsonToken jsonToken= p.getLastClearedToken();.*/
         Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
@@ -40,6 +45,6 @@ public class DeserializeJsonCommingPrices extends StdDeserializer<JsonNode> {
         new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
                 Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
     }
-        return null;
+        return result;
     }
 }

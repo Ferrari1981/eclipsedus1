@@ -26,6 +26,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.Serializable;
 import java.io.StringWriter;
+import java.lang.reflect.Type;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
@@ -301,28 +302,23 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
     public Integer DeserializerJson1cComminhgPrices(@NonNull Context context, @NonNull InputStream inputStream) {
 try{
     // TODO: 10.11.2023 starting Jakson JSON
-/*    StringWriter stringWriterJSONAndroid=    new StringWriter();
     ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
     SimpleModule module = new SimpleModule();
-    // TODO: 11.09.2023  какая текущап таблица
-    module.addDeserializer(JsonNode.class, new DeserializeJsonCommingPrices());
-    jsonGenerator.registerModule(module);*/
-   /* jsonGenerator.getFactory().createGenerator( stringWriterJSONAndroid ).useDefaultPrettyPrinter();*/
-/*    jsonGenerator.readValue(inputStream, new TypeReference<Object>() {});
-    ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
-    JsonNode jsonNode=jsonGenerator.readTree(inputStream);*/
+    module.addDeserializer(Integer.class, new DeserializeJsonCommingPrices());
+    jsonGenerator.registerModule(module);
 
-/*    jsonNode.elements().forEachRemaining(new Consumer<JsonNode>() {
+    JsonNode readValue = jsonGenerator.readValue(inputStream, new TypeReference<JsonNode>() {
+        @Override
+        public Type getType() {
+            return super.getType();
+        }
+    });
+    readValue.elements().forEachRemaining(new Consumer<JsonNode>() {
         @Override
         public void accept(JsonNode jsonNode) {
-            Log.d(this.getClass().getName(),"\n"
-                    + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()
-                    + " inputStream " +inputStream);
-        }
-    });*/
 
+        }
+    });
         Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
