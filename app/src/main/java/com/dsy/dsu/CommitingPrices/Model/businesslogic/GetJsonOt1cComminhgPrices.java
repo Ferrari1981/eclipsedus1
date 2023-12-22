@@ -46,7 +46,7 @@ import okhttp3.Response;
 public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent {
 
     @Override
-   public InputStream startingJsonOt1cComminhgPrices(@NonNull Context context,@NotNull String adress,@NotNull int PublicId) {
+   public InputStream startingGetJsonOt1cComminhgPrices(@NonNull Context context,@NotNull String adress,@NotNull Integer PublicId) {
         final InputStream[] inputStreamCommingPrecies = new InputStream[1];
         try{
                     // MediaType JSON = MediaType.parse("application/json; charset=utf-8");
@@ -70,11 +70,13 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
 
 
 // TODO: 22.12.2023 генерируем даным для 1с согласование цен
-            byte[] dataforsend1cCommitPay=    GenetarJsonOt1cComminhgPrices(context);
+            LinkedHashMap<String,Long> linkedHashMapОтпавркаНа1с=new LinkedHashMap<>();
+            linkedHashMapОтпавркаНа1с.put("dsu1user",PublicId.longValue());
+            byte[] dataforsend1cCommitPay=    GenetarJsonGet1cComminhgPrices(context,linkedHashMapОтпавркаНа1с);
 
             
             RequestBody bodyДляОтправки1cСогласования =
-                    RequestBody.create(MediaType.parse("application/json; charset=utf-8"),dataforsend1cCommitPay);
+                    RequestBody.create(MediaType.parse("application/octet-stream; charset=utf-8"),dataforsend1cCommitPay);
            
             Request requestGet1cСогласованииЦен = new Request.Builder()
                     .post(bodyДляОтправки1cСогласования)
@@ -150,13 +152,10 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
 
     // TODO: 21.12.2023 генерация джейсона
     @Override
-    byte[] GenetarJsonOt1cComminhgPrices(@NonNull Context context ) {
+    byte[] GenetarJsonGet1cComminhgPrices(@NonNull Context context,    LinkedHashMap<String,Long> linkedHashMapОтпавркаНа1с) {
         byte[] dataforsend1cCommitPay=null;
         try{
             //TODO POST () Генерируем JSON
-            LinkedHashMap<String,Long> linkedHashMapОтпавркаНа1с=new LinkedHashMap<>();
-            linkedHashMapОтпавркаНа1с.put("dsu1uuid",898989898l);
-            linkedHashMapОтпавркаНа1с.put("dsu1user",5l);
             // TODO: 10.11.2023 starting Jakson JSON
             StringWriter stringWriterJSONAndroid=    new StringWriter();
             ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
@@ -169,7 +168,8 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
             jsonGenerator.getFactory().createGenerator( stringWriterJSONAndroid ).useDefaultPrettyPrinter();
 
            dataforsend1cCommitPay=    jsonGenerator.writeValueAsBytes(bundle);
-           
+        // String  dataforsend1cCommitPay2=    jsonGenerator.writeValueAsString(bundle);
+
             Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
@@ -184,4 +184,6 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
     }
         return dataforsend1cCommitPay;
     }
+
+
 }

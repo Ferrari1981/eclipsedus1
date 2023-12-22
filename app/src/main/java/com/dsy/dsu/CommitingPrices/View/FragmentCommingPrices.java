@@ -18,6 +18,7 @@ import com.dsy.dsu.R;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.io.InputStream;
+import java.util.LinkedHashMap;
 
 
 public class FragmentCommingPrices extends Fragment {
@@ -41,7 +42,7 @@ public class FragmentCommingPrices extends Fragment {
 
 
             InputStream inputStream1сСогласования=
-                    new GetJsonOt1cComminhgPrices().startingJsonOt1cComminhgPrices(getContext(),"http://uat.dsu1.ru:55080/dds/hs/jsonto1ccena/listofdocuments",5);
+                    new GetJsonOt1cComminhgPrices().startingGetJsonOt1cComminhgPrices(getContext(),"http://uat.dsu1.ru:55080/dds/hs/jsonto1ccena/listofdocuments",5);
 
 
 

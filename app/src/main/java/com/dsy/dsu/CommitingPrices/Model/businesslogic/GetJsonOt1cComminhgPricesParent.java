@@ -8,12 +8,15 @@ import org.jetbrains.annotations.NotNull;
 
 import java.io.InputStream;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public abstract  class GetJsonOt1cComminhgPricesParent {
 
-  abstract InputStream startingJsonOt1cComminhgPrices(@NotNull Context context, @NotNull String adress, @NotNull int PublicId);
+  abstract InputStream startingGetJsonOt1cComminhgPrices(@NotNull Context context, @NotNull String adress, @NotNull Integer PublicId);
 
 
-  abstract byte[] GenetarJsonOt1cComminhgPrices( @NotNull Context context);
+  abstract byte[] GenetarJsonGet1cComminhgPrices( @NotNull Context context, @NotNull LinkedHashMap<String,Long> linkedHashMapОтпавркаНа1с);
+
+
 
 }
