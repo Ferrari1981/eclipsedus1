@@ -54,16 +54,16 @@ public class FragmentCommingPrices extends Fragment {
 
 
 
-        /*    InputStream inputStream1сСогласования=
-                    cComminhgPrices.startingGetJsonOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5);*/
+         InputStream inputStream1сСогласования=
+                    cComminhgPrices.startingGetJsonOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5,getHiltJaksonObjectMapper);
 
-  /*          String string1сСогласования=
-                    cComminhgPrices.startingGetStringOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5);*/
+            String string1сСогласования=
+                    cComminhgPrices.startingGetStringOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5,getHiltJaksonObjectMapper);
 
 
-            InputStream inputStream1сСогласования = getResources().openRawResource(R.raw.dsu1_keys);
+        /*    InputStream inputStream1сСогласования = getResources().openRawResource(R.raw.dsu1_keys);
 
-        cComminhgPrices.DeserializerJson1cComminhgPrices(getContext(),inputStream1сСогласования,getHiltJaksonObjectMapper);
+        cComminhgPrices.DeserializerJson1cComminhgPrices(getContext(),inputStream1сСогласования,getHiltJaksonObjectMapper);*/
 
 
             Log.d(this.getClass().getName(),"\n"

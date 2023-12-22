@@ -68,7 +68,9 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import javax.crypto.NoSuchPaddingException;
+import javax.inject.Inject;
 
+import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Predicate;
@@ -83,12 +85,13 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
  * TODO: Customize class - update intent actions, extra parameters and static
  * helper methods.
  */
-
+@AndroidEntryPoint
 public class Service_For_Remote_Async_Binary extends IntentService {
     protected LocalBinderAsync binderBinderRemoteAsync = new LocalBinderAsync();
     private Service_For_Public.LocalBinderОбщий localBinderОбщий;
     private      Integer ПубличныйIDДляФрагмента=0;
-
+    @Inject
+    ObjectMapper getHiltJaksonObjectMapper;
 
     public Service_For_Remote_Async_Binary() {
         super("Service_For_Remote_Async");
@@ -250,7 +253,7 @@ try{
     Long       ФинальныйРезультатAsyncBackgroud=0l;
     try{
             // TODO: 25.03.2023 ДОПОЛНИТЕОТНЕ УДЛАНИЕ СТАТУСА УДАЛЕНИЕ ПОСЛЕ СИНХРОНИАЗЦИИ
-                ФинальныйРезультатAsyncBackgroud  = new AsynsProccessor(context).МетодЗАпускаФоновойСинхронизации(context,handlerAsync );
+                ФинальныйРезультатAsyncBackgroud  = new AsynsProccessor(context,getHiltJaksonObjectMapper ).МетодЗАпускаФоновойСинхронизации(context,handlerAsync);
 
 
             Log.d(getApplicationContext().getClass().getName(), "\n"
@@ -287,7 +290,7 @@ try{
         Long       ФинальныйРезультатAsyncBackgroud=0l;
         try{
             // TODO: 25.03.2023 ДОПОЛНИТЕОТНЕ УДЛАНИЕ СТАТУСА УДАЛЕНИЕ ПОСЛЕ СИНХРОНИАЗЦИИ
-            ФинальныйРезультатAsyncBackgroud  = new AsynsProccessor(context).МетодЗАпускаФоновойСинхронизации(context  );
+            ФинальныйРезультатAsyncBackgroud  = new AsynsProccessor(context,getHiltJaksonObjectMapper).МетодЗАпускаФоновойСинхронизации(context  );
 
 
             Log.d(getApplicationContext().getClass().getName(), "\n"

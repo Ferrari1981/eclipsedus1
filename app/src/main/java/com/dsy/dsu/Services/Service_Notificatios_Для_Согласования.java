@@ -16,13 +16,18 @@ import com.dsy.dsu.BusinessLogicAll.Class_Generations_PUBLIC_CURRENT_ID;
 import com.dsy.dsu.BusinessLogicAll.Class_Get_Json_1C;
 import com.dsy.dsu.CnangeServers.PUBLIC_CONTENT;
 import com.dsy.dsu.OrdersTransports.Background.ServiceOrserTransportService;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import org.checkerframework.checker.units.qual.C;
 
 import java.util.Date;
 import java.util.HashMap;
 
+import javax.inject.Inject;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class Service_Notificatios_Для_Согласования extends IntentService {////Service
     ////////
     private Integer PROCESS_IDСогласования;
@@ -34,6 +39,13 @@ public class Service_Notificatios_Для_Согласования extends Intent
     private  Bundle bundleДляПришлиВСлужбуСогласования;
     public LocalBinderДляСогласования localBinderДляСогласования = new LocalBinderДляСогласования();
     private  Context context;
+
+    @Inject
+    ObjectMapper getHiltJaksonObjectMapper;
+
+
+
+
     public Service_Notificatios_Для_Согласования() {
         super("Service_Notificatios_Для_Согласования");
     }
@@ -190,7 +202,7 @@ public class Service_Notificatios_Для_Согласования extends Intent
                             "http://uat.dsu1.ru:55080/dds/hs/jsonto1c/listofdocuments")//TODO old debug "http://192.168.254.145/dsutest/hs/jsonto1c/listofdocuments"
                             .МетодОтправляемSimpleJSONОт1С(context,ПолученныйНомерДокументаСогласования,
                                     ПередаемСтатусСогласования,
-                                    "action",ПубличныйidPay,НомерТекущегоДокумента);
+                                    "action",ПубличныйidPay,НомерТекущегоДокумента,getHiltJaksonObjectMapper);
             // TODO  http://192.168.254.145/TestWLS/hs/jsonto1c/get/  "http://192.168.254.145/TestWLS/hs/jsonto1c/Test"*/
 
 
@@ -212,7 +224,7 @@ public class Service_Notificatios_Для_Согласования extends Intent
     }
 
 
-    public byte[]  МетодПолучаемNewFile1CСогласованияЧерезСлужбу(@NonNull Intent intent, @NonNull Context context) {
+    public byte[]  МетодПолучаемNewFile1CСогласованияЧерезСлужбу(@NonNull Intent intent, @NonNull Context context, ObjectMapper jsonGenerator) {
         byte[]    getFileNewOt1cPayCommit=null;
         try {
             int  ПубличныйidPay = intent.getExtras().getInt("ПубличныйidPay", 0);  // TODO: 24.03.2022
@@ -226,7 +238,7 @@ public class Service_Notificatios_Для_Согласования extends Intent
                             .МетодПолучениеФайлаBinatyJSONОт1С(context,
                                     backfile,
                                     ПередаемСтатусСогласования,
-                                    "binary",ПубличныйidPay,НомерТекущегоДокумента);
+                                    "binary",ПубличныйidPay,НомерТекущегоДокумента,jsonGenerator);
             // TODO  http://192.168.254.145/TestWLS/hs/jsonto1c/get/  "http://192.168.254.145/TestWLS/hs/jsonto1c/Test"*/
 
 

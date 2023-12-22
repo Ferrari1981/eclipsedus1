@@ -120,39 +120,7 @@ public  class PUBLIC_CONTENT extends SubClassCreatingMainAllTables {
         return МассивПортовСервера;
     }
 
-    // TODO: 23.03.2023  ПАСРСИНГ  JSON JSCSON
-// TODO: 23.03.2023  БИБЛИОТКЕ Jackson для созданиия И ПАРСИНГА JSON
-    public ObjectMapper   getGeneratorJackson()   {
-        ObjectMapper mapperJackson = null;
-        try{
-            JsonFactory factory = new JsonFactory();
-            //CBORFactory factory = new CBORFactory();
-            mapperJackson = new ObjectMapper(factory);
-            mapperJackson.writerWithDefaultPrettyPrinter();
-            mapperJackson.setPropertyNamingStrategy(PropertyNamingStrategy.CAMEL_CASE_TO_LOWER_CASE_WITH_UNDERSCORES);
-            mapperJackson.setLocale(new Locale("ru"));
-            DateFormat df = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss.SSS", new Locale("ru"));
-            mapperJackson.setDateFormat(df);
-            mapperJackson.setTimeZone(TimeZone.getTimeZone("Europe/Moscow"));
-            mapperJackson.disable(SerializationFeature.WRITE_DATES_AS_TIMESTAMPS);
-            mapperJackson.disable(SerializationFeature.FAIL_ON_EMPTY_BEANS);
-            mapperJackson.enable(SerializationFeature.FLUSH_AFTER_WRITE_VALUE);
-            mapperJackson .enable(SerializationFeature.INDENT_OUTPUT);
-            mapperJackson.setSerializationInclusion(JsonInclude.Include.NON_NULL);
-            Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
-                    + " mapperJackson "+mapperJackson );
-} catch (Exception e) {
-        e.printStackTrace();
-        Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-        new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
-                Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
-    }
-        return  mapperJackson;
-    
-}
+
 
 
 

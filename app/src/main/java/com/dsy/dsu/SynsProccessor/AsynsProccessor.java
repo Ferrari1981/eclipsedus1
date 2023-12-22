@@ -100,14 +100,15 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
     private     CopyOnWriteArrayList<Long>  ЛистТаблицыОбмена;
 
 
-
+    private   ObjectMapper jsonGenerator;
 
     // TODO: 28.07.2022
-    public AsynsProccessor(@NotNull Context context) {
+    public AsynsProccessor(@NotNull Context context,@NonNull  ObjectMapper jsonGenerator) {
         super(context);
         this.context=context;
-        public_contentДатыДляГлавныхТаблицСинхронизации=new PUBLIC_CONTENT(context);
-        sqLiteDatabase=    GetSQLiteDatabase.SqliteDatabase();
+        this.   public_contentДатыДляГлавныхТаблицСинхронизации=new PUBLIC_CONTENT(context);
+        this.   sqLiteDatabase=    GetSQLiteDatabase.SqliteDatabase();
+        this.jsonGenerator=    jsonGenerator;
         Log.w(context.getClass().getName(), "sqLiteDatabase" + sqLiteDatabase);
     }
 
@@ -127,7 +128,7 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
             Log.w(this.getClass().getName(), " ФОНОВАЯ СИНХОРОНИЗАЦИИИ ИДЁТ... СЛУЖБА "+РезультатаСинхронизации);
 
 
-            МетодПослеAsyncTaskЗавершающий(context,Проценты );
+            МетодПослеAsyncTaskЗавершающий(context,Проценты  );
 
             Log.d(context.getClass().getName(), "\n"
                     + " время: " + new Date()+"\n+" +
@@ -150,7 +151,7 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
     private void МетодПослеAsyncTaskЗавершающий( @NonNull Context context ,@NonNull int Проценты) {
         try{
             // TODO: 05.11.2022  после  ВЫПОЛЕНИЯ СИНЗХРОНИАЗИИ СООБЩАЕМ ОБ ОКОНЧАТИИ СИХРОНИАЗЦИИ ВИЗУАЛЬТА
-            new AsynsProccessor(context).   методCallBackPrograssBars(3, Проценты,new String(),0);
+            методCallBackPrograssBars(3, Проценты,new String(),0);
 
             Log.i(context.getClass().getName(),  " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
@@ -169,7 +170,7 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
 
 
     // TODO метод запуска СИНХРОНИЗАЦИИ  в фоне
-    public Long МетодЗАпускаФоновойСинхронизации(@NotNull Context context)   {
+    public Long МетодЗАпускаФоновойСинхронизации(@NotNull Context context )   {
         Long      РезультатаСинхронизации = 0l;
         try{
             this.context=context;
@@ -411,10 +412,15 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
                         && ! BufferGetVersionData.toString().matches("(.*)Server Running...... Don't Login(.*)")) {
                     Log.d(this.getClass().getName(), "  ID  " + this.ID +
                             " BufferGetVersionData " + BufferGetVersionData.toString());
+
+
                     //TODO БУфер JSON от Сервера
-                    CopyOnWriteArrayList<Map<String, String>> БуферJsonОтСервераmodification_server = new PUBLIC_CONTENT(context).getGeneratorJackson().readValue(BufferGetVersionData.toString(),
+                    CopyOnWriteArrayList<Map<String, String>> БуферJsonОтСервераmodification_server =
+                            jsonGenerator.readValue(BufferGetVersionData.toString(),
                             new TypeReference<CopyOnWriteArrayList<Map<String, String>>>() {
                             });
+
+
                     ///упаковываем в j
                     Log.d(this.getClass().getName(), "  БуферJsonОтСервераmodification_server  " + БуферJsonОтСервераmodification_server);
                     public_contentДатыДляГлавныхТаблицСинхронизации.ВерсииВсехСерверныхТаблиц = new LinkedHashMap<String, Long>();
@@ -1059,7 +1065,7 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
         try {
             Log.d(this.getClass().getName(), " имяТаблицаAsync " + имяТаблицаAsync + " БуферПолученныйJSON " +БуферGetByteJson.available()  );
             //TODO БУфер JSON от Сервера
-            ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
+          //  ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
             JsonNode jsonNodeParentMAP= jsonGenerator.readTree(БуферGetByteJson);
             if (jsonNodeParentMAP.size()>0) {
                 Log.d(this.getClass().getName(),"\n" + " class " +
@@ -1403,7 +1409,7 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
                             " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
                             + " КурсорДляОтправкиДанныхНаСерверОтАндройда "+КурсорДляОтправкиДанныхНаСерверОтАндройда.getCount() );
                     StringWriter stringWriterJSONAndroid=    new StringWriter();
-                    ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
+                 //   ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
                     SimpleModule module = new SimpleModule();
                     // TODO: 11.09.2023  какая текущапя таблица
                     if (имяТаблицыОтАндройда_локальноая.equalsIgnoreCase("materials_databinary")

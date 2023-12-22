@@ -180,7 +180,9 @@ public InputStream   МетодПолучемJSONОт1СДляСогласова
 
 
     // TODO: 07.07.2022  для лимита остатков
-    public StringBuffer МетодПолучемJSONОт1СДляЛимитаМатериаловВторойЭтап(@NonNull  Integer ПубличныйIDДляФрагмента, @NonNull String ТаблицыДляОбработки1С,Integer СФООтправляемОпятьНа1сДляПолучениеДАнныхОбратно)
+    public StringBuffer МетодПолучемJSONОт1СДляЛимитаМатериаловВторойЭтап(@NonNull  Integer ПубличныйIDДляФрагмента,
+                                                                          @NonNull String ТаблицыДляОбработки1С,
+                                                                          Integer СФООтправляемОпятьНа1сДляПолучениеДАнныхОбратно)
             throws InterruptedException, ExecutionException, NoSuchAlgorithmException, IOException, KeyManagementException, TimeoutException {
         StringBuffer stringBufferВторайШагПолучаемСамиДанныеНАОснованииЦФО = new StringBuffer();
         try {
@@ -385,7 +387,9 @@ public InputStream   МетодПолучемJSONОт1СДляСогласова
             , Integer ПередаемСтатусСогласования
             , String ТаблицыДляPOST,
             Integer ПубличныйIDДляCогласования
-                                                      ,@NotNull String НомерТекущегоДокумента)
+                                                      ,@NotNull String НомерТекущегоДокумента,
+
+                                                      @NonNull  ObjectMapper jsonGenerator)
             throws InterruptedException, ExecutionException, NoSuchAlgorithmException, IOException, KeyManagementException, TimeoutException {
         //TODO
         StringBuffer stringBufferотправкаНа1С = new StringBuffer();
@@ -419,7 +423,7 @@ public InputStream   МетодПолучемJSONОт1СДляСогласова
             Dispatcher      dispatcher= okHttpClientОтправкаСоглоавания.dispatcher();
 
             //TODO POST () Генерируем JSON на отправку 1c Cjukfjdfyb
-            byte[] dataforsend1cCommitPay= metodGeneraotrSimpleFor1cPayCommit(ПолученныйНомерДокументаСогласования, ПередаемСтатусСогласования,НомерТекущегоДокумента);
+            byte[] dataforsend1cCommitPay= metodGeneraotrSimpleFor1cPayCommit(ПолученныйНомерДокументаСогласования, ПередаемСтатусСогласования,НомерТекущегоДокумента,jsonGenerator);
 
             RequestBody bodyДляОтправки1cСогласования =
                     RequestBody.create(MediaType.parse("application/json; charset=utf-8"),dataforsend1cCommitPay);
@@ -494,7 +498,8 @@ public InputStream   МетодПолучемJSONОт1СДляСогласова
             , Integer ПередаемСтатусСогласования
             , String ТаблицыДляPOST,
                                                 Integer ПубличныйIDДляCогласования,
-                                                    @NonNull String НомерТекущегоДокумента)
+                                                    @NonNull String НомерТекущегоДокумента,
+                                                    @NotNull ObjectMapper jsonGenerator)
             throws InterruptedException, ExecutionException, NoSuchAlgorithmException, IOException, KeyManagementException, TimeoutException {
         final byte[][] newFileBinaty1c = {null};
         try {
@@ -522,7 +527,7 @@ public InputStream   МетодПолучемJSONОт1СДляСогласова
             Dispatcher      dispatcher= okHttpClientОтправкаСоглоавания.dispatcher();
 
             //TODO POST () Генерируем JSON на отправку 1c Cjukfjdfyb
-            byte[] dataforsend1cCommitPay= metodGeneraotrSimpleFor1cPayCommit(backfile, ПередаемСтатусСогласования,НомерТекущегоДокумента);
+            byte[] dataforsend1cCommitPay= metodGeneraotrSimpleFor1cPayCommit(backfile, ПередаемСтатусСогласования,НомерТекущегоДокумента,jsonGenerator);
 
             if (dataforsend1cCommitPay!=null) {
                 RequestBody bodyДляОтправки1cСогласования =
@@ -610,7 +615,9 @@ public InputStream   МетодПолучемJSONОт1СДляСогласова
 
 
     // TODO: 07.07.2022  получения данных тольо для согласования
-    public JsonNode МетодПингаИПОлучениеДанныхОт1сДляСогласования(@NonNull Context context, @NonNull Integer ПубличныйIDДляФрагмента) throws JSONException {
+    public JsonNode МетодПингаИПОлучениеДанныхОт1сДляСогласования(@NonNull Context context,
+                                                                  @NonNull Integer ПубличныйIDДляФрагмента,
+                                                                  @NonNull  ObjectMapper jsonGenerator) throws JSONException {
         // TODO: 09.11.2023
         JsonNode jsonNode1сСогласования=null;
         //TODO данные от 1С согласования
@@ -620,7 +627,7 @@ public InputStream   МетодПолучемJSONОт1СДляСогласова
                     new Class_Get_Json_1C(context,АдресСервера)//TODO
                             .МетодПолучемJSONОт1СДляСогласования(ПубличныйIDДляФрагмента,"sog");//
             //TODO БУфер JSON от Сервера
-            ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
+          //  ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
 
             if (  inputStream1cСогласования !=null) {
                 if (inputStream1cСогласования.available()>0 ) {
@@ -651,7 +658,8 @@ public InputStream   МетодПолучемJSONОт1СДляСогласова
     // TODO: 10.11.2023 метод получение JSOIN  для отправки на 1С Согласовании
   byte[] metodGeneraotrSimpleFor1cPayCommit(@NotNull String ПолученныйНомерДокументаСогласования,
                                               @NotNull Integer  ПередаемСтатусСогласования,
-                                            @NotNull String НомерТекущегоДокумента){
+                                            @NotNull String НомерТекущегоДокумента,
+                                            @NotNull @NonNull  ObjectMapper jsonGenerator){
       byte[] JsonByte1cPayCommit=null;
       try{
           LinkedHashMap<String,String>linkedHashMapОтпавркаНа1с=new LinkedHashMap<>();
@@ -660,7 +668,7 @@ public InputStream   МетодПолучемJSONОт1СДляСогласова
           linkedHashMapОтпавркаНа1с.put("dsu1number",НомерТекущегоДокумента);
           // TODO: 10.11.2023 starting Jakson JSON
           StringWriter stringWriterJSONAndroid=    new StringWriter();
-          ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
+          //ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
           SimpleModule module = new SimpleModule();
           // TODO: 11.09.2023  какая текущап таблица
 

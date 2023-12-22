@@ -63,6 +63,7 @@ import com.dsy.dsu.R;
 import com.dsy.dsu.Services.ServiceForCommitPay;
 import com.dsy.dsu.Services.Service_Notificatios_Для_Согласования;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.databind.node.TextNode;
 import com.google.android.material.bottomnavigation.BottomNavigationItemView;
@@ -86,6 +87,9 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
 import java.util.function.Consumer;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.CompletableObserver;
@@ -99,7 +103,7 @@ import io.reactivex.rxjava3.functions.Supplier;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 import kotlin.Unit;
 
-
+@AndroidEntryPoint
 public class Fragment1_List_CommitPay extends Fragment   {
 
     // TODO: 10.03.2022  согласования фрагмент
@@ -154,6 +158,11 @@ public class Fragment1_List_CommitPay extends Fragment   {
 
 
   private        Intent intentsendJsonNodeToService= null;
+
+
+    @Inject
+    ObjectMapper getHiltJaksonObjectMapper;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -2133,7 +2142,7 @@ class MyRecycleViewIsNullAdapter extends RecyclerView.Adapter<MyViewHolder> {
                                 //TODO ПЫТИАЕМСЯ ПОПОЛУЧИТЬ ДАННЫЕ С 1С
                              jsonNode1сСогласования =
                                         new Class_Get_Json_1C(getContext() ,"http://uat.dsu1.ru:55080/dds/hs/jsonto1c/listofdocuments")
-                                                .МетодПингаИПОлучениеДанныхОт1сДляСогласования(getContext(),ПубличныйidPay);//ПубличныйidPay*/
+                                                .МетодПингаИПОлучениеДанныхОт1сДляСогласования(getContext(),ПубличныйidPay,getHiltJaksonObjectMapper);//ПубличныйidPay*/
 
 
 
@@ -2248,7 +2257,7 @@ private void МетодISNUllПолучениеДанныхОт1сДляСогл
                     //TODO ПЫТИАЕМСЯ ПОПОЛУЧИТЬ ДАННЫЕ С 1С
                     jsonNode1сСогласования =
                             new Class_Get_Json_1C(getContext() ,"http://uat.dsu1.ru:55080/dds/hs/jsonto1c/listofdocuments")
-                                    .МетодПингаИПОлучениеДанныхОт1сДляСогласования(getContext(),ПубличныйidPay);//ПубличныйidPay*/
+                                    .МетодПингаИПОлучениеДанныхОт1сДляСогласования(getContext(),ПубличныйidPay,getHiltJaksonObjectMapper);//ПубличныйidPay*/
 
 
                     Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
@@ -2732,7 +2741,7 @@ private void МетодISNUllПолучениеДанныхОт1сДляСогл
             // TODO: 10.11.2023 получаем файл от 1с Соглосования Binaty
             getFileNewOt1cPayCommit =
                     binderСогласования1C.getService().
-                            МетодПолучаемNewFile1CСогласованияЧерезСлужбу(заданиеНаВыполение, getContext());
+                            МетодПолучаемNewFile1CСогласованияЧерезСлужбу(заданиеНаВыполение, getContext(),getHiltJaksonObjectMapper);
 
 
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
