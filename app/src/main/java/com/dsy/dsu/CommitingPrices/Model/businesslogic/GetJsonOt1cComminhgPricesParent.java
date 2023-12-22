@@ -6,11 +6,12 @@ import com.fasterxml.jackson.databind.JsonNode;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.InputStream;
 import java.util.ArrayList;
 
 public abstract  class GetJsonOt1cComminhgPricesParent {
 
-  abstract JsonNode startingJsonOt1cComminhgPrices(@NotNull Context context,@NotNull String adress,@NotNull int PublicId);
+  abstract InputStream startingJsonOt1cComminhgPrices(@NotNull Context context, @NotNull String adress, @NotNull int PublicId);
 
 
   abstract byte[] GenetarJsonOt1cComminhgPrices( @NotNull Context context);

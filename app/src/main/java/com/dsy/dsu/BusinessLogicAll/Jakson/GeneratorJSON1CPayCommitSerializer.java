@@ -89,7 +89,6 @@ class GeneratorJson1cPaernt {
         this.serializers = serializers;
     }
 
-
    void generatorJson(){
         try{
         Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +

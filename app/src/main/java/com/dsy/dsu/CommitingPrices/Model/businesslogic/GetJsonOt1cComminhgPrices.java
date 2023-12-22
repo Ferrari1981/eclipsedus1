@@ -46,8 +46,8 @@ import okhttp3.Response;
 public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent {
 
     @Override
-    JsonNode startingJsonOt1cComminhgPrices(@NonNull Context context,@NotNull String adress,@NotNull int PublicId) {
-        JsonNode jsonNode1сСогласования=null;
+   public InputStream startingJsonOt1cComminhgPrices(@NonNull Context context,@NotNull String adress,@NotNull int PublicId) {
+        final InputStream[] inputStreamCommingPrecies = new InputStream[1];
         try{
                     // MediaType JSON = MediaType.parse("application/json; charset=utf-8");
             OkHttpClient okHttpClient1cСогласованиеЦен = new OkHttpClient().newBuilder().addInterceptor(new Interceptor() {
@@ -69,7 +69,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                     Dispatcher dispatcher=  okHttpClient1cСогласованиеЦен.dispatcher();
 
 
-// TODO: 22.12.2023 генерируем даным для 1с согласование цен  
+// TODO: 22.12.2023 генерируем даным для 1с согласование цен
             byte[] dataforsend1cCommitPay=    GenetarJsonOt1cComminhgPrices(context);
 
             
@@ -103,11 +103,13 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
 
 
                                     byte[] asByteBuffer=    response.body().source().readByteArray();
-                                    InputStream     inputStream1c  = ByteSource.wrap(asByteBuffer).openBufferedStream();
+
+                                    inputStreamCommingPrecies[0] = ByteSource.wrap(asByteBuffer).openBufferedStream();
 
                                     Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                                             " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "     inputStream1c " + inputStream1c);
+                                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()
+                                            + "     inputStreamCommingPrecies[0] " + inputStreamCommingPrecies[0]);
 
                                     // TODO: 09.11.2023  close
                                     response.body().source().close();
@@ -124,29 +126,12 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                             }
                         }
                     });
-        /*            Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                 Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                             " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                             " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"  );
 
                     dispatcher.executorService().awaitTermination(1,TimeUnit.DAYS);
 
-
-
-
-                //TODO ПЫТИАЕМСЯ ПОПОЛУЧИТЬ ДАННЫЕ С 1С
-                InputStream inputStream1cСогласования  =
-                        new Class_Get_Json_1C(context,adress)//TODO
-                                .МетодПолучемJSONОт1СДляСогласования(ПубличныйIDДляФрагмента,"sog");//
-                //TODO БУфер JSON от Сервера
-                ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
-
-                if (  inputStream1cСогласования !=null) {
-                    if (inputStream1cСогласования.available()>0 ) {
-                        jsonNode1сСогласования= jsonGenerator.readTree(inputStream1cСогласования);
-
-                        inputStream1cСогласования.close();
-                    }
-                }*/
 
             Log.d(this.getClass().getName(),"\n"
                     + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
@@ -159,7 +144,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
             new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
                     Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
         }
-        return null;
+        return inputStreamCommingPrecies[0];
     }
 
 
@@ -178,7 +163,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
             SimpleModule module = new SimpleModule();
             // TODO: 11.09.2023  какая текущап таблица
             Bundle bundle=new Bundle();
-            bundle.putSerializable("ser",(Serializable) linkedHashMapОтпавркаНа1с);
+            bundle.putSerializable("sercommingrices",(Serializable) linkedHashMapОтпавркаНа1с);
             module.addSerializer(Bundle.class, new GeneratorJsonFor1cCommitingPrices(context));
             jsonGenerator.registerModule(module);
             jsonGenerator.getFactory().createGenerator( stringWriterJSONAndroid ).useDefaultPrettyPrinter();

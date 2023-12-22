@@ -12,9 +12,12 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dsy.dsu.BusinessLogicAll.Class_Get_Json_1C;
+import com.dsy.dsu.CommitingPrices.Model.businesslogic.GetJsonOt1cComminhgPrices;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.R;
 import com.fasterxml.jackson.databind.JsonNode;
+
+import java.io.InputStream;
 
 
 public class FragmentCommingPrices extends Fragment {
@@ -37,16 +40,17 @@ public class FragmentCommingPrices extends Fragment {
         try{
 
 
-            //TODO ПЫТИАЕМСЯ ПОПОЛУЧИТЬ ДАННЫЕ С 1С
-            JsonNode jsonNode1сСогласования       =
-                    new Class_Get_Json_1C(getContext() ,"http://uat.dsu1.ru:55080/dds/hs/jsonto1c/listofdocuments")
-                            .МетодПингаИПОлучениеДанныхОт1сДляСогласования(getContext(),5);//ПубличныйidPay*/
+            InputStream inputStream1сСогласования=
+                    new GetJsonOt1cComminhgPrices().startingJsonOt1cComminhgPrices(getContext(),"http://uat.dsu1.ru:55080/dds/hs/jsonto1c/listofdocuments",5);
+
+
+
 
 
             Log.d(this.getClass().getName(),"\n"
                     + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()  + " jsonNode1сСогласования  " +jsonNode1сСогласования);
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()  + " inputStream1сСогласования  " +inputStream1сСогласования);
 
 
             Log.d(this.getClass().getName(),"\n"

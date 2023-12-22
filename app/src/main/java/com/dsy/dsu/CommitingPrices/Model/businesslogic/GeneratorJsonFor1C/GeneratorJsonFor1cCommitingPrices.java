@@ -10,6 +10,11 @@ import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
 
 import java.io.IOException;
+import java.util.LinkedHashMap;
+import java.util.Map;
+import java.util.function.Consumer;
+
+import io.reactivex.rxjava3.core.Flowable;
 
 public class GeneratorJsonFor1cCommitingPrices extends JsonSerializer<Bundle> {
 
@@ -22,8 +27,52 @@ public class GeneratorJsonFor1cCommitingPrices extends JsonSerializer<Bundle> {
 
     @Override
     public void serialize(Bundle value, JsonGenerator gen, SerializerProvider serializers) throws IOException {
-
  try{
+
+     LinkedHashMap<String, Long> linkedHashMapCommintPrecis = (LinkedHashMap<String, Long>) value.getSerializable("sercommingrices");
+
+     gen.writeStartArray();
+     gen.writeStartObject();
+     // TODO: 20.07.2023 Строки
+     Flowable.fromIterable(linkedHashMapCommintPrecis.entrySet())
+             .onBackpressureBuffer()
+             .blockingIterable()
+             .forEach(new Consumer<Map.Entry<String, Long>>() {
+                 @Override
+                 public void accept(Map.Entry<String, Long> stringLongEntry) {
+                     try{
+
+                         if (stringLongEntry.getKey()==null) {
+                             serializers.defaultSerializeField(stringLongEntry.getKey(),null, gen);
+                         } else {
+                                 serializers.defaultSerializeField(stringLongEntry.getKey(),stringLongEntry.getValue(), gen);
+                         }
+
+                         Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                                 " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
+                                 + " s " +stringLongEntry.getKey()+" d" +stringLongEntry.getValue());
+
+                     } catch (Exception e) {
+                         e.printStackTrace();
+                         Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                                 " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                         new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
+                                 Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+                     }
+                 }
+             });
+     gen.writeEndObject();
+     gen.writeEndArray();
+     gen.flush();
+     gen.close();
+     Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+             " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+             " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n");
+     Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+             " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+             " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n");
+
 
         Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
