@@ -14,6 +14,7 @@ import android.view.ViewGroup;
 import com.dsy.dsu.BusinessLogicAll.Class_Get_Json_1C;
 import com.dsy.dsu.CommitingPrices.Model.businesslogic.GetJsonOt1cComminhgPrices;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
+import com.dsy.dsu.Hilt.Jakson.HiltInterfaceJakson;
 import com.dsy.dsu.R;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -23,10 +24,14 @@ import java.util.LinkedHashMap;
 
 import javax.inject.Inject;
 
+import dagger.hilt.EntryPoints;
 import dagger.hilt.android.AndroidEntryPoint;
 
-
+@AndroidEntryPoint
 public class FragmentCommingPrices extends Fragment {
+
+    @Inject
+    ObjectMapper getHiltJaksonObjectMapper;
 
 
 
@@ -58,14 +63,7 @@ public class FragmentCommingPrices extends Fragment {
 
             InputStream inputStream1сСогласования = getResources().openRawResource(R.raw.dsu1_keys);
 
-        cComminhgPrices.DeserializerJson1cComminhgPrices(getContext(),inputStream1сСогласования);
-
-/*
-            Log.d(this.getClass().getName(),"\n"
-                    + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()  + " inputStream1сСогласования  " +inputStream1сСогласования+
-                    " ResultDesi " +ResultDesi);*/
+        cComminhgPrices.DeserializerJson1cComminhgPrices(getContext(),inputStream1сСогласования,getHiltJaksonObjectMapper);
 
 
             Log.d(this.getClass().getName(),"\n"

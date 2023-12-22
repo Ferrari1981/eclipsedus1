@@ -1,5 +1,7 @@
 package com.dsy.dsu.Providers;
 
+import static org.chromium.base.ContextUtils.getApplicationContext;
+
 import android.annotation.SuppressLint;
 import android.content.ContentProvider;
 import android.content.ContentProviderOperation;
@@ -26,7 +28,9 @@ import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.CnangeServers.PUBLIC_CONTENT;
 import com.dsy.dsu.BusinessLogicAll.SubClassCreatingMainAllTables;
 import com.dsy.dsu.BusinessLogicAll.SubClassUpVersionDATA;
+import com.dsy.dsu.Hilt.Jakson.HiltInterfaceJakson;
 import com.dsy.dsu.Hilt.Sqlitehilt.HiltInterfacesqlite;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -48,6 +52,8 @@ public class ContentProviderSynsInsertOnlyAsync extends ContentProvider {
     private Integer ТекущаяСтрокаПриДОбавлениииURL = 0;
     @Inject
      SQLiteDatabase sqlite;
+
+
     public ContentProviderSynsInsertOnlyAsync() throws InterruptedException {
         try {
             CopyOnWriteArrayList<String> ИменаТаблицыОтАндройда =
@@ -330,7 +336,7 @@ public class ContentProviderSynsInsertOnlyAsync extends ContentProvider {
             // TODO: 02.09.2023  CREATE get SQLITE
             sqlite = EntryPoints.get(getContext(), HiltInterfacesqlite.class).getHiltSqlite();
 
-
+           /// ObjectMapper getHiltJaksonObjectMapper    = EntryPoints.get(getContext(), HiltInterfaceJakson.class).getHiltJaksonInterface( );
             Log.d(this.getClass().getName(),"\n"
                     + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +

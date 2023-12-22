@@ -305,7 +305,8 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
 
 
     @Override
-    public Integer DeserializerJson1cComminhgPrices(@NonNull Context context, @NonNull InputStream inputStream) {
+    public Integer DeserializerJson1cComminhgPrices(@NonNull Context context, @NonNull InputStream inputStream,
+                                                    @NonNull ObjectMapper objectMapper) {
 try{
     // TODO: 10.11.2023 starting Jakson JSON
     ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
