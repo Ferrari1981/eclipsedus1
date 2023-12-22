@@ -41,7 +41,7 @@ public class FragmentCommingPrices extends Fragment {
 
 
             InputStream inputStream1сСогласования=
-                    new GetJsonOt1cComminhgPrices().startingJsonOt1cComminhgPrices(getContext(),"http://uat.dsu1.ru:55080/dds/hs/jsonto1c/listofdocuments",5);
+                    new GetJsonOt1cComminhgPrices().startingJsonOt1cComminhgPrices(getContext(),"http://uat.dsu1.ru:55080/dds/hs/jsonto1ccena/listofdocuments",5);
 
 
 
