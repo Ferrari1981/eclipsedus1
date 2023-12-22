@@ -15,6 +15,7 @@ import android.view.WindowManager;
 import com.dsy.dsu.CommitsPayments.Fragment1_List_CommitPay;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.R;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.google.android.datatransport.runtime.dagger.Provides;
 import com.google.common.util.concurrent.AtomicDouble;
 
@@ -22,6 +23,7 @@ import javax.inject.Inject;
 
 import dagger.hilt.EntryPoint;
 import dagger.hilt.InstallIn;
+import dagger.hilt.android.AndroidEntryPoint;
 import dagger.hilt.android.components.ActivityComponent;
 import dagger.hilt.android.scopes.ActivityScoped;
 
@@ -32,6 +34,8 @@ public class MainActivityCommitingPrices extends AppCompatActivity {
     private FragmentTransaction fragmentTransaction;
     private Fragment fragmentCommitPrices;
     private  Bl bl;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +51,8 @@ public class MainActivityCommitingPrices extends AppCompatActivity {
                 | WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
             // TODO: 21.12.2023 inisia
             fragmentManager =  getSupportFragmentManager();
-            // TODO: 21.12.2023 запускаем бизес процесс
+
+
              bl=    new Bl();
             Log.d(this.getClass().getName(),"\n"
                     + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +

@@ -51,6 +51,12 @@ import okio.ByteString;
 
 public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent {
 
+    public GetJsonOt1cComminhgPrices() {
+        Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"  );
+    }
+
     @Override
    public InputStream startingGetJsonOt1cComminhgPrices(@NonNull Context context,@NotNull String adress,@NotNull Integer PublicId) {
         final InputStream[] inputStreamCommingPrecies = new InputStream[1];
@@ -304,10 +310,17 @@ try{
     // TODO: 10.11.2023 starting Jakson JSON
     ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
     SimpleModule module = new SimpleModule();
-    module.addDeserializer(Integer.class, new DeserializeJsonCommingPrices());
+    module.addDeserializer(Integer.class, new DeserializeJsonCommingPrices(context));
     jsonGenerator.registerModule(module);
-
-    Integer result = jsonGenerator.readValue(inputStream,Integer.class);
+    String s="[ {\n" +
+            "  \"dsu1user\" : 5\n" +
+            "} ]";
+    Integer result = jsonGenerator.readValue(s, new TypeReference<Integer>() {
+        @Override
+        public Type getType() {
+            return super.getType();
+        }
+    });
         Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +

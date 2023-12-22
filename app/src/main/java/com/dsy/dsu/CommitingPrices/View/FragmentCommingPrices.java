@@ -16,9 +16,14 @@ import com.dsy.dsu.CommitingPrices.Model.businesslogic.GetJsonOt1cComminhgPrices
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.R;
 import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.InputStream;
 import java.util.LinkedHashMap;
+
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
 
 
 public class FragmentCommingPrices extends Fragment {
@@ -41,16 +46,19 @@ public class FragmentCommingPrices extends Fragment {
         try{
             GetJsonOt1cComminhgPrices cComminhgPrices=new GetJsonOt1cComminhgPrices();
 
+
+
+
         /*    InputStream inputStream1сСогласования=
                     cComminhgPrices.startingGetJsonOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5);*/
 
-            String string1сСогласования=
-                    cComminhgPrices.startingGetStringOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5);
+  /*          String string1сСогласования=
+                    cComminhgPrices.startingGetStringOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5);*/
 
 
+            InputStream inputStream1сСогласования = getResources().openRawResource(R.raw.dsu1_keys);
 
-
-        // int ResultDesi=   cComminhgPrices.DeserializerJson1cComminhgPrices(getContext(),inputStream1сСогласования);
+        cComminhgPrices.DeserializerJson1cComminhgPrices(getContext(),inputStream1сСогласования);
 
 /*
             Log.d(this.getClass().getName(),"\n"
