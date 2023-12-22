@@ -307,18 +307,7 @@ try{
     module.addDeserializer(Integer.class, new DeserializeJsonCommingPrices());
     jsonGenerator.registerModule(module);
 
-    JsonNode readValue = jsonGenerator.readValue(inputStream, new TypeReference<JsonNode>() {
-        @Override
-        public Type getType() {
-            return super.getType();
-        }
-    });
-    readValue.elements().forEachRemaining(new Consumer<JsonNode>() {
-        @Override
-        public void accept(JsonNode jsonNode) {
-
-        }
-    });
+    Integer result = jsonGenerator.readValue(inputStream,Integer.class);
         Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
