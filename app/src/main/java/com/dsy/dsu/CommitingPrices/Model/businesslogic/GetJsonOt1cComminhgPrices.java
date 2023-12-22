@@ -10,10 +10,13 @@ import androidx.annotation.NonNull;
 import com.dsy.dsu.BusinessLogicAll.Class_Get_Json_1C;
 import com.dsy.dsu.BusinessLogicAll.Jakson.GeneratorJSON1CPayCommitSerializer;
 import com.dsy.dsu.CnangeServers.PUBLIC_CONTENT;
+import com.dsy.dsu.CommitingPrices.Model.businesslogic.GeneratorJsonFor1C.DeserializeJsonCommingPrices;
 import com.dsy.dsu.CommitingPrices.Model.businesslogic.GeneratorJsonFor1C.GeneratorJsonFor1cCommitingPrices;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.deser.DeserializationProblemHandler;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.google.common.io.ByteSource;
 
@@ -152,7 +155,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
 
     // TODO: 21.12.2023 генерация джейсона
     @Override
-    byte[] GenetarJsonGet1cComminhgPrices(@NonNull Context context,    LinkedHashMap<String,Long> linkedHashMapОтпавркаНа1с) {
+    public byte[] GenetarJsonGet1cComminhgPrices(@NonNull Context context,    LinkedHashMap<String,Long> linkedHashMapОтпавркаНа1с) {
         byte[] dataforsend1cCommitPay=null;
         try{
             //TODO POST () Генерируем JSON
@@ -168,7 +171,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
             jsonGenerator.getFactory().createGenerator( stringWriterJSONAndroid ).useDefaultPrettyPrinter();
 
            dataforsend1cCommitPay=    jsonGenerator.writeValueAsBytes(bundle);
-        // String  dataforsend1cCommitPay2=    jsonGenerator.writeValueAsString(bundle);
+       //  String  dataforsend1cCommitPay2=    jsonGenerator.writeValueAsString(bundle);
 
             Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
@@ -183,6 +186,36 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                 Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
     }
         return dataforsend1cCommitPay;
+    }
+
+
+
+
+    @Override
+    public Integer DeserializerJson1cComminhgPrices(@NonNull Context context, @NonNull InputStream inputStream) {
+try{
+    // TODO: 10.11.2023 starting Jakson JSON
+    StringWriter stringWriterJSONAndroid=    new StringWriter();
+    ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
+    SimpleModule module = new SimpleModule();
+    // TODO: 11.09.2023  какая текущап таблица
+    module.addDeserializer(JsonNode.class, new DeserializeJsonCommingPrices(context));
+    jsonGenerator.registerModule(module);
+    jsonGenerator.getFactory().createGenerator( stringWriterJSONAndroid ).useDefaultPrettyPrinter();
+    jsonGenerator.readValue(inputStream, new TypeReference<Object>() {});
+        Log.d(this.getClass().getName(),"\n"
+                + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()
+                + " inputStream " +inputStream);
+    } catch (Exception e) {
+        e.printStackTrace();
+        Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+        new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
+                Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+    }
+        return null;
     }
 
 

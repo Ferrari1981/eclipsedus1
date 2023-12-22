@@ -12,11 +12,14 @@ import java.util.LinkedHashMap;
 
 public abstract  class GetJsonOt1cComminhgPricesParent {
 
-  abstract InputStream startingGetJsonOt1cComminhgPrices(@NotNull Context context, @NotNull String adress, @NotNull Integer PublicId);
+  public abstract InputStream startingGetJsonOt1cComminhgPrices(@NotNull Context context, @NotNull String adress, @NotNull Integer PublicId);
 
 
-  abstract byte[] GenetarJsonGet1cComminhgPrices( @NotNull Context context, @NotNull LinkedHashMap<String,Long> linkedHashMapОтпавркаНа1с);
+  public  abstract byte[] GenetarJsonGet1cComminhgPrices( @NotNull Context context, @NotNull LinkedHashMap<String,Long> linkedHashMapОтпавркаНа1с);
 
+
+
+  public  abstract Integer DeserializerJson1cComminhgPrices( @NotNull Context context, @NotNull InputStream inputStream);
 
 
 }
