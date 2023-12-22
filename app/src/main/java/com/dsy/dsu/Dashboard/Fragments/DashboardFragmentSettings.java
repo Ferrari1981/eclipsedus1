@@ -69,7 +69,7 @@ import io.reactivex.rxjava3.subjects.Subject;
 import kotlin.Unit;
 
 /**
- * A simple {@link Fragment} subclass.
+ * AHilt simple {@link Fragment} subclass.
  * Use the {@link DashboardFragmentSettings#newInstance} factory method to
  * create an instance of this fragment.
  */

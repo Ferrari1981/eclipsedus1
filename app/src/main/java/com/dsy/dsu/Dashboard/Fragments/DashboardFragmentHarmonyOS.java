@@ -26,7 +26,7 @@ import com.google.android.material.card.MaterialCardView;
 import com.google.android.material.textview.MaterialTextView;
 
 /**
- * A simple {@link Fragment} subclass.
+ * AHilt simple {@link Fragment} subclass.
  * Use the {@link DashboardFragmentHarmonyOS#newInstance} factory method to
  * create an instance of this fragment.
  */

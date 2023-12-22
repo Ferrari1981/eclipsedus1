@@ -1,5 +1,5 @@
 
-package com.dsy.dsu.Hilt;
+package com.dsy.dsu.Hilt.RoomHilt;
 
 
 import android.content.Context;
@@ -17,9 +17,10 @@ import dagger.hilt.InstallIn;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
 
+@QualifiertRoom
 @Module
 @InstallIn(SingletonComponent.class)
-public class DataModule {
+public class DataModuleRoom {
 
     @Singleton
     @Provides

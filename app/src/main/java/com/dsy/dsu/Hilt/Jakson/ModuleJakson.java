@@ -1,4 +1,3 @@
-/*
 
 package com.dsy.dsu.Hilt;
 
@@ -9,6 +8,7 @@ import android.util.Log;
 import com.dsy.dsu.AllDatabases.ROOM.CreateROOM;
 import com.dsy.dsu.AllDatabases.ROOM.ROOMDatabase;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
+import com.dsy.dsu.Hilt.Jakson.QualifierJakson;
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.core.JsonFactory;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -28,6 +28,9 @@ import dagger.hilt.InstallIn;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
 
+
+
+@QualifierJakson
 @Module
 @InstallIn(SingletonComponent.class)
 public class ModuleJakson {
@@ -66,4 +69,3 @@ public class ModuleJakson {
 
     }
 }
-*/

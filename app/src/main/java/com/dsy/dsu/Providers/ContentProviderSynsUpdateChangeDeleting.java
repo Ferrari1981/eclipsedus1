@@ -28,7 +28,7 @@ import com.dsy.dsu.BusinessLogicAll.DATE.Class_Generation_Data;
 import com.dsy.dsu.CnangeServers.PUBLIC_CONTENT;
 import com.dsy.dsu.BusinessLogicAll.SubClassCreatingMainAllTables;
 import com.dsy.dsu.BusinessLogicAll.SubClassUpVersionDATA;
-import com.dsy.dsu.Hilt.HiltInterfacesqlite;
+import com.dsy.dsu.Hilt.Sqlitehilt.HiltInterfacesqlite;
 
 import java.util.ArrayList;
 import java.util.Optional;
@@ -118,10 +118,15 @@ public class ContentProviderSynsUpdateChangeDeleting extends ContentProvider {
 /*            new GetSqlite().методGetSqlite(getContext());
             sqlite=    GetSQLiteDatabase.SqliteDatabase();*/
 
-            sqlite = EntryPoints.get(getContext(), HiltInterfacesqlite.class).metodHiltSQl();
+            sqlite = EntryPoints.get(getContext(), HiltInterfacesqlite.class).getHiltSqlite();
 
-            Log.w(this.getClass().getName(), "sqlite " + sqlite + " getContext()) " +getContext());
             preferences =getContext(). getSharedPreferences("sharedPreferencesХранилище", Context.MODE_MULTI_PROCESS);
+
+
+            Log.d(this.getClass().getName(),"\n"
+                    + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
 
     } catch (Exception e) {
         e.printStackTrace();

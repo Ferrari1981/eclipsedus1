@@ -98,7 +98,7 @@ public class Service_For_Remote_Async_Binary extends IntentService {
     public void onCreate() {
         super.onCreate();
         try{
-      /*     A a = EntryPoints.get(getApplicationContext(), HiltInterface.class).metodA();
+      /*     AHilt a = EntryPoints.get(getApplicationContext(), HiltInterface.class).metodA();
          String HILTTTT=   a.metodA();*/
 
           //  sqlite.isOpen();

@@ -25,7 +25,7 @@ import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.CnangeServers.PUBLIC_CONTENT;
 import com.dsy.dsu.BusinessLogicAll.SubClassCreatingMainAllTables;
 import com.dsy.dsu.BusinessLogicAll.SubClassUpVersionDATA;
-import com.dsy.dsu.Hilt.HiltInterfacesqlite;
+import com.dsy.dsu.Hilt.Sqlitehilt.HiltInterfacesqlite;
 
 
 import java.util.ArrayList;
@@ -330,12 +330,12 @@ public class ContentProviderSynsInsert extends ContentProvider {
     public boolean onCreate() {
         try {
             // TODO: 02.09.2023  CREATE get SQLITE
-            // TODO: 02.09.2023  CREATE get SQLITE
-         /*   new GetSqlite().методGetSqlite(getContext());
-            sqlite=    GetSQLiteDatabase.SqliteDatabase();*/
+            sqlite = EntryPoints.get(getContext(), HiltInterfacesqlite.class).getHiltSqlite();
 
-            sqlite = EntryPoints.get(getContext(), HiltInterfacesqlite.class).metodHiltSQl();
-            Log.w(this.getClass().getName(), "sqlite " + sqlite + " getContext()) " + getContext());
+            Log.d(this.getClass().getName(),"\n"
+                    + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"

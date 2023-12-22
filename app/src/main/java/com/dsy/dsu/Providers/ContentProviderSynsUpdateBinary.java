@@ -53,7 +53,7 @@ import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.CnangeServers.PUBLIC_CONTENT;
 import com.dsy.dsu.BusinessLogicAll.SubClassCreatingMainAllTables;
 import com.dsy.dsu.BusinessLogicAll.SubClassUpVersionDATA;
-import com.dsy.dsu.Hilt.HiltInterfacesqlite;
+import com.dsy.dsu.Hilt.Sqlitehilt.HiltInterfacesqlite;
 import com.fasterxml.jackson.databind.JsonNode;
 
 import java.util.ArrayList;
@@ -146,13 +146,18 @@ public class ContentProviderSynsUpdateBinary extends ContentProvider {
     public boolean onCreate() {
         try {
             // TODO: 02.09.2023  CREATE get SQLITE
-            // TODO: 02.09.2023  CREATE get SQLITE
-      /*      new GetSqlite().методGetSqlite(getContext());
-            sqlite=    GetSQLiteDatabase.SqliteDatabase();*/
-            sqlite = EntryPoints.get(getContext(), HiltInterfacesqlite.class).metodHiltSQl();
 
-            Log.w(this.getClass().getName(), "sqlite " + sqlite + " getContext()) " +getContext());
+            sqlite = EntryPoints.get(getContext(), HiltInterfacesqlite.class).getHiltSqlite();
+
             preferences =getContext(). getSharedPreferences("sharedPreferencesХранилище", Context.MODE_MULTI_PROCESS);
+
+
+            Log.d(this.getClass().getName(),"\n"
+                    + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
+
+
 
     } catch (Exception e) {
         e.printStackTrace();
@@ -794,7 +799,7 @@ class SubClassJsonParserOtServer{
                                                                                 String ПолеЗначениеJson = stringJsonNodeEntry.getValue().asText()
                                                                                         .replace("\"", "").replace("\\n", "")
                                                                                         .replace("\\r", "").replace("\\", "")
-                                                                                        .replace("\\t", "").trim();//todo .replaceAll("[^A-Za-zА-Яа-я0-9]", "")
+                                                                                        .replace("\\t", "").trim();//todo .replaceAll("[^AHilt-Za-zА-Яа-я0-9]", "")
                                                                                 if (ПолеОтJSONKEY.equalsIgnoreCase("status_carried_out") ||
                                                                                         ПолеОтJSONKEY.equalsIgnoreCase("closed") ||
                                                                                         ПолеОтJSONKEY.equalsIgnoreCase("locked")) {

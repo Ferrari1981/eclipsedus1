@@ -1,5 +1,5 @@
 
-package com.dsy.dsu.Hilt;
+package com.dsy.dsu.Hilt.Sqlitehilt;
 
 
 import android.content.Context;
@@ -17,8 +17,7 @@ import dagger.hilt.InstallIn;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
 
-
-@QualifierSqlite
+@QualifiertEnd
 @Module
 @InstallIn(SingletonComponent.class)
 public class DataModuleSqlite {

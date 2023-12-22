@@ -110,7 +110,7 @@ import io.reactivex.rxjava3.functions.Predicate;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
 /**
- * A simple {@link Fragment} subclass.
+ * AHilt simple {@link Fragment} subclass.
  * Use the {@link FragmentSingleTabelOneSwipe#newInstance} factory method to
  * create an instance of this fragment.
  */
