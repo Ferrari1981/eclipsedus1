@@ -2,24 +2,31 @@ package com.dsy.dsu.CommitingPrices.Model.businesslogic;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
 import com.dsy.dsu.BusinessLogicAll.Class_Get_Json_1C;
+import com.dsy.dsu.BusinessLogicAll.Jakson.GeneratorJSON1CPayCommitSerializer;
 import com.dsy.dsu.CnangeServers.PUBLIC_CONTENT;
+import com.dsy.dsu.CommitingPrices.Model.businesslogic.GeneratorJsonFor1C.GeneratorJsonFor1cCommitingPrices;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.google.common.io.ByteSource;
 
 import org.jetbrains.annotations.NotNull;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.Serializable;
+import java.io.StringWriter;
 import java.security.KeyManagementException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -62,14 +69,13 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                     Dispatcher dispatcher=  okHttpClient1cСогласованиеЦен.dispatcher();
 
 
+// TODO: 22.12.2023 генерируем даным для 1с согласование цен  
+            byte[] dataforsend1cCommitPay=    GenetarJsonOt1cComminhgPrices(context);
 
-            //TODO POST () Генерируем JSON
-            byte[] dataforsend1cCommitPay= GenetarJsonOt1cComminhgPrices(ПолученныйНомерДокументаСогласования, ПередаемСтатусСогласования,НомерТекущегоДокумента);
-
+            
             RequestBody bodyДляОтправки1cСогласования =
                     RequestBody.create(MediaType.parse("application/json; charset=utf-8"),dataforsend1cCommitPay);
-            //  RequestBody bodyДляОтправки1cСогласования = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),stringBufferСгенерированыйJSONДляОтпрвкиНа1С.toString());
-
+           
             Request requestGet1cСогласованииЦен = new Request.Builder()
                     .post(bodyДляОтправки1cСогласования)
                     .url(adress).build();
@@ -159,13 +165,31 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
 
     // TODO: 21.12.2023 генерация джейсона
     @Override
-    byte[] GenetarJsonOt1cComminhgPrices(@NonNull Context context, @NonNull ArrayList arrayListforgenetaror) {
+    byte[] GenetarJsonOt1cComminhgPrices(@NonNull Context context ) {
+        byte[] dataforsend1cCommitPay=null;
         try{
+            //TODO POST () Генерируем JSON
+            LinkedHashMap<String,Long> linkedHashMapОтпавркаНа1с=new LinkedHashMap<>();
+            linkedHashMapОтпавркаНа1с.put("dsu1uuid",898989898l);
+            linkedHashMapОтпавркаНа1с.put("dsu1user",5l);
+            // TODO: 10.11.2023 starting Jakson JSON
+            StringWriter stringWriterJSONAndroid=    new StringWriter();
+            ObjectMapper jsonGenerator = new PUBLIC_CONTENT(context).getGeneratorJackson();
+            SimpleModule module = new SimpleModule();
+            // TODO: 11.09.2023  какая текущап таблица
+            Bundle bundle=new Bundle();
+            bundle.putSerializable("ser",(Serializable) linkedHashMapОтпавркаНа1с);
+            module.addSerializer(Bundle.class, new GeneratorJsonFor1cCommitingPrices(context));
+            jsonGenerator.registerModule(module);
+            jsonGenerator.getFactory().createGenerator( stringWriterJSONAndroid ).useDefaultPrettyPrinter();
 
-        Log.d(this.getClass().getName(),"\n"
+           dataforsend1cCommitPay=    jsonGenerator.writeValueAsBytes(bundle);
+           
+            Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() 
+                    + " dataforsend1cCommitPay " +dataforsend1cCommitPay);
     } catch (Exception e) {
         e.printStackTrace();
         Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
@@ -173,6 +197,6 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
         new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
                 Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
     }
-        return new byte[0];
+        return dataforsend1cCommitPay;
     }
 }

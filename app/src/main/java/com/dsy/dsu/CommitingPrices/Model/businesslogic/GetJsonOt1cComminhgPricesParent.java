@@ -13,6 +13,6 @@ public abstract  class GetJsonOt1cComminhgPricesParent {
   abstract JsonNode startingJsonOt1cComminhgPrices(@NotNull Context context,@NotNull String adress,@NotNull int PublicId);
 
 
-  abstract byte[] GenetarJsonOt1cComminhgPrices(@NotNull Context context, @NotNull ArrayList arrayListforgenetaror);
+  abstract byte[] GenetarJsonOt1cComminhgPrices( @NotNull Context context);
 
 }
