@@ -75,8 +75,7 @@ public class ModuleOkHttpBulider {
 
 
                 // Get the file of our certificate
-                InputStream caFileInputStream = context.getResources().openRawResource(R.raw.keystorecreatebks18);
-
+                InputStream caFileInputStream = context.getResources().openRawResource(R.raw.certificate_bks_31);
                 // We're going to put our certificates in a Keystore
                 KeyStore keyStore = KeyStore.getInstance("BKS");
                 keyStore.load(caFileInputStream, "secret".toCharArray());

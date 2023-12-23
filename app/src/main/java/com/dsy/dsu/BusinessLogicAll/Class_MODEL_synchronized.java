@@ -1,6 +1,7 @@
 package com.dsy.dsu.BusinessLogicAll;
 
 import android.annotation.SuppressLint;
+import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -8,6 +9,7 @@ import android.content.pm.PackageInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.Settings;
@@ -20,7 +22,6 @@ import com.dsy.dsu.BusinessLogicAll.DATE.Class_Generation_Data;
 
 import com.dsy.dsu.CnangeServers.PUBLIC_CONTENT;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
-import com.dsy.dsu.SSL.SSL1;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -529,6 +530,7 @@ import okio.BufferedSink;
 
     //todo #GET     //#GET  только для ПИНГА     //#GET  только для ПИНГА  //#GET  только для ПИНГА //#GET  только для ПИНГА //#GET  только для ПИНГА //#GET  только для ПИНГА //#GET  только для ПИНГА //#GET  только для ПИНГА
     ///МЕТОД ПОЛУЧЕНИЕ ДАННЫХ С СЕРВЕРА
+    @SuppressLint("Range")
     public Long МетодУниверсальногоПинга(String NameTable,
                                             String Тип ,
                                             String JobForServer,
@@ -558,6 +560,12 @@ import okio.BufferedSink;
             // MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
            /// OkHttpClient.Builder builderokhtttp = new OkHttpClient.Builder();
+
+
+
+
+
+
 
            //OkHttpClient.Builder builderokhtttp=   new SSL1(context).getOkHttpClientBuilde2();
             // TODO: 15.12.2023 end test

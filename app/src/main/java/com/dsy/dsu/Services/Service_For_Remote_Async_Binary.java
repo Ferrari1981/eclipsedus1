@@ -75,6 +75,7 @@ import io.reactivex.rxjava3.core.Flowable;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.functions.Predicate;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
 
 
 /**
@@ -92,7 +93,8 @@ public class Service_For_Remote_Async_Binary extends IntentService {
     private      Integer ПубличныйIDДляФрагмента=0;
     @Inject
     ObjectMapper getHiltJaksonObjectMapper;
-
+    @Inject
+      OkHttpClient.Builder getHiltOkHttpBulder;
     public Service_For_Remote_Async_Binary() {
         super("Service_For_Remote_Async");
     }
