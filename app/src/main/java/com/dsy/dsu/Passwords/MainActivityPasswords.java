@@ -243,7 +243,7 @@ public class MainActivityPasswords extends AppCompatActivity {
         Integer БуферПубличныйIDОтСервера;
         //TODO запукаем метод Афторизаиция по ЛОГИНУ И ПАРОЛЮ
         БуферПубличныйIDОтСервера = new Class_MODEL_synchronized(getApplicationContext()).
-                методАвторизацииЛогинИПаполь(getApplicationContext(), preferences, ПубличноеЛогин, ПубличноеПароль);
+                методАвторизацииЛогинИПаполь(getApplicationContext(), preferences, ПубличноеЛогин, ПубличноеПароль,getHiltOkHttpBulder);
         Log.d(this.getClass().getName(), " БуферПубличныйIDОтСервера " + БуферПубличныйIDОтСервера);
 
         // TODO: 24.08.2023 УСПЕШНЫЙ КОД ЛОГИРОВАНИЕ И ПАРОЛЬ
@@ -529,102 +529,54 @@ public class MainActivityPasswords extends AppCompatActivity {
                         }
 
                         // TODO: 29.09.2023 ВТОРОЙ Observavle самой операции аунтификации и сохрание пароля
-                       Observable.just("SavePasswordAyntivication")
-                                .subscribeOn(Schedulers.single())
-                                .doOnNext(new Consumer<String>() {
-                                    @Override
-                                    public void accept(String s) throws Throwable {
+                        Integer БуферПубличныйIDОтСервера = 0;
+                        ПубличноеЛогин = ИмяДляВходаСистему.getText().toString().trim();///получаем из формы имя для того чтобы постучаться на сервер
+                        Log.d(getPackageName().getClass().getName(), "ПубличноеИмяПользовательДлСервлета " + ПубличноеЛогин);
+                        ПубличноеПароль = ПарольДляВходаСистему.getText().toString().trim();///////получаем из формы пароль для того чтобы постучаться на сервер
+                        Log.d(getPackageName().getClass().getName(), "ПубличноеПарольДлСервлета " + ПубличноеПароль);
 
-                                        Integer БуферПубличныйIDОтСервера = 0;
-                                        ПубличноеЛогин = ИмяДляВходаСистему.getText().toString().trim();///получаем из формы имя для того чтобы постучаться на сервер
-                                        Log.d(getPackageName().getClass().getName(), "ПубличноеИмяПользовательДлСервлета " + ПубличноеЛогин);
-                                        ПубличноеПароль = ПарольДляВходаСистему.getText().toString().trim();///////получаем из формы пароль для того чтобы постучаться на сервер
-                                        Log.d(getPackageName().getClass().getName(), "ПубличноеПарольДлСервлета " + ПубличноеПароль);
-
-                                        // TODO: 29.09.2023 пароль и логин
-                                        if (ПубличноеЛогин.length() > 3 && ПубличноеПароль.length() > 3) {
-                                            boolean ПроверкаНАстройкиСети =
-                                                    new Class_Find_Setting_User_Network(getApplicationContext()).МетодПроветяетКакуюУстановкуВыбралПользовательСети();
-                                            if (ПроверкаНАстройкиСети == true) {
-                                                Boolean РеальныйПингСервера =
-                                                        new Class_Connections_Server(getApplicationContext()).МетодПингаСервераРаботаетИлиНет(getApplicationContext(),getHiltOkHttpBulder);
-                                                // TODO: 07.10.2023 пинг сервера
-                                                if (РеальныйПингСервера == true) {
-                                                    // TODO: 07.10.2023 проверка разрешений на КАМЕРУ
-                                                    ClassPerssionAdvanceRoles classPerssionAdvanceRoles=new ClassPerssionAdvanceRoles();
-                                                    Boolean ФлагЕслиРАзрешенияКамераИлиНет=      classPerssionAdvanceRoles.metodPerssionAdvanceRoles();;
-                                                    if (ФлагЕслиРАзрешенияКамераИлиНет==true) {
-                                                        // TODO: 15.09.2023 ОБРАБОТКА ПАРОЛИ
-                                                        методGetПарольОбработка(КнопкаВходавСистему);
-                                                        Log.d(this.getClass().getName(), " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                                                                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                                                                " Класс  :" + Thread.currentThread().getStackTrace()[2].getClassName() +
-                                                                "  РеальныйПингСервера " +РеальныйПингСервера + " ФлагЕслиРАзрешенияКамераИлиНет " +ФлагЕслиРАзрешенияКамераИлиНет);
-                                                    }else {
-                                                        МетодВизуальногоОтображениеРаботыКоннекта("Нет разрешение Камеры"+"\n "+"и Файлы !!!", КнопкаВходавСистему);
-                                                    }
-                                                    // TODO: 15.09.2023 end password
-                                                } else {
-                                                    МетодВизуальногоОтображениеРаботыКоннекта("Сервер выкл !!!", КнопкаВходавСистему);
-                                                }
-                                            } else {
-                                                МетодВизуальногоОтображениеРаботыКоннекта("Интернет выкл !!!",КнопкаВходавСистему);
-                                            }
-                                        } else {
-                                            МетодВизуальногоОтображениеРаботыКоннекта(" Повторите Логин и пароль ", КнопкаВходавСистему);
-                                        }
+                        // TODO: 29.09.2023 пароль и логин
+                        if (ПубличноеЛогин.length() > 3 && ПубличноеПароль.length() > 3) {
+                            boolean ПроверкаНАстройкиСети =
+                                    new Class_Find_Setting_User_Network(getApplicationContext()).МетодПроветяетКакуюУстановкуВыбралПользовательСети();
+                            if (ПроверкаНАстройкиСети == true) {
+                                Boolean РеальныйПингСервера =
+                                        new Class_Connections_Server(getApplicationContext()).МетодПингаСервераРаботаетИлиНет(getApplicationContext(),getHiltOkHttpBulder);
+                                // TODO: 07.10.2023 пинг сервера
+                                if (РеальныйПингСервера == true) {
+                                    // TODO: 07.10.2023 проверка разрешений на КАМЕРУ
+                                    ClassPerssionAdvanceRoles classPerssionAdvanceRoles=new ClassPerssionAdvanceRoles();
+                                    Boolean ФлагЕслиРАзрешенияКамераИлиНет=      classPerssionAdvanceRoles.metodPerssionAdvanceRoles();;
+                                    if (ФлагЕслиРАзрешенияКамераИлиНет==true) {
+                                        // TODO: 15.09.2023 ОБРАБОТКА ПАРОЛИ
+                                        методGetПарольОбработка(КнопкаВходавСистему);
                                         Log.d(this.getClass().getName(), " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
                                                 " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                                                " Класс  :" + Thread.currentThread().getStackTrace()[2].getClassName());
+                                                " Класс  :" + Thread.currentThread().getStackTrace()[2].getClassName() +
+                                                "  РеальныйПингСервера " +РеальныйПингСервера + " ФлагЕслиРАзрешенияКамераИлиНет " +ФлагЕслиРАзрешенияКамераИлиНет);
+                                    }else {
+                                        МетодВизуальногоОтображениеРаботыКоннекта("Нет разрешение Камеры"+"\n "+"и Файлы !!!", КнопкаВходавСистему);
                                     }
-                                })
-                                .doAfterNext(new Consumer<String>() {
-                                    @Override
-                                    public void accept(String s) throws Throwable {
-                                        Log.d(this.getClass().getName(), " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                                                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                                                " Класс  :" + Thread.currentThread().getStackTrace()[2].getClassName());
-                                    }
-                                })
-                                .observeOn(AndroidSchedulers.mainThread())
-                                .doOnComplete(new Action() {
-                                    @Override
-                                    public void run() throws Throwable {
-                                       // TODO: 29.09.2023 Програсс бар
-                                         методПрограссБАр();
-                                        Log.d(this.getClass().getName(), " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                                                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                                                " Класс  :" + Thread.currentThread().getStackTrace()[2].getClassName());
-                                    }
-                                })
-                                .doOnError(new Consumer<Throwable>() {
-                                    @Override
-                                    public void accept(Throwable throwable) throws Throwable {
-                                        throwable.printStackTrace();
-                                        Log.e(this.getClass().getName(), "Ошибка " +throwable + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                                                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-                                        // TODO: 01.09.2021 метод вызова
-                                        new Class_Generation_Errors(getApplicationContext()).МетодЗаписиВЖурналНовойОшибки(throwable.toString(), this.getClass().getName(),
-                                                Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
-                                    }
-                                })
-                               .onErrorComplete(new Predicate<Throwable>() {
-                                   @Override
-                                   public boolean test(Throwable throwable) throws Throwable {
-                                       throwable.printStackTrace();
-                                       Log.e(this.getClass().getName(), "throwable " + throwable + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                                               " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-                                       // TODO: 01.09.2021 метод вызова
-                                       new Class_Generation_Errors(getApplicationContext()).МетодЗаписиВЖурналНовойОшибки(throwable.toString(), this.getClass().getName(),
-                                               Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
-                                       return true;
-                                   }
-                               })
-                                .subscribe();
-
+                                    // TODO: 15.09.2023 end password
+                                } else {
+                                    МетодВизуальногоОтображениеРаботыКоннекта("Сервер выкл !!!", КнопкаВходавСистему);
+                                }
+                            } else {
+                                МетодВизуальногоОтображениеРаботыКоннекта("Интернет выкл !!!",КнопкаВходавСистему);
+                            }
+                        } else {
+                            МетодВизуальногоОтображениеРаботыКоннекта(" Повторите Логин и пароль ", КнопкаВходавСистему);
+                        }
                         Log.d(this.getClass().getName(), " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
                                 " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber()+
                                 " Класс  :" + Thread.currentThread().getStackTrace()[2].getClassName());
+                        // TODO: 29.09.2023 Програсс бар
+                        методПрограссБАр();
+                        Log.d(this.getClass().getName(), " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber()+
+                                " Класс  :" + Thread.currentThread().getStackTrace()[2].getClassName());
+
+
                     }
 
                     @Override

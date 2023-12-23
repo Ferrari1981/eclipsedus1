@@ -22,6 +22,7 @@ import com.dsy.dsu.BusinessLogicAll.DATE.Class_Generation_Data;
 
 import com.dsy.dsu.CnangeServers.PUBLIC_CONTENT;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
+import com.dsy.dsu.Hilt.getOkHttpClientBuilder.ModuleOkHttpBulider;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -105,7 +106,8 @@ import okio.BufferedSink;
                                                          Long Версия,
                                                          Integer ID,
                                                          String ИмяСервера,
-                                                         Integer ИмяПорта) {
+                                                         Integer ИмяПорта,
+                                                         OkHttpClient.Builder getHiltOkHttpBulder) {
 
         final StringBuffer[] БуферСамиДанныеОтСервера = {new StringBuffer()};
         try {
@@ -120,7 +122,7 @@ import okio.BufferedSink;
             СтрокаСвязиСсервером = СтрокаСвязиСсервером.replace(" ", "%20");
             URL Adress = new URL(СтрокаСвязиСсервером);
             Log.d(this.getClass().getName(), " СтрокаСвязиСсервером " + СтрокаСвязиСсервером);
-            OkHttpClient okHttpClientДанныеОтСервера = new OkHttpClient().newBuilder().addInterceptor(new Interceptor() {
+            OkHttpClient okHttpClientДанныеОтСервера = getHiltOkHttpBulder.addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
                             Class_GRUD_SQL_Operations grudSqlOperations= new Class_GRUD_SQL_Operations(context);
@@ -225,6 +227,7 @@ import okio.BufferedSink;
             });
             //TODO
             dispatcherДанныеОтСервера.executorService().awaitTermination(1, TimeUnit.DAYS);
+            dispatcherДанныеОтСервера.cancelAll();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
            String ОшибкаТекущегоМетода = e.toString();
@@ -252,7 +255,8 @@ import okio.BufferedSink;
                                                                               Long Версия,
                                                                               Integer ID,
                                                                               String ИмяСервера,
-                                                                              Integer ИмяПорта) {
+                                                                              Integer ИмяПорта,
+                                                                              OkHttpClient.Builder getHiltOkHttpBulder) {
 
         final StringBuffer[] БуферСамиДанныеОтСервера = {new StringBuffer()};
         try {
@@ -267,7 +271,7 @@ import okio.BufferedSink;
             СтрокаСвязиСсервером = СтрокаСвязиСсервером.replace(" ", "%20");
             URL Adress = new URL(СтрокаСвязиСсервером);
             Log.d(this.getClass().getName(), " СтрокаСвязиСсервером " + СтрокаСвязиСсервером);
-            OkHttpClient okHttpClientДанныеОтСервера = new OkHttpClient().newBuilder().addInterceptor(new Interceptor() {
+            OkHttpClient okHttpClientДанныеОтСервера = getHiltOkHttpBulder.addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
                             Class_GRUD_SQL_Operations grudSqlOperations= new Class_GRUD_SQL_Operations(context);
@@ -375,6 +379,7 @@ import okio.BufferedSink;
             });
             //TODO
             dispatcherДанныеОтСервера.executorService().awaitTermination(1, TimeUnit.DAYS);
+            dispatcherДанныеОтСервера.cancelAll();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             String ОшибкаТекущегоМетода = e.toString();
@@ -401,7 +406,8 @@ import okio.BufferedSink;
                                                                               Long Версия,
                                                                               Integer ID,
                                                                               String ИмяСервера,
-                                                                              Integer ИмяПорта) {
+                                                                              Integer ИмяПорта,
+                                                         OkHttpClient.Builder getHiltOkHttpBulder) {
 
         final InputStream[] inputStreamJaksonByte = {null};
         try {
@@ -416,7 +422,7 @@ import okio.BufferedSink;
             СтрокаСвязиСсервером = СтрокаСвязиСсервером.replace(" ", "%20");
             URL Adress = new URL(СтрокаСвязиСсервером);
             Log.d(this.getClass().getName(), " СтрокаСвязиСсервером " + СтрокаСвязиСсервером);
-            OkHttpClient okHttpClientДанныеОтСервера = new OkHttpClient().newBuilder().addInterceptor(new Interceptor() {
+            OkHttpClient okHttpClientДанныеОтСервера = getHiltOkHttpBulder.addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
                             Class_GRUD_SQL_Operations grudSqlOperations= new Class_GRUD_SQL_Operations(context);
@@ -510,6 +516,7 @@ import okio.BufferedSink;
             });
             //TODO
             dispatcherДанныеОтСервера.executorService().awaitTermination(1, TimeUnit.DAYS);
+            dispatcherДанныеОтСервера.cancelAll();
         } catch (IOException | InterruptedException e) {
             e.printStackTrace();
             String ОшибкаТекущегоМетода = e.toString();
@@ -563,8 +570,9 @@ import okio.BufferedSink;
 
 
 
-
-
+/*
+            ModuleOkHttpBulider moduleOkHttpBulider=new ModuleOkHttpBulider();
+          OkHttpClient.Builder builder=  moduleOkHttpBulider.getHiltOkHttpBulder(context);*/
 
 
            //OkHttpClient.Builder builderokhtttp=   new SSL1(context).getOkHttpClientBuilde2();
@@ -594,6 +602,8 @@ import okio.BufferedSink;
                                 ПубличноеЛогин = Курсор_ПолучаемИмяСотрудникаИзТаблицыФИО.getString(0).trim();
                                 ПубличноеПароль = Курсор_ПолучаемИмяСотрудникаИзТаблицыФИО.getString(1).trim();
                             }
+                            Курсор_ПолучаемИмяСотрудникаИзТаблицыФИО.close();
+
                             String ANDROID_ID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
                             Log.d(this.getClass().getName(), "  PUBLIC_CONTENT.ПубличноеИмяПользовательДлСервлета  " + ПубличноеЛогин +
                                     " PUBLIC_CONTENT.ПубличноеПарольДлСервлета " + ПубличноеПароль);
@@ -674,6 +684,8 @@ import okio.BufferedSink;
                 }
             });
             dispatcherПинг.executorService().awaitTermination(1,TimeUnit.DAYS);
+            dispatcherПинг.cancelAll();
+            okHttpClientПинг.connectionPool().evictAll();
             Log.i(context.getClass().getName(), "БуферРезультатПингасСервером" + БуферРезультатПингасСервером);
         } catch (IOException ex) {
             ex.printStackTrace();
@@ -749,7 +761,8 @@ import okio.BufferedSink;
                                              @NonNull String Таблица,
                                              @NonNull  String JobForServer,
                                              @NonNull   String ИмяСервера,
-                                             Integer ИмяПорта)  {
+                                             @NonNull  Integer ИмяПорта,
+                                             @NonNull   OkHttpClient.Builder getHiltOkHttpBulder)  {
 
         final StringBuffer[] БуферCallsBackОтСеврера = {new StringBuffer()};
                 try {
@@ -763,7 +776,7 @@ import okio.BufferedSink;
                     СтрокаСвязиСсервером = СтрокаСвязиСсервером.replace(" ", "%20");
                     URL Adress = new URL(СтрокаСвязиСсервером);
                     Log.d(this.getClass().getName(), " Adress  " + Adress);
-                    OkHttpClient okHttpClientОтправкиДанныхНаСервер = new OkHttpClient().newBuilder().addInterceptor(new Interceptor() {
+                    OkHttpClient okHttpClientОтправкиДанныхНаСервер =getHiltOkHttpBulder.addInterceptor(new Interceptor() {
                                 @Override
                                 public Response intercept(Chain chain) throws IOException {
                                     // TODO: 26.08.2021 НОВЫЙ ВЫЗОВ НОВОГО КЛАСС GRUD - ОПЕРАЦИИ
@@ -909,6 +922,7 @@ import okio.BufferedSink;
                         }
                     });
                     dispatcherCallsBackСервера.executorService().awaitTermination(1, TimeUnit.DAYS);
+                    dispatcherCallsBackСервера.cancelAll();
                     Log.i(context.getClass().getName(), "БуферCallsBackОтСеврера" + БуферCallsBackОтСеврера[0]);
                     // TODO: 12.03.2023  тест код конец
                 } catch (IOException | InterruptedException ex) {
@@ -3269,7 +3283,8 @@ Class_GRUD_SQL_Operations classGrudSqlOperationsУдалениеДанныхЧе
                                                   @NonNull String ЗаданиеЗагрузки,
                                                   @NonNull String ИмяФайлаЗагрузки ,
                                                   @NonNull String ВозвращяемыйТип,
-                                                  @NonNull  Integer ВремяНАReadFile) {
+                                                  @NonNull  Integer ВремяНАReadFile,
+                                                  @NonNull OkHttpClient.Builder getHiltOkHttpBulder) {
         final File[] СамФайлJsonandApk = {null};
                 try {
                     String СтрокаСвязиСсервером ="http://"+ИмяСервера+":"+ИмяПорта+"/";;
@@ -3277,7 +3292,7 @@ Class_GRUD_SQL_Operations classGrudSqlOperationsУдалениеДанныхЧе
                     СтрокаСвязиСсервером = СтрокаСвязиСсервером + АдресЗагрузки; /////"dsu1.glassfish/update_android_dsu1/output-metadata.json";
                     СтрокаСвязиСсервером = СтрокаСвязиСсервером.replace(" ", "%20");
                     URL    Adress = new URL(СтрокаСвязиСсервером);
-                    OkHttpClient okHttpClientЗагрузкаНовогоПО = new OkHttpClient().newBuilder().addInterceptor(new Interceptor() {
+                    OkHttpClient okHttpClientЗагрузкаНовогоПО = getHiltOkHttpBulder.addInterceptor(new Interceptor() {
                                 @Override
                                 public Response intercept(Chain chain) throws IOException {
                                     // TODO: 26.08.2021 НОВЫЙ ВЫЗОВ НОВОГО КЛАСС GRUD - ОПЕРАЦИИ
@@ -3432,6 +3447,7 @@ Class_GRUD_SQL_Operations classGrudSqlOperationsУдалениеДанныхЧе
                         }
                     });
                     dispatcherЗагрузкаПО.executorService().awaitTermination(1,TimeUnit.DAYS);
+                    dispatcherЗагрузкаПО.cancelAll();
                     Log.i(context.getClass().getName(), "СамФайлJsonandApk" + СамФайлJsonandApk[0]);
                     // TODO: 13.03.2023  конец загрузки файла по новому FILE
                 } catch (IOException | InterruptedException ex) {
@@ -3752,7 +3768,8 @@ Class_GRUD_SQL_Operations classGrudSqlOperationsУдалениеДанныхЧе
     public Integer методАвторизацииЛогинИПаполь(@NonNull Context context,
                                                      @NonNull SharedPreferences preferences,
                                                      @NonNull String ПубличноеЛогин,
-                                                     @NonNull String ПубличноеПароль) {
+                                                     @NonNull String ПубличноеПароль,
+                                                @NotNull OkHttpClient.Builder getHiltOkHttpBulder) {
 
 
         final Integer[] БуферПубличныйIDОтСервера = {0};
@@ -3777,7 +3794,7 @@ Class_GRUD_SQL_Operations classGrudSqlOperationsУдалениеДанныхЧе
 
             // TODO: 11.03.2023  текст код
             if (ПубличноеЛогин.length()>0 && ПубличноеПароль.length()>0 && СтрокаСвязиСсервером.length()>0) {
-                OkHttpClient okHttpClientИмяиПароль = new OkHttpClient().newBuilder().addInterceptor(new Interceptor() {
+                OkHttpClient okHttpClientИмяиПароль =getHiltOkHttpBulder.addInterceptor(new Interceptor() {
                             @Override
                             public Response intercept(Chain chain) throws IOException {
                                 String ANDROID_ID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
@@ -3876,6 +3893,7 @@ Class_GRUD_SQL_Operations classGrudSqlOperationsУдалениеДанныхЧе
                     }
                 });
                 dispatcherПроверкаЛогиниПароль.executorService().awaitTermination(1,TimeUnit.DAYS);
+                dispatcherПроверкаЛогиниПароль.cancelAll();
             } else {
             }
         } catch (Exception e) {

@@ -255,7 +255,7 @@ try{
     Long       ФинальныйРезультатAsyncBackgroud=0l;
     try{
             // TODO: 25.03.2023 ДОПОЛНИТЕОТНЕ УДЛАНИЕ СТАТУСА УДАЛЕНИЕ ПОСЛЕ СИНХРОНИАЗЦИИ
-                ФинальныйРезультатAsyncBackgroud  = new AsynsProccessor(context,getHiltJaksonObjectMapper ).МетодЗАпускаФоновойСинхронизации(context,handlerAsync);
+                ФинальныйРезультатAsyncBackgroud  = new AsynsProccessor(context,getHiltJaksonObjectMapper,getHiltOkHttpBulder ).МетодЗАпускаФоновойСинхронизации(context,handlerAsync);
 
 
             Log.d(getApplicationContext().getClass().getName(), "\n"
@@ -292,7 +292,7 @@ try{
         Long       ФинальныйРезультатAsyncBackgroud=0l;
         try{
             // TODO: 25.03.2023 ДОПОЛНИТЕОТНЕ УДЛАНИЕ СТАТУСА УДАЛЕНИЕ ПОСЛЕ СИНХРОНИАЗЦИИ
-            ФинальныйРезультатAsyncBackgroud  = new AsynsProccessor(context,getHiltJaksonObjectMapper).МетодЗАпускаФоновойСинхронизации(context  );
+            ФинальныйРезультатAsyncBackgroud  = new AsynsProccessor(context,getHiltJaksonObjectMapper,getHiltOkHttpBulder).МетодЗАпускаФоновойСинхронизации(context  );
 
 
             Log.d(getApplicationContext().getClass().getName(), "\n"

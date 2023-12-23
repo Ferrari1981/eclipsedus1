@@ -8,6 +8,8 @@ import androidx.annotation.NonNull;
 
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.IOException;
 import java.util.Date;
 import java.util.Optional;
@@ -22,10 +24,10 @@ import okhttp3.Response;
 
 public class  ClassOkHttpОбычныйПинг {
     OkHttpClient  okHttpClient;
-    public  void методОбычногоПодключениявOkHttp(@NonNull Context context) {
+    public  void методОбычногоПодключениявOkHttp(@NonNull Context context, @NotNull OkHttpClient.Builder getHiltOkHttpBulder) {
         try {
             StringBuffer stringBuffer = new StringBuffer();
-            okHttpClient = new OkHttpClient().newBuilder().addInterceptor(new Interceptor() {
+            okHttpClient = getHiltOkHttpBulder.addInterceptor(new Interceptor() {
                         @Override
                         public okhttp3.Response intercept(Chain chain) throws IOException {
                             Request originalRequest = chain.request();
@@ -39,6 +41,7 @@ public class  ClassOkHttpОбычныйПинг {
                     .build();
             Request requestGET = new Request.Builder().get().url("http://192.168.254.40:8080/websocet/gEt").build();////"http://192.168.254.40:8080/websocet/gEt"
             Log.d(this.getClass().getName(), "  request  " + requestGET);
+
             okHttpClient.newCall(requestGET).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
@@ -73,6 +76,7 @@ public class  ClassOkHttpОбычныйПинг {
             });
 
             okHttpClient.dispatcher().executorService().awaitTermination(1, TimeUnit.DAYS);
+            okHttpClient.dispatcher().cancelAll();
             Log.i(this.getClass().getName(),  " Атоманически установкаОбновление ПО "+
                     Thread.currentThread().getStackTrace()[2].getMethodName()+
                     " время " +new Date().toLocaleString() );

@@ -49,13 +49,18 @@ import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Maybe;
 import io.reactivex.rxjava3.core.MaybeObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Action;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
 
+@AndroidEntryPoint
 
 public class ServiceUpdatePoОбновлениеПО extends IntentService {////Service
 
@@ -73,6 +78,11 @@ public class ServiceUpdatePoОбновлениеПО extends IntentService {////
     private    File FileAPK = null;
 
     private Handler handlerUpdatePO;
+
+
+    @Inject
+  OkHttpClient.Builder getHiltOkHttpBulder;
+
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
      *
@@ -270,7 +280,8 @@ public class ServiceUpdatePoОбновлениеПО extends IntentService {////
             FileAPK = new Class_MODEL_synchronized(getApplicationContext()).
                     МетодЗагрузкиОбновлениеПОсСервера(new PUBLIC_CONTENT(getApplicationContext()).getСсылкаНаРежимСервераОбновлениеПО(),
                             getApplicationContext(), ИмяСерверИзХранилица ,ПортСерверИзХранилица,
-                            "FileAPKUpdatePO","update_dsu1.apk","application/octet-stream",500);
+                            "FileAPKUpdatePO","update_dsu1.apk",
+                            "application/octet-stream",500,getHiltOkHttpBulder);
 
             Log.w(getApplicationContext().getClass().getName(),    Thread.currentThread().getStackTrace()[2].getMethodName()
                     + Thread.currentThread().getName()+" FileAPK" + FileAPK);
@@ -687,7 +698,7 @@ public class ServiceUpdatePoОбновлениеПО extends IntentService {////
             File ФайлJsonОтСервера = new Class_MODEL_synchronized(getApplicationContext()).
                     МетодЗагрузкиОбновлениеПОсСервера(new PUBLIC_CONTENT(getApplicationContext()).getСсылкаНаРежимСервераОбновлениеПО(),
                             getApplicationContext(), ИмяСерверИзХранилица ,ПортСерверИзХранилица,"FileJsonUpdatePO",
-                            "update_dsu1.json","application/json",10);
+                            "update_dsu1.json","application/json",10,getHiltOkHttpBulder);
 
             Log.w(getApplicationContext().getClass().getName(),    Thread.currentThread().getStackTrace()[2].getMethodName()
                     + Thread.currentThread().getName()+" ФайлJsonОтСервера" + ФайлJsonОтСервера);

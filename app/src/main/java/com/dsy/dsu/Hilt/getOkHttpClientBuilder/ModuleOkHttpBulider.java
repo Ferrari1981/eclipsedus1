@@ -23,6 +23,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 import java.util.TimeZone;
+import java.util.concurrent.TimeUnit;
 
 import javax.inject.Singleton;
 import javax.net.ssl.HostnameVerifier;
@@ -38,6 +39,7 @@ import dagger.Provides;
 import dagger.hilt.InstallIn;
 import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
+import okhttp3.ConnectionPool;
 import okhttp3.OkHttpClient;
 
 
@@ -47,7 +49,7 @@ import okhttp3.OkHttpClient;
 public class ModuleOkHttpBulider {
     @Singleton
     @Provides
-    public  OkHttpClient.Builder getHiltOkHttpBulder(@ApplicationContext Context context) {
+    public     OkHttpClient.Builder getHiltOkHttpBulder(@ApplicationContext Context context) {
         OkHttpClient.Builder okhttpbulder=null;
         try {
 
@@ -95,6 +97,8 @@ public class ModuleOkHttpBulider {
 
 
                 okhttpbulder.socketFactory(sslSocketFactory);
+
+                okhttpbulder.connectionPool(new ConnectionPool(100,5, TimeUnit.SECONDS));
                 okhttpbulder.hostnameVerifier(new HostnameVerifier() {
                     @Override
                     public boolean verify(String hostname, SSLSession session) {
@@ -102,7 +106,7 @@ public class ModuleOkHttpBulider {
                     }
                 });
 
-
+                caFileInputStream.close();
 
                 Log.i(this.getClass().getName(),  " Атоманически установкаОбновление ПО "+
                         Thread.currentThread().getStackTrace()[2].getMethodName()+

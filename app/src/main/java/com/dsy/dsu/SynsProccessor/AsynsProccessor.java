@@ -66,6 +66,7 @@ import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.functions.Predicate;
 import io.reactivex.rxjava3.parallel.ParallelFlowable;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
 
 public class AsynsProccessor extends Class_MODEL_synchronized {
     // TODO: 28.07.2022  переменые
@@ -102,13 +103,16 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
 
     private   ObjectMapper jsonGenerator;
 
+    private   OkHttpClient.Builder getHiltOkHttpBulder;
+
     // TODO: 28.07.2022
-    public AsynsProccessor(@NotNull Context context,@NonNull  ObjectMapper jsonGenerator) {
+    public AsynsProccessor(@NotNull Context context,@NonNull  ObjectMapper jsonGenerator,@NotNull  OkHttpClient.Builder getHiltOkHttpBulder) {
         super(context);
         this.context=context;
         this.   public_contentДатыДляГлавныхТаблицСинхронизации=new PUBLIC_CONTENT(context);
         this.   sqLiteDatabase=    GetSQLiteDatabase.SqliteDatabase();
         this.jsonGenerator=    jsonGenerator;
+        this.getHiltOkHttpBulder=    getHiltOkHttpBulder;
         Log.w(context.getClass().getName(), "sqLiteDatabase" + sqLiteDatabase);
     }
 
@@ -403,7 +407,7 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
                     0l,
                     ID,
                     ИмяСерверИзХранилица ,
-                    ПортСерверИзХранилица);
+                    ПортСерверИзХранилица,getHiltOkHttpBulder);
             Log.d(this.getClass().getName(), " BufferGetVersionData.toString().toCharArray().length "
                     + BufferGetVersionData.toString().toCharArray().length);
             // TODO: 03.09.2021
@@ -1032,7 +1036,7 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
                     ,ВерсияДанных,
                     ID,
                     ИмяСерверИзХранилица
-                    ,ПортСерверИзХранилица);
+                    ,ПортСерверИзХранилица,getHiltOkHttpBulder);
             // TODO: 01.12.2023
 
             Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
@@ -1748,7 +1752,7 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
                         ID,
                         Таблицы,
                         "Получение JSON файла от Андройда",
-                        ИмяСерверИзХранилица ,ПортСерверИзХранилица);
+                        ИмяСерверИзХранилица ,ПортСерверИзХранилица,getHiltOkHttpBulder);
 
                 ///БУФЕР ОТПРАВКИ ДАННЫХ НА СЕРВЕР  //TODO original "tabel.dsu1.ru", 8888        //TODO "192.168.254.40", 8080
                 Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +

@@ -247,6 +247,7 @@ public class Service_Async_1C extends IntentService {
                     while (!okHttpClient.dispatcher().executorService().isShutdown());
                     Log.i(context.getClass().getName(), "БуферGET1С" + БуферGET1С[0]);
                     okHttpClient.dispatcher().executorService().awaitTermination(1,TimeUnit.DAYS);
+            okHttpClient.dispatcher().cancelAll();
                     // TODO: 06.07.2022
     } catch (Exception e) {
         e.printStackTrace();
