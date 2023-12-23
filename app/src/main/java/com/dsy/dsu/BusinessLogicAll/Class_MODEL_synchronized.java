@@ -556,9 +556,9 @@ import okio.BufferedSink;
             // TODO: 11.03.2023 новый тест код
             // MediaType JSON = MediaType.parse("application/json; charset=utf-8");
 
-            OkHttpClient.Builder builderokhtttp = new OkHttpClient.Builder();
+           /// OkHttpClient.Builder builderokhtttp = new OkHttpClient.Builder();
 
-           /// OkHttpClient.Builder builderokhtttp=   new SSL1(context).getOkHttpClientBuilder();
+           OkHttpClient.Builder builderokhtttp=   new SSL1(context).getOkHttpClientBuilde2();
             // TODO: 15.12.2023 end test
             OkHttpClient okHttpClientПинг = builderokhtttp.addInterceptor(new Interceptor() {
                         @Override
