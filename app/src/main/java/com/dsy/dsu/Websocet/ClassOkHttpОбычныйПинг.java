@@ -15,8 +15,13 @@ import java.util.Date;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
 
+import javax.net.ssl.HostnameVerifier;
+import javax.net.ssl.SSLSession;
+import javax.net.ssl.SSLSocketFactory;
+
 import okhttp3.Call;
 import okhttp3.Callback;
+import okhttp3.ConnectionPool;
 import okhttp3.Interceptor;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
@@ -24,10 +29,23 @@ import okhttp3.Response;
 
 public class  ClassOkHttpОбычныйПинг {
     OkHttpClient  okHttpClient;
-    public  void методОбычногоПодключениявOkHttp(@NonNull Context context, @NotNull OkHttpClient.Builder getHiltOkHttpBulder) {
+    public  void методОбычногоПодключениявOkHttp(@NonNull Context context, @NotNull SSLSocketFactory getsslSocketFactory ) {
         try {
             StringBuffer stringBuffer = new StringBuffer();
-            okHttpClient = getHiltOkHttpBulder.addInterceptor(new Interceptor() {
+
+
+       OkHttpClient.Builder builder=     new OkHttpClient().newBuilder();
+            builder.socketFactory(getsslSocketFactory);
+
+            builder.connectionPool(new ConnectionPool(100,5, TimeUnit.SECONDS));
+            builder.hostnameVerifier(new HostnameVerifier() {
+                @Override
+                public boolean verify(String hostname, SSLSession session) {
+                    return true;
+                }
+            });
+
+            okHttpClient = new OkHttpClient().newBuilder().addInterceptor(new Interceptor() {
                         @Override
                         public okhttp3.Response intercept(Chain chain) throws IOException {
                             Request originalRequest = chain.request();

@@ -1,7 +1,6 @@
 package com.dsy.dsu.BusinessLogicAll;
 
 import android.annotation.SuppressLint;
-import android.content.ContentResolver;
 import android.content.ContentValues;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,7 +8,6 @@ import android.content.pm.PackageInfo;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteCursor;
 import android.database.sqlite.SQLiteDatabase;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Environment;
 import android.provider.Settings;
@@ -22,7 +20,6 @@ import com.dsy.dsu.BusinessLogicAll.DATE.Class_Generation_Data;
 
 import com.dsy.dsu.CnangeServers.PUBLIC_CONTENT;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
-import com.dsy.dsu.Hilt.getOkHttpClientBuilder.ModuleOkHttpBulider;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -39,10 +36,7 @@ import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.KeyManagementException;
-import java.security.KeyStoreException;
 import java.security.NoSuchAlgorithmException;
-import java.security.SecureRandom;
-import java.security.UnrecoverableKeyException;
 import java.text.SimpleDateFormat;
 import java.time.YearMonth;
 import java.util.ArrayList;
@@ -59,13 +53,6 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 import javax.crypto.NoSuchPaddingException;
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.KeyManagerFactory;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.TrustManager;
-import javax.net.ssl.TrustManagerFactory;
-import javax.net.ssl.X509TrustManager;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -571,7 +558,7 @@ import okio.BufferedSink;
 
 
 /*
-            ModuleOkHttpBulider moduleOkHttpBulider=new ModuleOkHttpBulider();
+            ModulegetsslSocketFactory moduleOkHttpBulider=new ModulegetsslSocketFactory();
           OkHttpClient.Builder builder=  moduleOkHttpBulider.getHiltOkHttpBulder(context);*/
 
 
@@ -685,7 +672,6 @@ import okio.BufferedSink;
             });
             dispatcherПинг.executorService().awaitTermination(1,TimeUnit.DAYS);
             dispatcherПинг.cancelAll();
-            okHttpClientПинг.connectionPool().evictAll();
             Log.i(context.getClass().getName(), "БуферРезультатПингасСервером" + БуферРезультатПингасСервером);
         } catch (IOException ex) {
             ex.printStackTrace();
