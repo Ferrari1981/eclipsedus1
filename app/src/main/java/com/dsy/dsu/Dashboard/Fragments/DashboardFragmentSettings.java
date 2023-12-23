@@ -58,6 +58,9 @@ import com.jakewharton.rxbinding4.view.RxView;
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.CompletableObserver;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -67,12 +70,15 @@ import io.reactivex.rxjava3.internal.util.BlockingIgnoringReceiver;
 import io.reactivex.rxjava3.subjects.PublishSubject;
 import io.reactivex.rxjava3.subjects.Subject;
 import kotlin.Unit;
+import okhttp3.OkHttpClient;
 
 /**
  * AHilt simple {@link Fragment} subclass.
  * Use the {@link DashboardFragmentSettings#newInstance} factory method to
  * create an instance of this fragment.
  */
+
+@AndroidEntryPoint
 public class DashboardFragmentSettings extends  DialogFragment {
     // TODO: Rename parameter arguments, choose names that match
 
@@ -99,6 +105,10 @@ public class DashboardFragmentSettings extends  DialogFragment {
 
 
     private   ServiceConnection  connectionОбновлениеПО;
+
+
+    @Inject
+      OkHttpClient.Builder getHiltOkHttpBulder;
 
     public DashboardFragmentSettings() {
         // Required empty public constructor
@@ -684,7 +694,7 @@ try{
 
                                         if (СтатусСетиВыбранныйПользователем == true) {
                                             Boolean СтатусСервераСоюзаВключенИлиНЕт =
-                                                    class_connections_serverПингаСерераИзАктивтиМеню.МетодПингаСервераРаботаетИлиНет(getContext());
+                                                    class_connections_serverПингаСерераИзАктивтиМеню.МетодПингаСервераРаботаетИлиНет(getContext(),getHiltOkHttpBulder);
                                             if (СтатусСервераСоюзаВключенИлиНЕт == true) {
                                                 // TODO: 23.08.2023
 
@@ -766,7 +776,7 @@ try{
                         public void onClick(View v) {
                             try {
                                 Boolean ЕслиСвязьсСервером =
-                                        new Class_Connections_Server(getContext()).МетодПингаСервераРаботаетИлиНет(getContext());
+                                        new Class_Connections_Server(getContext()).МетодПингаСервераРаботаетИлиНет(getContext(),getHiltOkHttpBulder);
 
                                 if (ЕслиСвязьсСервером == true) {
                                     String ПолученыйТекущееИмяПользователя = new Class_MODEL_synchronized(getContext())

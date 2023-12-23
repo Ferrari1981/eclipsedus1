@@ -535,7 +535,8 @@ import okio.BufferedSink;
                                             Long VersionData,
                                             Integer IdUser,
                                             String ИмяСервера,
-                                            Integer ИмяПорта) throws IOException,
+                                            Integer ИмяПорта,
+                                         @NotNull  OkHttpClient.Builder getHiltOkHttpBulder) throws IOException,
             ExecutionException, InterruptedException, TimeoutException, NoSuchAlgorithmException,
             KeyManagementException, InvalidKeyException, NoSuchPaddingException {
         final Long[] РазмерПришедшегоПотока = {0l};
@@ -558,9 +559,9 @@ import okio.BufferedSink;
 
            /// OkHttpClient.Builder builderokhtttp = new OkHttpClient.Builder();
 
-           OkHttpClient.Builder builderokhtttp=   new SSL1(context).getOkHttpClientBuilde2();
+           //OkHttpClient.Builder builderokhtttp=   new SSL1(context).getOkHttpClientBuilde2();
             // TODO: 15.12.2023 end test
-            OkHttpClient okHttpClientПинг = builderokhtttp.addInterceptor(new Interceptor() {
+            OkHttpClient okHttpClientПинг = getHiltOkHttpBulder.addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
                             // TODO: 26.08.2021 НОВЫЙ ВЫЗОВ НОВОГО КЛАСС GRUD - ОПЕРАЦИИ

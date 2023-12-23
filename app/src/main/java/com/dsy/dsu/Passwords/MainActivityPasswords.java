@@ -55,6 +55,9 @@ import java.util.Date;
 import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
+import javax.inject.Inject;
+
+import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.Disposable;
@@ -63,6 +66,9 @@ import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Predicate;
 import io.reactivex.rxjava3.observers.DisposableObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import okhttp3.OkHttpClient;
+
+@AndroidEntryPoint
 
 public class MainActivityPasswords extends AppCompatActivity {
     ////todo аунтификация
@@ -83,7 +89,8 @@ public class MainActivityPasswords extends AppCompatActivity {
     private Message message;
     public static final int ALL_PERSSION_CODE=1;
     public static final int CAMERA_PERSSION_CODE=2;
-
+    @Inject
+      OkHttpClient.Builder getHiltOkHttpBulder;
     ////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -540,7 +547,7 @@ public class MainActivityPasswords extends AppCompatActivity {
                                                     new Class_Find_Setting_User_Network(getApplicationContext()).МетодПроветяетКакуюУстановкуВыбралПользовательСети();
                                             if (ПроверкаНАстройкиСети == true) {
                                                 Boolean РеальныйПингСервера =
-                                                        new Class_Connections_Server(getApplicationContext()).МетодПингаСервераРаботаетИлиНет(getApplicationContext());
+                                                        new Class_Connections_Server(getApplicationContext()).МетодПингаСервераРаботаетИлиНет(getApplicationContext(),getHiltOkHttpBulder);
                                                 // TODO: 07.10.2023 пинг сервера
                                                 if (РеальныйПингСервера == true) {
                                                     // TODO: 07.10.2023 проверка разрешений на КАМЕРУ
