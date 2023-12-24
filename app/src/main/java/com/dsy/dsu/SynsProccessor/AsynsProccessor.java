@@ -54,6 +54,7 @@ import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 import javax.crypto.NoSuchPaddingException;
+import javax.net.ssl.SSLSocketFactory;
 
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.CompletableObserver;
@@ -103,16 +104,16 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
 
     private   ObjectMapper jsonGenerator;
 
-    private   OkHttpClient.Builder getHiltOkHttpBulder;
+    private SSLSocketFactory getsslSocketFactory2;
 
     // TODO: 28.07.2022
-    public AsynsProccessor(@NotNull Context context,@NonNull  ObjectMapper jsonGenerator,@NotNull  OkHttpClient.Builder getHiltOkHttpBulder) {
+    public AsynsProccessor(@NotNull Context context,@NonNull  ObjectMapper jsonGenerator,@NotNull  SSLSocketFactory getsslSocketFactory2) {
         super(context);
         this.context=context;
         this.   public_contentДатыДляГлавныхТаблицСинхронизации=new PUBLIC_CONTENT(context);
         this.   sqLiteDatabase=    GetSQLiteDatabase.SqliteDatabase();
         this.jsonGenerator=    jsonGenerator;
-        this.getHiltOkHttpBulder=    getHiltOkHttpBulder;
+        this.getsslSocketFactory2=    getsslSocketFactory2;
         Log.w(context.getClass().getName(), "sqLiteDatabase" + sqLiteDatabase);
     }
 
@@ -407,7 +408,7 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
                     0l,
                     ID,
                     ИмяСерверИзХранилица ,
-                    ПортСерверИзХранилица,getHiltOkHttpBulder);
+                    ПортСерверИзХранилица,getsslSocketFactory2);
             Log.d(this.getClass().getName(), " BufferGetVersionData.toString().toCharArray().length "
                     + BufferGetVersionData.toString().toCharArray().length);
             // TODO: 03.09.2021
@@ -1036,7 +1037,7 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
                     ,ВерсияДанных,
                     ID,
                     ИмяСерверИзХранилица
-                    ,ПортСерверИзХранилица,getHiltOkHttpBulder);
+                    ,ПортСерверИзХранилица,getsslSocketFactory2);
             // TODO: 01.12.2023
 
             Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
@@ -1569,7 +1570,7 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
                   КоличествоПотоков=1;
               }*/
             @io.reactivex.rxjava3.annotations.NonNull Scheduler schedulers=Schedulers.newThread();
-            int КоличествоПотоков=Runtime.getRuntime().availableProcessors();;
+            int КоличествоПотоков=1;//Runtime.getRuntime().availableProcessors();;
 
         ParallelFlowable parallelFlowableAsync
                 = Flowable.fromIterable( public_contentДатыДляГлавныхТаблицСинхронизации.ВерсииВсехСерверныхТаблиц.keySet())
@@ -1752,7 +1753,7 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
                         ID,
                         Таблицы,
                         "Получение JSON файла от Андройда",
-                        ИмяСерверИзХранилица ,ПортСерверИзХранилица,getHiltOkHttpBulder);
+                        ИмяСерверИзХранилица ,ПортСерверИзХранилица,getsslSocketFactory2);
 
                 ///БУФЕР ОТПРАВКИ ДАННЫХ НА СЕРВЕР  //TODO original "tabel.dsu1.ru", 8888        //TODO "192.168.254.40", 8080
                 Log.d(this.getClass().getName(),"\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +

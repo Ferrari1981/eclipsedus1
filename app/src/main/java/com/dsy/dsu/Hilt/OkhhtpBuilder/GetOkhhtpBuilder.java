@@ -26,7 +26,7 @@ public class GetOkhhtpBuilder {
         this.getsslSocketFactory = getsslSocketFactory;
     }
 
-    void getOkhhtpBuilder(){
+   public   OkHttpClient.Builder getOkhhtpBuilder(){
         OkHttpClient.Builder builder=null;
         try{
          builder=     new OkHttpClient().newBuilder();
@@ -51,5 +51,6 @@ public class GetOkhhtpBuilder {
                 this.getClass().getName(), Thread.currentThread().getStackTrace()[2].getMethodName(),
                 Thread.currentThread().getStackTrace()[2].getLineNumber());
     }
+        return builder;
     }
 }

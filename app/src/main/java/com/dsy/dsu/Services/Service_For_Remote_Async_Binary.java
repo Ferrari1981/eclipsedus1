@@ -69,6 +69,7 @@ import java.util.function.Consumer;
 
 import javax.crypto.NoSuchPaddingException;
 import javax.inject.Inject;
+import javax.net.ssl.SSLSocketFactory;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.rxjava3.core.Flowable;
@@ -94,7 +95,7 @@ public class Service_For_Remote_Async_Binary extends IntentService {
     @Inject
     ObjectMapper getHiltJaksonObjectMapper;
     @Inject
-      OkHttpClient.Builder getHiltOkHttpBulder;
+    SSLSocketFactory getsslSocketFactory2;
     public Service_For_Remote_Async_Binary() {
         super("Service_For_Remote_Async");
     }
@@ -255,7 +256,8 @@ try{
     Long       ФинальныйРезультатAsyncBackgroud=0l;
     try{
             // TODO: 25.03.2023 ДОПОЛНИТЕОТНЕ УДЛАНИЕ СТАТУСА УДАЛЕНИЕ ПОСЛЕ СИНХРОНИАЗЦИИ
-                ФинальныйРезультатAsyncBackgroud  = new AsynsProccessor(context,getHiltJaksonObjectMapper,getHiltOkHttpBulder ).МетодЗАпускаФоновойСинхронизации(context,handlerAsync);
+                ФинальныйРезультатAsyncBackgroud  = new AsynsProccessor(context,getHiltJaksonObjectMapper,getsslSocketFactory2 )
+                        .МетодЗАпускаФоновойСинхронизации(context,handlerAsync);
 
 
             Log.d(getApplicationContext().getClass().getName(), "\n"
@@ -292,7 +294,8 @@ try{
         Long       ФинальныйРезультатAsyncBackgroud=0l;
         try{
             // TODO: 25.03.2023 ДОПОЛНИТЕОТНЕ УДЛАНИЕ СТАТУСА УДАЛЕНИЕ ПОСЛЕ СИНХРОНИАЗЦИИ
-            ФинальныйРезультатAsyncBackgroud  = new AsynsProccessor(context,getHiltJaksonObjectMapper,getHiltOkHttpBulder).МетодЗАпускаФоновойСинхронизации(context  );
+            ФинальныйРезультатAsyncBackgroud  = new AsynsProccessor(context,getHiltJaksonObjectMapper,getsslSocketFactory2)
+                    .МетодЗАпускаФоновойСинхронизации(context  );
 
 
             Log.d(getApplicationContext().getClass().getName(), "\n"

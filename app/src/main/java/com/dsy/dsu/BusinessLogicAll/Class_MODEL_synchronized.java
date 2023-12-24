@@ -20,6 +20,7 @@ import com.dsy.dsu.BusinessLogicAll.DATE.Class_Generation_Data;
 
 import com.dsy.dsu.CnangeServers.PUBLIC_CONTENT;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
+import com.dsy.dsu.Hilt.OkhhtpBuilder.GetOkhhtpBuilder;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONObject;
@@ -53,6 +54,7 @@ import java.util.zip.GZIPInputStream;
 import java.util.zip.GZIPOutputStream;
 
 import javax.crypto.NoSuchPaddingException;
+import javax.net.ssl.SSLSocketFactory;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -243,7 +245,7 @@ import okio.BufferedSink;
                                                                               Integer ID,
                                                                               String ИмяСервера,
                                                                               Integer ИмяПорта,
-                                                                              OkHttpClient.Builder getHiltOkHttpBulder) {
+                                                                              SSLSocketFactory getsslSocketFactory2) {
 
         final StringBuffer[] БуферСамиДанныеОтСервера = {new StringBuffer()};
         try {
@@ -258,7 +260,11 @@ import okio.BufferedSink;
             СтрокаСвязиСсервером = СтрокаСвязиСсервером.replace(" ", "%20");
             URL Adress = new URL(СтрокаСвязиСсервером);
             Log.d(this.getClass().getName(), " СтрокаСвязиСсервером " + СтрокаСвязиСсервером);
-            OkHttpClient okHttpClientДанныеОтСервера = getHiltOkHttpBulder.addInterceptor(new Interceptor() {
+
+
+
+            OkHttpClient.Builder builderokhtttp=   new GetOkhhtpBuilder(context,getsslSocketFactory2).getOkhhtpBuilder();
+            OkHttpClient okHttpClientДанныеОтСервера = builderokhtttp.addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
                             Class_GRUD_SQL_Operations grudSqlOperations= new Class_GRUD_SQL_Operations(context);
@@ -394,7 +400,7 @@ import okio.BufferedSink;
                                                                               Integer ID,
                                                                               String ИмяСервера,
                                                                               Integer ИмяПорта,
-                                                         OkHttpClient.Builder getHiltOkHttpBulder) {
+                                                         SSLSocketFactory getsslSocketFactory2) {
 
         final InputStream[] inputStreamJaksonByte = {null};
         try {
@@ -409,7 +415,10 @@ import okio.BufferedSink;
             СтрокаСвязиСсервером = СтрокаСвязиСсервером.replace(" ", "%20");
             URL Adress = new URL(СтрокаСвязиСсервером);
             Log.d(this.getClass().getName(), " СтрокаСвязиСсервером " + СтрокаСвязиСсервером);
-            OkHttpClient okHttpClientДанныеОтСервера = getHiltOkHttpBulder.addInterceptor(new Interceptor() {
+
+
+            OkHttpClient.Builder builderokhtttp=   new GetOkhhtpBuilder(context,getsslSocketFactory2).getOkhhtpBuilder();
+            OkHttpClient okHttpClientДанныеОтСервера = builderokhtttp.addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
                             Class_GRUD_SQL_Operations grudSqlOperations= new Class_GRUD_SQL_Operations(context);
@@ -532,7 +541,7 @@ import okio.BufferedSink;
                                             Integer IdUser,
                                             String ИмяСервера,
                                             Integer ИмяПорта,
-                                         @NotNull  OkHttpClient.Builder getHiltOkHttpBulder) throws IOException,
+                                         @NotNull SSLSocketFactory getsslSocketFactory2) throws IOException,
             ExecutionException, InterruptedException, TimeoutException, NoSuchAlgorithmException,
             KeyManagementException, InvalidKeyException, NoSuchPaddingException {
         final Long[] РазмерПришедшегоПотока = {0l};
@@ -555,16 +564,9 @@ import okio.BufferedSink;
 
            /// OkHttpClient.Builder builderokhtttp = new OkHttpClient.Builder();
 
-
-
-/*
-            ModulegetsslSocketFactory2 moduleOkHttpBulider=new ModulegetsslSocketFactory2();
-          OkHttpClient.Builder builder=  moduleOkHttpBulider.getHiltOkHttpBulder(context);*/
-
-
-           //OkHttpClient.Builder builderokhtttp=   new SSL1(context).getOkHttpClientBuilde2();
+           OkHttpClient.Builder builderokhtttp=   new GetOkhhtpBuilder(context,getsslSocketFactory2).getOkhhtpBuilder();
             // TODO: 15.12.2023 end test
-            OkHttpClient okHttpClientПинг = getHiltOkHttpBulder.addInterceptor(new Interceptor() {
+            OkHttpClient okHttpClientПинг = builderokhtttp.addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
                             // TODO: 26.08.2021 НОВЫЙ ВЫЗОВ НОВОГО КЛАСС GRUD - ОПЕРАЦИИ
@@ -748,7 +750,7 @@ import okio.BufferedSink;
                                              @NonNull  String JobForServer,
                                              @NonNull   String ИмяСервера,
                                              @NonNull  Integer ИмяПорта,
-                                             @NonNull   OkHttpClient.Builder getHiltOkHttpBulder)  {
+                                             @NonNull SSLSocketFactory getsslSocketFactory2)  {
 
         final StringBuffer[] БуферCallsBackОтСеврера = {new StringBuffer()};
                 try {
@@ -762,7 +764,10 @@ import okio.BufferedSink;
                     СтрокаСвязиСсервером = СтрокаСвязиСсервером.replace(" ", "%20");
                     URL Adress = new URL(СтрокаСвязиСсервером);
                     Log.d(this.getClass().getName(), " Adress  " + Adress);
-                    OkHttpClient okHttpClientОтправкиДанныхНаСервер =getHiltOkHttpBulder.addInterceptor(new Interceptor() {
+
+
+                    OkHttpClient.Builder builderokhtttp=   new GetOkhhtpBuilder(context,getsslSocketFactory2).getOkhhtpBuilder();
+                    OkHttpClient okHttpClientОтправкиДанныхНаСервер =builderokhtttp.addInterceptor(new Interceptor() {
                                 @Override
                                 public Response intercept(Chain chain) throws IOException {
                                     // TODO: 26.08.2021 НОВЫЙ ВЫЗОВ НОВОГО КЛАСС GRUD - ОПЕРАЦИИ
@@ -3270,7 +3275,7 @@ Class_GRUD_SQL_Operations classGrudSqlOperationsУдалениеДанныхЧе
                                                   @NonNull String ИмяФайлаЗагрузки ,
                                                   @NonNull String ВозвращяемыйТип,
                                                   @NonNull  Integer ВремяНАReadFile,
-                                                  @NonNull OkHttpClient.Builder getHiltOkHttpBulder) {
+                                                  @NonNull SSLSocketFactory getsslSocketFactory2) {
         final File[] СамФайлJsonandApk = {null};
                 try {
                     String СтрокаСвязиСсервером ="http://"+ИмяСервера+":"+ИмяПорта+"/";;
@@ -3278,7 +3283,9 @@ Class_GRUD_SQL_Operations classGrudSqlOperationsУдалениеДанныхЧе
                     СтрокаСвязиСсервером = СтрокаСвязиСсервером + АдресЗагрузки; /////"dsu1.glassfish/update_android_dsu1/output-metadata.json";
                     СтрокаСвязиСсервером = СтрокаСвязиСсервером.replace(" ", "%20");
                     URL    Adress = new URL(СтрокаСвязиСсервером);
-                    OkHttpClient okHttpClientЗагрузкаНовогоПО = getHiltOkHttpBulder.addInterceptor(new Interceptor() {
+
+                    OkHttpClient.Builder builderokhtttp=   new GetOkhhtpBuilder(context,getsslSocketFactory2).getOkhhtpBuilder();
+                    OkHttpClient okHttpClientЗагрузкаНовогоПО = builderokhtttp.addInterceptor(new Interceptor() {
                                 @Override
                                 public Response intercept(Chain chain) throws IOException {
                                     // TODO: 26.08.2021 НОВЫЙ ВЫЗОВ НОВОГО КЛАСС GRUD - ОПЕРАЦИИ
@@ -3755,7 +3762,7 @@ Class_GRUD_SQL_Operations classGrudSqlOperationsУдалениеДанныхЧе
                                                      @NonNull SharedPreferences preferences,
                                                      @NonNull String ПубличноеЛогин,
                                                      @NonNull String ПубличноеПароль,
-                                                @NotNull OkHttpClient.Builder getHiltOkHttpBulder) {
+                                                @NotNull SSLSocketFactory getsslSocketFactory2) {
 
 
         final Integer[] БуферПубличныйIDОтСервера = {0};
@@ -3780,7 +3787,10 @@ Class_GRUD_SQL_Operations classGrudSqlOperationsУдалениеДанныхЧе
 
             // TODO: 11.03.2023  текст код
             if (ПубличноеЛогин.length()>0 && ПубличноеПароль.length()>0 && СтрокаСвязиСсервером.length()>0) {
-                OkHttpClient okHttpClientИмяиПароль =getHiltOkHttpBulder.addInterceptor(new Interceptor() {
+
+
+                OkHttpClient.Builder builderokhtttp=   new GetOkhhtpBuilder(context,getsslSocketFactory2).getOkhhtpBuilder();
+                OkHttpClient okHttpClientИмяиПароль =builderokhtttp.addInterceptor(new Interceptor() {
                             @Override
                             public Response intercept(Chain chain) throws IOException {
                                 String ANDROID_ID = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);

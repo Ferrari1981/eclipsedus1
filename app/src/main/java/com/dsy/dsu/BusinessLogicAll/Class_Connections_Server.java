@@ -18,6 +18,7 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeoutException;
 
 import javax.crypto.NoSuchPaddingException;
+import javax.net.ssl.SSLSocketFactory;
 
 import okhttp3.OkHttpClient;
 
@@ -34,10 +35,10 @@ public class Class_Connections_Server  extends  Class_GRUD_SQL_Operations {
         preferences =context.getSharedPreferences("sharedPreferencesХранилище", Context.MODE_MULTI_PROCESS);
     }
     ///////// TODO ПРОВЕРЯЕТ ЕСЛИ ПОДКЛЧБЕНИ В ИНТРЕНТУ
-    public Boolean МетодПингаСервераРаботаетИлиНет(Context КонтекстКоторыйДляСинхронизации,@NotNull  OkHttpClient.Builder getHiltOkHttpBulder) {
+    public Boolean МетодПингаСервераРаботаетИлиНет(Context КонтекстКоторыйДляСинхронизации,@NotNull SSLSocketFactory getsslSocketFactory2) {
         Boolean РезультатПингакСервераРаботаетЛиОНРеально=false;
                             try{
-                                РезультатПингакСервераРаботаетЛиОНРеально=  МетодПингаСервераРаботаетИлиНетВнутри(КонтекстКоторыйДляСинхронизации,getHiltOkHttpBulder);
+                                РезультатПингакСервераРаботаетЛиОНРеально=  МетодПингаСервераРаботаетИлиНетВнутри(КонтекстКоторыйДляСинхронизации,getsslSocketFactory2);
 
                             Log.w(КонтекстКоторыйДляСинхронизации.getClass().getName(), " РезультатПингакСервераРаботаетЛиОНРеально "
                                     +РезультатПингакСервераРаботаетЛиОНРеально);
@@ -54,7 +55,7 @@ public class Class_Connections_Server  extends  Class_GRUD_SQL_Operations {
                             return РезультатПингакСервераРаботаетЛиОНРеально;
                         }
     ///////// TODO ПРОВЕРЯЕТ ЕСЛИ ПОДКЛЧБЕНИ В ИНТРЕНТУ
-    private Boolean МетодПингаСервераРаботаетИлиНетВнутри(@NotNull Context КонтекстКоторыйДляСинхронизации,@NotNull  OkHttpClient.Builder getHiltOkHttpBulder)
+    private Boolean МетодПингаСервераРаботаетИлиНетВнутри(@NotNull Context КонтекстКоторыйДляСинхронизации,@NotNull SSLSocketFactory getsslSocketFactory2)
             throws ExecutionException, InterruptedException, TimeoutException, NoSuchPaddingException, NoSuchAlgorithmException, InvalidKeyException {
          Boolean результатПрозвонаСокетом = false;
         try {
@@ -78,7 +79,7 @@ public class Class_Connections_Server  extends  Class_GRUD_SQL_Operations {
                                       "Хотим Получить Статус Реальной Работы SQL SERVER"
                                       ,0l,
                                       0
-                              ,ИмяСервера, ИмяПорта,getHiltOkHttpBulder);//application/gzip
+                              ,ИмяСервера, ИмяПорта,getsslSocketFactory2);//application/gzip
                 Log.d(Class_MODEL_synchronized.class.getName(), "  БуферПолучениеДанныхРЕальныйСтатусРАботыSQLServer" +
                         БуферПолучениеДанныхРЕальныйСтатусРАботыSQLServer);
 

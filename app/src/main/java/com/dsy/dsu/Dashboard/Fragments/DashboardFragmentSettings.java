@@ -59,6 +59,7 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+import javax.net.ssl.SSLSocketFactory;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.rxjava3.core.Completable;
@@ -108,7 +109,7 @@ public class DashboardFragmentSettings extends  DialogFragment {
 
 
     @Inject
-      OkHttpClient.Builder getHiltOkHttpBulder;
+    SSLSocketFactory getsslSocketFactory2;
 
     public DashboardFragmentSettings() {
         // Required empty public constructor
@@ -694,7 +695,7 @@ try{
 
                                         if (СтатусСетиВыбранныйПользователем == true) {
                                             Boolean СтатусСервераСоюзаВключенИлиНЕт =
-                                                    class_connections_serverПингаСерераИзАктивтиМеню.МетодПингаСервераРаботаетИлиНет(getContext(),getHiltOkHttpBulder);
+                                                    class_connections_serverПингаСерераИзАктивтиМеню.МетодПингаСервераРаботаетИлиНет(getContext(),getsslSocketFactory2);
                                             if (СтатусСервераСоюзаВключенИлиНЕт == true) {
                                                 // TODO: 23.08.2023
 
@@ -776,7 +777,7 @@ try{
                         public void onClick(View v) {
                             try {
                                 Boolean ЕслиСвязьсСервером =
-                                        new Class_Connections_Server(getContext()).МетодПингаСервераРаботаетИлиНет(getContext(),getHiltOkHttpBulder);
+                                        new Class_Connections_Server(getContext()).МетодПингаСервераРаботаетИлиНет(getContext(),getsslSocketFactory2);
 
                                 if (ЕслиСвязьсСервером == true) {
                                     String ПолученыйТекущееИмяПользователя = new Class_MODEL_synchronized(getContext())

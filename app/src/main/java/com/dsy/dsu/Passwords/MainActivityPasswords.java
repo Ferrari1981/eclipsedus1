@@ -56,6 +56,7 @@ import java.util.Locale;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
+import javax.net.ssl.SSLSocketFactory;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -90,7 +91,7 @@ public class MainActivityPasswords extends AppCompatActivity {
     public static final int ALL_PERSSION_CODE=1;
     public static final int CAMERA_PERSSION_CODE=2;
     @Inject
-      OkHttpClient.Builder getHiltOkHttpBulder;
+    SSLSocketFactory getsslSocketFactory2;
     ////
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -243,7 +244,7 @@ public class MainActivityPasswords extends AppCompatActivity {
         Integer БуферПубличныйIDОтСервера;
         //TODO запукаем метод Афторизаиция по ЛОГИНУ И ПАРОЛЮ
         БуферПубличныйIDОтСервера = new Class_MODEL_synchronized(getApplicationContext()).
-                методАвторизацииЛогинИПаполь(getApplicationContext(), preferences, ПубличноеЛогин, ПубличноеПароль,getHiltOkHttpBulder);
+                методАвторизацииЛогинИПаполь(getApplicationContext(), preferences, ПубличноеЛогин, ПубличноеПароль,getsslSocketFactory2);
         Log.d(this.getClass().getName(), " БуферПубличныйIDОтСервера " + БуферПубличныйIDОтСервера);
 
         // TODO: 24.08.2023 УСПЕШНЫЙ КОД ЛОГИРОВАНИЕ И ПАРОЛЬ
@@ -541,7 +542,7 @@ public class MainActivityPasswords extends AppCompatActivity {
                                     new Class_Find_Setting_User_Network(getApplicationContext()).МетодПроветяетКакуюУстановкуВыбралПользовательСети();
                             if (ПроверкаНАстройкиСети == true) {
                                 Boolean РеальныйПингСервера =
-                                        new Class_Connections_Server(getApplicationContext()).МетодПингаСервераРаботаетИлиНет(getApplicationContext(),getHiltOkHttpBulder);
+                                        new Class_Connections_Server(getApplicationContext()).МетодПингаСервераРаботаетИлиНет(getApplicationContext(),getsslSocketFactory2);
                                 // TODO: 07.10.2023 пинг сервера
                                 if (РеальныйПингСервера == true) {
                                     // TODO: 07.10.2023 проверка разрешений на КАМЕРУ

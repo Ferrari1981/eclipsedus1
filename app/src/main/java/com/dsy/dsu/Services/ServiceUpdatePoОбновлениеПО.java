@@ -50,6 +50,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import javax.inject.Inject;
+import javax.net.ssl.SSLSocketFactory;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
@@ -81,7 +82,7 @@ public class ServiceUpdatePoОбновлениеПО extends IntentService {////
 
 
     @Inject
-  OkHttpClient.Builder getHiltOkHttpBulder;
+    SSLSocketFactory getsslSocketFactory2;
 
     /**
      * Creates an IntentService.  Invoked by your subclass's constructor.
@@ -281,7 +282,7 @@ public class ServiceUpdatePoОбновлениеПО extends IntentService {////
                     МетодЗагрузкиОбновлениеПОсСервера(new PUBLIC_CONTENT(getApplicationContext()).getСсылкаНаРежимСервераОбновлениеПО(),
                             getApplicationContext(), ИмяСерверИзХранилица ,ПортСерверИзХранилица,
                             "FileAPKUpdatePO","update_dsu1.apk",
-                            "application/octet-stream",500,getHiltOkHttpBulder);
+                            "application/octet-stream",500,getsslSocketFactory2);
 
             Log.w(getApplicationContext().getClass().getName(),    Thread.currentThread().getStackTrace()[2].getMethodName()
                     + Thread.currentThread().getName()+" FileAPK" + FileAPK);
@@ -698,7 +699,7 @@ public class ServiceUpdatePoОбновлениеПО extends IntentService {////
             File ФайлJsonОтСервера = new Class_MODEL_synchronized(getApplicationContext()).
                     МетодЗагрузкиОбновлениеПОсСервера(new PUBLIC_CONTENT(getApplicationContext()).getСсылкаНаРежимСервераОбновлениеПО(),
                             getApplicationContext(), ИмяСерверИзХранилица ,ПортСерверИзХранилица,"FileJsonUpdatePO",
-                            "update_dsu1.json","application/json",10,getHiltOkHttpBulder);
+                            "update_dsu1.json","application/json",10,getsslSocketFactory2);
 
             Log.w(getApplicationContext().getClass().getName(),    Thread.currentThread().getStackTrace()[2].getMethodName()
                     + Thread.currentThread().getName()+" ФайлJsonОтСервера" + ФайлJsonОтСервера);
