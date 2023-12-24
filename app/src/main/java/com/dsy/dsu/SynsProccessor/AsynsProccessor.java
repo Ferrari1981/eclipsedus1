@@ -1570,7 +1570,7 @@ public class AsynsProccessor extends Class_MODEL_synchronized {
                   КоличествоПотоков=1;
               }*/
             @io.reactivex.rxjava3.annotations.NonNull Scheduler schedulers=Schedulers.newThread();
-            int КоличествоПотоков=1;//Runtime.getRuntime().availableProcessors();;
+            int КоличествоПотоков=Runtime.getRuntime().availableProcessors();
 
         ParallelFlowable parallelFlowableAsync
                 = Flowable.fromIterable( public_contentДатыДляГлавныхТаблицСинхронизации.ВерсииВсехСерверныхТаблиц.keySet())

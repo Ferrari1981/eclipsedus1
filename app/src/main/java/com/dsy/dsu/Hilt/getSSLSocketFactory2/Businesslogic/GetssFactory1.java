@@ -12,6 +12,7 @@ import java.security.KeyStore;
 import java.security.SecureRandom;
 import java.util.Date;
 
+import javax.net.ssl.KeyManagerFactory;
 import javax.net.ssl.SSLContext;
 import javax.net.ssl.SSLSocketFactory;
 import javax.net.ssl.TrustManager;
@@ -24,7 +25,37 @@ public class GetssFactory1 extends  BissennsLogica {
         SSLSocketFactory sslSocketFactory2 = null;
         try {
             caFileInputStream = context.getResources().openRawResource(R.raw.certificate_bks_31);
-            // We're going to put our certificates in a Keystore
+
+
+            SSLContext sslContext = SSLContext.getInstance("SSL");
+
+                KeyStore ks = KeyStore.getInstance("BKS");
+               ks.load(caFileInputStream, "secret".toCharArray());
+                TrustManagerFactory tmf = TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+                tmf.init(ks);
+                KeyManagerFactory kmf = KeyManagerFactory.getInstance(KeyManagerFactory.getDefaultAlgorithm());
+                kmf.init(ks,  "secret".toCharArray());
+
+            sslContext.init(kmf.getKeyManagers(), tmf.getTrustManagers(), new SecureRandom());
+
+            sslSocketFactory2 = sslContext.getSocketFactory();
+
+            caFileInputStream.close();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+         /*   // We're going to put our certificates in a Keystore
             KeyStore keyStore = KeyStore.getInstance("BKS");
             keyStore.load(caFileInputStream, "secret".toCharArray());
 
@@ -39,7 +70,7 @@ public class GetssFactory1 extends  BissennsLogica {
 
             sslSocketFactory2 = sslContext.getSocketFactory();
 
-            caFileInputStream.close();
+            caFileInputStream.close();*/
 
             Log.i(this.getClass().getName(), " Атоманически установкаОбновление ПО " +
                     Thread.currentThread().getStackTrace()[2].getMethodName() +
