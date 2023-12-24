@@ -336,7 +336,7 @@ public class ContentProviderSynsInsertOnlyAsync extends ContentProvider {
             // TODO: 02.09.2023  CREATE get SQLITE
             sqlite = EntryPoints.get(getContext(), HiltInterfacesqlite.class).getHiltSqlite();
 
-           /// ObjectMapper getHiltJaksonObjectMapper    = EntryPoints.get(getContext(), HiltInterfacegetsslSocketFactory.class).getHiltJaksonInterface( );
+           /// ObjectMapper getHiltJaksonObjectMapper    = EntryPoints.get(getContext(), HiltInterfacegetsslSocketFactory2.class).getHiltJaksonInterface( );
             Log.d(this.getClass().getName(),"\n"
                     + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +

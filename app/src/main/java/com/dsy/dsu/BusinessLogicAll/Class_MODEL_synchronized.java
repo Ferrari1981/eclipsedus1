@@ -558,7 +558,7 @@ import okio.BufferedSink;
 
 
 /*
-            ModulegetsslSocketFactory moduleOkHttpBulider=new ModulegetsslSocketFactory();
+            ModulegetsslSocketFactory2 moduleOkHttpBulider=new ModulegetsslSocketFactory2();
           OkHttpClient.Builder builder=  moduleOkHttpBulider.getHiltOkHttpBulder(context);*/
 
 

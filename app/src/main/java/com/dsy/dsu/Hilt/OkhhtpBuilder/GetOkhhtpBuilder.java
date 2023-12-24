@@ -1,9 +1,11 @@
-package com.dsy.dsu.Hilt.getSSLSocketFactory;
+package com.dsy.dsu.Hilt.OkhhtpBuilder;
 
 import android.content.Context;
 import android.util.Log;
 
 import com.dsy.dsu.Errors.Class_Generation_Errors;
+
+import org.jetbrains.annotations.NotNull;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
@@ -19,7 +21,7 @@ public class GetOkhhtpBuilder {
     Context context;
     SSLSocketFactory getsslSocketFactory;
 
-    public GetOkhhtpBuilder(Context context, SSLSocketFactory getsslSocketFactory) {
+    public GetOkhhtpBuilder(@NotNull Context context, @NotNull SSLSocketFactory getsslSocketFactory) {
         this.context = context;
         this.getsslSocketFactory = getsslSocketFactory;
     }

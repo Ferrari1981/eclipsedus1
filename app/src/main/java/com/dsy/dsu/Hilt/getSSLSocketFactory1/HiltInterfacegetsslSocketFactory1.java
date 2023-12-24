@@ -1,4 +1,4 @@
-package com.dsy.dsu.Hilt.getSSLSocketFactory;
+package com.dsy.dsu.Hilt.getSSLSocketFactory1;
 
 
 import dagger.hilt.EntryPoint;
@@ -9,10 +9,10 @@ import okhttp3.OkHttpClient;
 
 @EntryPoint
 @InstallIn(SingletonComponent.class)
-public interface HiltInterfacegetsslSocketFactory {
+public interface HiltInterfacegetsslSocketFactory1 {
 
 
-    OkHttpClient.Builder  getHiltOkHttpBulderInterface( );
+    OkHttpClient.Builder getHiltOkHttpBulderInterface1( );
 }
 
 

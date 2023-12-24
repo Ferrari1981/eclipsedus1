@@ -1,5 +1,5 @@
 
-package com.dsy.dsu.Hilt.getSSLSocketFactory;
+package com.dsy.dsu.Hilt.getSSLSocketFactory2;
 
 
 import android.content.Context;
@@ -29,15 +29,15 @@ import dagger.hilt.android.qualifiers.ApplicationContext;
 import dagger.hilt.components.SingletonComponent;
 
 
-@QualifiergetsslSocketFactory
+@QualifiergetsslSocketFactory2
 @Module
 @InstallIn(SingletonComponent.class)
-public class ModulegetsslSocketFactory {
+public class ModulegetsslSocketFactory2 {
 
 
     @Singleton
     @Provides
-    public     SSLSocketFactory getsslSocketFactory  (@ApplicationContext Context context) {
+    public     SSLSocketFactory getsslSocketFactory1(@ApplicationContext Context context) {
         SSLSocketFactory sslSocketFactory=null;
         try {
 
