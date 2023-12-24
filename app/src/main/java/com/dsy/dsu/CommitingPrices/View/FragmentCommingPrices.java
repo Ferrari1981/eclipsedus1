@@ -11,20 +11,15 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dsy.dsu.BusinessLogicAll.Class_Get_Json_1C;
-import com.dsy.dsu.CommitingPrices.Model.businesslogic.GetJsonOt1cComminhgPrices;
+import com.dsy.dsu.CommitingPrices.Model.SendAndGetData.GetJsonOt1cComminhgPrices;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
-import com.dsy.dsu.Hilt.Jakson.HiltInterfaceJakson;
 import com.dsy.dsu.R;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import java.io.InputStream;
-import java.util.LinkedHashMap;
 
 import javax.inject.Inject;
 
-import dagger.hilt.EntryPoints;
 import dagger.hilt.android.AndroidEntryPoint;
 
 @AndroidEntryPoint

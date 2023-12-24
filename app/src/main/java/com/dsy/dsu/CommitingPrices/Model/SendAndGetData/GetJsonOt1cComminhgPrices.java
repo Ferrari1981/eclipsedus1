@@ -1,22 +1,16 @@
-package com.dsy.dsu.CommitingPrices.Model.businesslogic;
+package com.dsy.dsu.CommitingPrices.Model.SendAndGetData;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.dsy.dsu.BusinessLogicAll.Class_Get_Json_1C;
-import com.dsy.dsu.BusinessLogicAll.Jakson.GeneratorJSON1CPayCommitSerializer;
-import com.dsy.dsu.CnangeServers.PUBLIC_CONTENT;
 import com.dsy.dsu.CommitingPrices.Model.businesslogic.GeneratorJsonFor1C.DeserializeJsonCommingPrices;
 import com.dsy.dsu.CommitingPrices.Model.businesslogic.GeneratorJsonFor1C.GeneratorJsonFor1cCommitingPrices;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.deser.DeserializationProblemHandler;
 import com.fasterxml.jackson.databind.module.SimpleModule;
 import com.google.common.io.ByteSource;
 
@@ -27,15 +21,9 @@ import java.io.InputStream;
 import java.io.Serializable;
 import java.io.StringWriter;
 import java.lang.reflect.Type;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
-import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.Optional;
-import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.TimeoutException;
-import java.util.function.Consumer;
 
 import okhttp3.Call;
 import okhttp3.Callback;
