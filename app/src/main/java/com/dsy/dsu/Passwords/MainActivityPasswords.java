@@ -1,6 +1,7 @@
 package com.dsy.dsu.Passwords;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
@@ -53,6 +54,7 @@ import com.jakewharton.rxbinding4.view.RxView;
 
 import java.util.Date;
 import java.util.Locale;
+import java.util.concurrent.CompletableFuture;
 import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
@@ -60,13 +62,18 @@ import javax.net.ssl.SSLSocketFactory;
 
 import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.CompletableObserver;
 import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Action;
 import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.functions.Function;
 import io.reactivex.rxjava3.functions.Predicate;
+import io.reactivex.rxjava3.functions.Supplier;
 import io.reactivex.rxjava3.observers.DisposableObserver;
 import io.reactivex.rxjava3.schedulers.Schedulers;
+import kotlin.Unit;
 import okhttp3.OkHttpClient;
 
 @AndroidEntryPoint
@@ -509,98 +516,161 @@ public class MainActivityPasswords extends AppCompatActivity {
     class ClassSavePassword{
         // TODO: 29.09.2023  пароль
       private   Disposable disposableSave;
+    @SuppressLint("CheckResult")
     void metodSavePassword(){
         // TODO: 29.09.2023 Save and Ayntifization
-                RxView.clicks(КнопкаВходавСистему)
-                .throttleFirst(5, TimeUnit.SECONDS)
-                .subscribe(new DisposableObserver<Object>() {
+  try{
+        RxView.clicks(  КнопкаВходавСистему)
+                .throttleFirst(3,TimeUnit.SECONDS)
+                .filter(s -> !s.toString().isEmpty())
+                .map(new Function<Unit, Object>() {
                     @Override
-                    public void onNext(@io.reactivex.rxjava3.annotations.NonNull Object o) {
-                      // TODO: 29.09.2023 Запустился
-                        ПрогрессБарДляВходаСистему.setVisibility(View.VISIBLE);// при нажатии делаем видимый програсссбар
-                        ПрогрессБарДляВходаСистему.refreshDrawableState();
-                        ПрогрессБарДляВходаСистему.forceLayout();
+                    public Object apply(Unit unit) throws Throwable {
+                        Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n" );
+                        return    КнопкаВходавСистему;
+                    }
+                })
+                .doOnError(new io.reactivex.rxjava3.functions.Consumer<Throwable>() {
+                    @Override
+                    public void accept(Throwable throwable) throws Throwable {
+                        throwable.printStackTrace();
+                        Log.e(getApplicationContext().getClass().getName(),
+                                "Ошибка " + throwable + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                                        " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                        new Class_Generation_Errors(getApplicationContext()).МетодЗаписиВЖурналНовойОшибки(throwable.toString(),
+                                this.getClass().getName().toString(), Thread.currentThread().getStackTrace()[2].getMethodName().toString(),
+                                Thread.currentThread().getStackTrace()[2].getLineNumber());
+                    }
+                })
+                .onErrorComplete(new Predicate<Throwable>() {
+                    @Override
+                    public boolean test(Throwable throwable) throws Throwable {
+                        throwable.printStackTrace();
+                        Log.e(getApplicationContext().getClass().getName(),
+                                "Ошибка " + throwable + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                                        " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                        new Class_Generation_Errors(getApplicationContext()).МетодЗаписиВЖурналНовойОшибки(throwable.toString(),
+                                this.getClass().getName().toString(), Thread.currentThread().getStackTrace()[2].getMethodName().toString(),
+                                Thread.currentThread().getStackTrace()[2].getLineNumber());
+                        return false;
+                    }
+                })
+                .subscribe( GetPasswordServer-> {
+                    ///todo revboot
 
-                        Vibrator v2 = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
-                        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-                            v2.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
-                        } else {
-                            //deprecated in API 26
-                            v2.vibrate(50);
-                        }
-
-                        // TODO: 29.09.2023 ВТОРОЙ Observavle самой операции аунтификации и сохрание пароля
-                        Integer БуферПубличныйIDОтСервера = 0;
-                        ПубличноеЛогин = ИмяДляВходаСистему.getText().toString().trim();///получаем из формы имя для того чтобы постучаться на сервер
-                        Log.d(getPackageName().getClass().getName(), "ПубличноеИмяПользовательДлСервлета " + ПубличноеЛогин);
-                        ПубличноеПароль = ПарольДляВходаСистему.getText().toString().trim();///////получаем из формы пароль для того чтобы постучаться на сервер
-                        Log.d(getPackageName().getClass().getName(), "ПубличноеПарольДлСервлета " + ПубличноеПароль);
-
-                        // TODO: 29.09.2023 пароль и логин
-                        if (ПубличноеЛогин.length() > 3 && ПубличноеПароль.length() > 3) {
-                            boolean ПроверкаНАстройкиСети =
-                                    new Class_Find_Setting_User_Network(getApplicationContext()).МетодПроветяетКакуюУстановкуВыбралПользовательСети();
-                            if (ПроверкаНАстройкиСети == true) {
-                                Boolean РеальныйПингСервера =
-                                        new Class_Connections_Server(getApplicationContext()).МетодПингаСервераРаботаетИлиНет(getApplicationContext(),getsslSocketFactory2);
-                                // TODO: 07.10.2023 пинг сервера
-                                if (РеальныйПингСервера == true) {
-                                    // TODO: 07.10.2023 проверка разрешений на КАМЕРУ
-                                    ClassPerssionAdvanceRoles classPerssionAdvanceRoles=new ClassPerssionAdvanceRoles();
-                                    Boolean ФлагЕслиРАзрешенияКамераИлиНет=      classPerssionAdvanceRoles.metodPerssionAdvanceRoles();;
-                                    if (ФлагЕслиРАзрешенияКамераИлиНет==true) {
-                                        // TODO: 15.09.2023 ОБРАБОТКА ПАРОЛИ
-                                        методGetПарольОбработка(КнопкаВходавСистему);
-                                        Log.d(this.getClass().getName(), " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                                                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                                                " Класс  :" + Thread.currentThread().getStackTrace()[2].getClassName() +
-                                                "  РеальныйПингСервера " +РеальныйПингСервера + " ФлагЕслиРАзрешенияКамераИлиНет " +ФлагЕслиРАзрешенияКамераИлиНет);
-                                    }else {
-                                        МетодВизуальногоОтображениеРаботыКоннекта("Нет разрешение Камеры"+"\n "+"и Файлы !!!", КнопкаВходавСистему);
-                                    }
-                                    // TODO: 15.09.2023 end password
-                                } else {
-                                    МетодВизуальногоОтображениеРаботыКоннекта("Сервер выкл !!!", КнопкаВходавСистему);
+                    Completable.fromSupplier(()->GetPasswordServers())
+                            .subscribeOn(Schedulers.single())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new CompletableObserver() {
+                                @Override
+                                public void onSubscribe(@io.reactivex.rxjava3.annotations.NonNull Disposable d) {
+                                    // TODO: 29.09.2023 Запустился
+                                    ПрогрессБарДляВходаСистему.setVisibility(View.VISIBLE);// при нажатии делаем видимый програсссбар
+                                    ПрогрессБарДляВходаСистему.refreshDrawableState();
+                                    ПрогрессБарДляВходаСистему.forceLayout();
                                 }
-                            } else {
-                                МетодВизуальногоОтображениеРаботыКоннекта("Интернет выкл !!!",КнопкаВходавСистему);
-                            }
-                        } else {
-                            МетодВизуальногоОтображениеРаботыКоннекта(" Повторите Логин и пароль ", КнопкаВходавСистему);
-                        }
-                        Log.d(this.getClass().getName(), " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                                " Класс  :" + Thread.currentThread().getStackTrace()[2].getClassName());
-                        // TODO: 29.09.2023 Програсс бар
-                        методПрограссБАр();
-                        Log.d(this.getClass().getName(), " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                                " Класс  :" + Thread.currentThread().getStackTrace()[2].getClassName());
+
+                                @Override
+                                public void onComplete() {
+                                    Vibrator v2 = (Vibrator) getApplicationContext().getSystemService(Context.VIBRATOR_SERVICE);
+                                    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                                        v2.vibrate(VibrationEffect.createOneShot(50, VibrationEffect.DEFAULT_AMPLITUDE));
+                                    } else {
+                                        //deprecated in API 26
+                                        v2.vibrate(50);
+                                    }
+                                    // TODO: 29.09.2023 Програсс бар
+                                    методПрограссБАр();
+                                }
+
+                                @Override
+                                public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
+                                    Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                                            " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                                    new Class_Generation_Errors(getApplicationContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
+                                            Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+                                }
+                            });
+
+                    Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n" + GetPasswordServer );
 
 
-                    }
-
-                    @Override
-                    public void onError(@io.reactivex.rxjava3.annotations.NonNull Throwable e) {
-                        e.printStackTrace();
-                        Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-                        // TODO: 01.09.2021 метод вызова
-                        new Class_Generation_Errors(getApplicationContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
-                                Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
-                    }
-
-                    @Override
-                    public void onComplete() {
-                        Log.d(this.getClass().getName(), " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                                " Класс  :" + Thread.currentThread().getStackTrace()[2].getClassName());
-                    }
                 });
+    } catch (Exception e) {
+            Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                    " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+            new Class_Generation_Errors(getApplicationContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
+                    Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+        }
 
         }
 
     }
+
+
+    Boolean GetPasswordServers(){
+        Boolean ФлагЕслиРАзрешенияКамераИлиНет=false;
+        try{
+// TODO: 29.09.2023 ВТОРОЙ Observavle самой операции аунтификации и сохрание пароля
+            Integer БуферПубличныйIDОтСервера = 0;
+            ПубличноеЛогин = ИмяДляВходаСистему.getText().toString().trim();///получаем из формы имя для того чтобы постучаться на сервер
+            Log.d(getPackageName().getClass().getName(), "ПубличноеИмяПользовательДлСервлета " + ПубличноеЛогин);
+            ПубличноеПароль = ПарольДляВходаСистему.getText().toString().trim();///////получаем из формы пароль для того чтобы постучаться на сервер
+            Log.d(getPackageName().getClass().getName(), "ПубличноеПарольДлСервлета " + ПубличноеПароль);
+
+            // TODO: 29.09.2023 пароль и логин
+            if (ПубличноеЛогин.length() > 3 && ПубличноеПароль.length() > 3) {
+                boolean ПроверкаНАстройкиСети =
+                        new Class_Find_Setting_User_Network(getApplicationContext()).МетодПроветяетКакуюУстановкуВыбралПользовательСети();
+                if (ПроверкаНАстройкиСети == true) {
+                    Boolean РеальныйПингСервера =
+                            new Class_Connections_Server(getApplicationContext()).МетодПингаСервераРаботаетИлиНет(getApplicationContext(),getsslSocketFactory2);
+                    // TODO: 07.10.2023 пинг сервера
+                    if (РеальныйПингСервера == true) {
+                        // TODO: 07.10.2023 проверка разрешений на КАМЕРУ
+                        ClassPerssionAdvanceRoles classPerssionAdvanceRoles=new ClassPerssionAdvanceRoles();
+                         ФлагЕслиРАзрешенияКамераИлиНет=      classPerssionAdvanceRoles.metodPerssionAdvanceRoles();;
+                        if (ФлагЕслиРАзрешенияКамераИлиНет==true) {
+                            // TODO: 15.09.2023 ОБРАБОТКА ПАРОЛИ
+                            методGetПарольОбработка(КнопкаВходавСистему);
+                            Log.d(this.getClass().getName(), " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                                    " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber()+
+                                    " Класс  :" + Thread.currentThread().getStackTrace()[2].getClassName() +
+                                    "  РеальныйПингСервера " +РеальныйПингСервера + " ФлагЕслиРАзрешенияКамераИлиНет " +ФлагЕслиРАзрешенияКамераИлиНет);
+                        }else {
+                            МетодВизуальногоОтображениеРаботыКоннекта("Нет разрешение Камеры"+"\n "+"и Файлы !!!", КнопкаВходавСистему);
+                        }
+                        // TODO: 15.09.2023 end password
+                    } else {
+                        МетодВизуальногоОтображениеРаботыКоннекта("Сервер выкл !!!", КнопкаВходавСистему);
+                    }
+                } else {
+                    МетодВизуальногоОтображениеРаботыКоннекта("Интернет выкл !!!",КнопкаВходавСистему);
+                }
+            } else {
+                МетодВизуальногоОтображениеРаботыКоннекта(" Повторите Логин и пароль ", КнопкаВходавСистему);
+            }
+
+            Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n" + ФлагЕслиРАзрешенияКамераИлиНет );
+    } catch (Exception e) {
+        Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+        new Class_Generation_Errors(getApplicationContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
+                Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+    }
+        return  ФлагЕслиРАзрешенияКамераИлиНет;
+    }
+
+
+
+
+
 
     // TODO: 29.09.2023 Классс после УСПЕШНО уантификайции переходимм в саму программу  faceapp
 
