@@ -13,6 +13,7 @@ import androidx.lifecycle.ViewModel;
 import org.jetbrains.annotations.NotNull;
 
 import java.io.Closeable;
+import java.util.Objects;
 
 public class Modell extends  ViewModel {
     // TODO: 25.12.2023
@@ -34,7 +35,8 @@ public class Modell extends  ViewModel {
 
     public  void setData(@NotNull Long l){
         // TODO: 25.12.2023 set
-        data.setValue(l);
+      Number d=  Objects.requireNonNullElse(l,0);
+        data.setValue(d.longValue());
         Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +

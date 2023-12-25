@@ -58,8 +58,8 @@ public class FragmentCommingPrices extends Fragment {
          /*InputStream inputStream1сСогласования=
                     cComminhgPrices.startingGetJsonOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5,getHiltJaksonObjectMapper);*/
 
-            String string1сСогласования=
-                    cComminhgPrices.startingGetStringOt1cComminhgPrices(getContext(),"http://192.168.254.218/dds_copy/hs/jsonto1ccena/listofdocuments",5,getHiltJaksonObjectMapper);
+        /*    String string1сСогласования=
+                    cComminhgPrices.startingGetStringOt1cComminhgPrices(getContext(),"http://192.168.254.218/dds_copy/hs/jsonto1ccena/listofdocuments",5,getHiltJaksonObjectMapper);*/
 
 
         /*    InputStream inputStream1сСогласования = getResources().openRawResource(R.raw.dsu1_keys);
@@ -82,7 +82,7 @@ public class FragmentCommingPrices extends Fragment {
                 }
             });
 
-            commitPricesViewModel.setData(34343434l);
+            commitPricesViewModel.setData(null);
 
             Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
