@@ -5,10 +5,7 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProvider;
-import androidx.lifecycle.ViewModelProviders;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -67,22 +64,16 @@ public class FragmentCommingPrices extends Fragment {
         cComminhgPrices.DeserializerJson1cComminhgPrices(getContext(),inputStream1сСогласования,getHiltJaksonObjectMapper);*/
 
 
-// TODO: 25.12.2023 код создание модели
-
+// TODO: 25.12.2023 код создание Фабрики VieModel
             Modell commitPricesViewModel = new ViewModelProvider(this,  new ModelFactory(5l,getContext())).get(Modell.class );
-            LiveData<Long> liveData1 = commitPricesViewModel.getData();
+            StartingGetViewModel startingGetViewModel =new StartingGetViewModel(commitPricesViewModel);
+            startingGetViewModel.startGetViewModel(this);
 
-            liveData1.observe(this, new Observer<Long>() {
-                @Override
-                public void onChanged(Long s) {
-                    Log.d(this.getClass().getName(),"\n"
-                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
-                }
-            });
+            // TODO: 25.12.2023
 
             commitPricesViewModel.setData(null);
+
+
 
             Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
