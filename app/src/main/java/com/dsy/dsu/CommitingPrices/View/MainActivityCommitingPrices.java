@@ -4,6 +4,12 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModel;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.app.Activity;
 import android.content.Context;
@@ -12,22 +18,11 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 
-import com.dsy.dsu.CommitsPayments.Fragment1_List_CommitPay;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
-import com.dsy.dsu.Hilt.Jakson.HiltInterfaceJakson;
 import com.dsy.dsu.R;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.android.datatransport.runtime.dagger.Provides;
-import com.google.common.util.concurrent.AtomicDouble;
 
-import javax.inject.Inject;
-
-import dagger.hilt.EntryPoint;
-import dagger.hilt.EntryPoints;
-import dagger.hilt.InstallIn;
 import dagger.hilt.android.AndroidEntryPoint;
-import dagger.hilt.android.components.ActivityComponent;
-import dagger.hilt.android.scopes.ActivityScoped;
+
 @AndroidEntryPoint
 public class MainActivityCommitingPrices extends AppCompatActivity {
     private Activity activity;
@@ -53,7 +48,10 @@ public class MainActivityCommitingPrices extends AppCompatActivity {
             // TODO: 21.12.2023 inisia
             fragmentManager =  getSupportFragmentManager();
 
+
+            // TODO: 25.12.2023 запускам бизнес логику
              bl=    new Bl();
+
             Log.d(this.getClass().getName(),"\n"
                     + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +

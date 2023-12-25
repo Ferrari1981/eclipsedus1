@@ -5,6 +5,10 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.lifecycle.LiveData;
+import androidx.lifecycle.Observer;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.lifecycle.ViewModelProviders;
 
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -12,11 +16,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.dsy.dsu.CommitingPrices.Model.SendAndGetData.GetJsonOt1cComminhgPrices;
+import com.dsy.dsu.CommitingPrices.ViewModel.ModelFactory;
+import com.dsy.dsu.CommitingPrices.ViewModel.Modell;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.R;
 import com.fasterxml.jackson.databind.ObjectMapper;
-
-import java.io.InputStream;
 
 import javax.inject.Inject;
 
@@ -27,6 +31,8 @@ public class FragmentCommingPrices extends Fragment {
 
     @Inject
     ObjectMapper getHiltJaksonObjectMapper;
+
+
 
 
 
@@ -44,21 +50,50 @@ public class FragmentCommingPrices extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try{
+
+
+            // TODO: 25.12.2023  предварительный код  получение данныз от 1с
             GetJsonOt1cComminhgPrices cComminhgPrices=new GetJsonOt1cComminhgPrices();
 
-
-
-
-         InputStream inputStream1сСогласования=
+         /*InputStream inputStream1сСогласования=
                     cComminhgPrices.startingGetJsonOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5,getHiltJaksonObjectMapper);
 
             String string1сСогласования=
-                    cComminhgPrices.startingGetStringOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5,getHiltJaksonObjectMapper);
+                    cComminhgPrices.startingGetStringOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5,getHiltJaksonObjectMapper);*/
 
 
         /*    InputStream inputStream1сСогласования = getResources().openRawResource(R.raw.dsu1_keys);
 
         cComminhgPrices.DeserializerJson1cComminhgPrices(getContext(),inputStream1сСогласования,getHiltJaksonObjectMapper);*/
+
+
+
+
+
+            Modell commitPricesViewModel = new ViewModelProvider(this,  new ModelFactory(5l,getContext())).get(Modell.class );
+            LiveData<String> liveData1 = commitPricesViewModel.getData();
+
+            liveData1.observe(this, new Observer<String>() {
+                @Override
+                public void onChanged(String s) {
+                    Log.d(this.getClass().getName(),"\n"
+                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                }
+            });
+
+            Modell model = ViewModelProviders.of(this).get(Modell.class);
+            LiveData<String> liveData2 = model.getData();
+            liveData2.observe(this, new Observer<String>() {
+                @Override
+                public void onChanged(String s) {
+                    Log.d(this.getClass().getName(),"\n"
+                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                }
+            });
 
 
             Log.d(this.getClass().getName(),"\n"

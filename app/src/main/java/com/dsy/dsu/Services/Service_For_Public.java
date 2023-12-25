@@ -107,7 +107,6 @@ public class Service_For_Public extends IntentService {
                 " Класс в процессе... " +  this.getClass().getName()+"\n"+
                 " метод в процессе... " + Thread.currentThread().getStackTrace()[2].getMethodName());
         //   return super.onBind(intent);
-        localBinderОбщий.setCallingWorkSourceUid(new Random().nextInt());
     } catch (Exception e) {
         e.printStackTrace();
         Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
