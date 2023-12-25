@@ -156,7 +156,6 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                                                       @NonNull ObjectMapper objectMapper) {
         final String[] stringCommingPrecies = {null};
         try{
-            // MediaType JSON = MediaType.parse("application/json; charset=utf-8");
             OkHttpClient okHttpClient1cСогласованиеЦен = new OkHttpClient().newBuilder().addInterceptor(new Interceptor() {
                         @Override
                         public Response intercept(Chain chain) throws IOException {
@@ -174,23 +173,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                     .build();
             // TODO: 25.10.2022 Диспечер
             Dispatcher dispatcher=  okHttpClient1cСогласованиеЦен.dispatcher();
-
-
-// TODO: 22.12.2023 генерируем даным для 1с согласование цен
-          /*  LinkedHashMap<String,Long> linkedHashMapОтпавркаНа1с=new LinkedHashMap<>();
-            linkedHashMapОтпавркаНа1с.put("dsu1user",PublicId.longValue());
-            byte[] dataforsend1cCommitPay=    GenetarJsonGet1cComminhgPrices(context,linkedHashMapОтпавркаНа1с,objectMapper);
-
-
-            RequestBody bodyДляОтправки1cСогласования =
-                    RequestBody.create(MediaType.parse("application/octet-stream; charset=utf-8"),dataforsend1cCommitPay);
-
-            Request requestGet1cСогласованииЦен = new Request.Builder()
-                    .post(bodyДляОтправки1cСогласования)
-                    .url(adress).build();*/
-
             Request requestet1cСогласованииЦен = new Request.Builder().get().url(adress).build();
-
             // TODO  Call callGET = client.newCall(requestGET);
             okHttpClient1cСогласованиеЦен.newCall(requestet1cСогласованииЦен).enqueue(new Callback() {
                 @Override
@@ -204,7 +187,6 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                 @Override
                 public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                     try{
-
                         Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                                 " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()
