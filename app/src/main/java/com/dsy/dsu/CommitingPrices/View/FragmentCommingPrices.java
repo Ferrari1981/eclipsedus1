@@ -29,7 +29,7 @@ public class FragmentCommingPrices extends Fragment {
     @Inject
     ObjectMapper getHiltJaksonObjectMapper;
 
-
+   private Modell modell;
 
 
 
@@ -47,11 +47,25 @@ public class FragmentCommingPrices extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try{
-
-// TODO: 25.12.2023 код создание Фабрики VieModel
-            Modell commitPricesViewModel = new ViewModelProvider(this,  new ModelFactory(5l,getContext())).get(Modell.class );
+       // TODO: 25.12.2023 код создание Фабрики VieModel
+            modell = new ViewModelProvider(this,  new ModelFactory(5l,getContext())).get(Modell.class );
 
             // TODO: 25.12.2023  предварительный код  получение данныз от 1с
+            // TODO: 25.12.2023  получение данныз от 1с согласования цен String
+            StartingLiveDataJsonString startingLiveDataJsonString =new StartingLiveDataJsonString(modell,getContext());
+            // TODO: 25.12.2023 запуска callback
+            startingLiveDataJsonString.getLiveDataCallBacks(this);
+
+
+            // TODO: 25.12.2023  запускаем получение Данных
+            modell.livedatastartSetJsonSting("http://192.168.254.218/dds_copy/hs/jsonto1ccena/listofdocuments",getHiltJaksonObjectMapper);
+
+            Log.d(this.getClass().getName(),"\n"
+                + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
+
+
 
 
          /*InputStream inputStream1сСогласования=
@@ -67,23 +81,6 @@ public class FragmentCommingPrices extends Fragment {
 
 
 
-
-            // TODO: 25.12.2023  получение данныз от 1с согласования цен String
-            StartingLiveDataJsonString startingLiveDataJsonString =new StartingLiveDataJsonString(commitPricesViewModel,getContext());
-            // TODO: 25.12.2023 запуска callback
-            startingLiveDataJsonString.getLiveDataCallBacks(this);
-
-
-            // TODO: 25.12.2023  запускаем получение Данных
-            commitPricesViewModel.livedatastartSetJsonSting("http://192.168.254.218/dds_copy/hs/jsonto1ccena/listofdocuments",5,getHiltJaksonObjectMapper);
-
-
-
-
-            Log.d(this.getClass().getName(),"\n"
-                + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
     } catch (Exception e) {
         e.printStackTrace();
         Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
@@ -98,7 +95,6 @@ public class FragmentCommingPrices extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         try{
-
         Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +

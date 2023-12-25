@@ -1,6 +1,7 @@
 package com.dsy.dsu.CommitingPrices.View;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.os.Bundle;
 import android.util.Log;
@@ -18,7 +19,8 @@ import java.util.Objects;
 // TODO: 25.12.2023  бизнес логика
 public class StartingLiveDataJsonString {
    private com.dsy.dsu.CommitingPrices.ViewModel.Modell commitPricesViewModel;
-    Context context;
+  private   Context context;
+    @SuppressLint("SuspiciousIndentation")
     public StartingLiveDataJsonString(@NotNull  com.dsy.dsu.CommitingPrices.ViewModel.Modell commitPricesViewModel, @NotNull Context context) {
         try{
         this.commitPricesViewModel = commitPricesViewModel;

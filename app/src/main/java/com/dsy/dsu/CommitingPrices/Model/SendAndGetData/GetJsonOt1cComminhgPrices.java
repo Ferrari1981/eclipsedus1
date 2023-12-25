@@ -210,12 +210,12 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()
                                     + "     stringCommingPrecies[0] " +  stringCommingPrecies[0]);
-
-                            // TODO: 09.11.2023  close
-                            response.body().source().close();
-                            //TODO
-                            dispatcher.executorService().shutdown();
                         }
+                        // TODO: 25.12.2023
+                        // TODO: 09.11.2023  close
+                        response.body().source().close();
+                        //TODO
+                        dispatcher.executorService().shutdown();
                     } catch (Exception e) {
                         e.printStackTrace();
                         Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"

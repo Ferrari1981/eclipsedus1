@@ -47,7 +47,7 @@ public class GetssFactory2 extends  BissennsLogica {
 
                 @Override
                 public X509Certificate[] getAcceptedIssuers() {
-                    return null;
+                    return  getAcceptedIssuers();
                 }
             } };
 
