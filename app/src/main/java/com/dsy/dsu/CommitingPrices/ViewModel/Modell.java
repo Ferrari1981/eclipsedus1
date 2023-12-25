@@ -14,22 +14,15 @@ import java.io.Closeable;
 
 public class Modell extends  ViewModel {
     // TODO: 25.12.2023
-    MutableLiveData<String> data;
-    Context context;
+    private   MutableLiveData<String> data= new MutableLiveData<>();;
+    private Context context;
 
     public Modell(long id,  Context context) {
         this.data = data;
         this.context = context;
     }
 
-
-
-
     public LiveData<String> getData() {
-        if (data == null) {
-            data = new MutableLiveData<>();
-
-        }
         Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +

@@ -67,8 +67,7 @@ public class FragmentCommingPrices extends Fragment {
         cComminhgPrices.DeserializerJson1cComminhgPrices(getContext(),inputStream1сСогласования,getHiltJaksonObjectMapper);*/
 
 
-
-
+// TODO: 25.12.2023 код создание модели
 
             Modell commitPricesViewModel = new ViewModelProvider(this,  new ModelFactory(5l,getContext())).get(Modell.class );
             LiveData<String> liveData1 = commitPricesViewModel.getData();
@@ -83,17 +82,7 @@ public class FragmentCommingPrices extends Fragment {
                 }
             });
 
-            Modell model = ViewModelProviders.of(this).get(Modell.class);
-            LiveData<String> liveData2 = model.getData();
-            liveData2.observe(this, new Observer<String>() {
-                @Override
-                public void onChanged(String s) {
-                    Log.d(this.getClass().getName(),"\n"
-                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
-                }
-            });
+   
 
 
             Log.d(this.getClass().getName(),"\n"

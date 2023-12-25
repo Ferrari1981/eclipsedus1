@@ -24,8 +24,9 @@ public class ModelFactory implements ViewModelProvider.Factory {
 
         if (modelClass == Modell.class) {
             return (T) new Modell(id,context);
+        }else {
+            return ViewModelProvider.Factory.super.create(modelClass);
         }
 
-        return ViewModelProvider.Factory.super.create(modelClass);
     }
 }
