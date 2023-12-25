@@ -10,6 +10,7 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
+import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesString;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 
 import org.jetbrains.annotations.NotNull;
@@ -18,10 +19,10 @@ import java.util.Objects;
 
 // TODO: 25.12.2023  бизнес логика
 public class StartingLiveDataJsonString {
-   private com.dsy.dsu.CommitingPrices.ViewModel.Modell commitPricesViewModel;
+   private ModelComminingPrisesString commitPricesViewModel;
   private   Context context;
     @SuppressLint("SuspiciousIndentation")
-    public StartingLiveDataJsonString(@NotNull  com.dsy.dsu.CommitingPrices.ViewModel.Modell commitPricesViewModel, @NotNull Context context) {
+    public StartingLiveDataJsonString(@NotNull ModelComminingPrisesString commitPricesViewModel, @NotNull Context context) {
         try{
         this.commitPricesViewModel = commitPricesViewModel;
         this.context = context;
@@ -47,7 +48,14 @@ public class StartingLiveDataJsonString {
                 // TODO: 25.12.2023
                 Bundle validadress=   Objects.requireNonNullElse(bundle,new Bundle());
                 if(!validadress.isEmpty()) {
-                    String string1сСогласования = validadress.getString("string1сСогласования");
+                    // TODO: 25.12.2023  пришел ответ в livedata от VieModel
+              String   string1сСогласования = validadress.getString("string1сСогласования");
+
+                    Log.d(this.getClass().getName(),"\n"
+                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+ " string1сСогласования " + string1сСогласования);
+
                 }
                 Log.d(this.getClass().getName(),"\n"
                         + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +

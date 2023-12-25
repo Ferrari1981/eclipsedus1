@@ -1,6 +1,5 @@
 package com.dsy.dsu.CommitingPrices.ViewModel;
 
-import android.app.Application;
 import android.content.Context;
 
 import androidx.annotation.NonNull;
@@ -22,8 +21,8 @@ public class ModelFactory implements ViewModelProvider.Factory {
     @Override
     public <T extends ViewModel> T create(@NonNull Class<T> modelClass) {
 
-        if (modelClass == Modell.class) {
-            return (T) new Modell(id,context);
+        if (modelClass == ModelComminingPrisesString.class) {
+            return (T) new ModelComminingPrisesString(id,context);
         }else {
             return ViewModelProvider.Factory.super.create(modelClass);
         }

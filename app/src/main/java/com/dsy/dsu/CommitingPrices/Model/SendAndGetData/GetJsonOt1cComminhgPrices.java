@@ -192,7 +192,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                                 " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()
                                 + "   response.isSuccessful() " +  response.isSuccessful());
 
-                        if (response.isSuccessful()) {
+                     //   if (response.isSuccessful()) {
                             String  ПришедшегоПотока =    response.header("stream_size");
                             ПришедшегоПотока =     Optional.ofNullable(ПришедшегоПотока).map(String::valueOf).orElse("0");
                             Long РазмерПришедшегоПотока = Long.parseLong(ПришедшегоПотока  );
@@ -210,7 +210,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()
                                     + "     stringCommingPrecies[0] " +  stringCommingPrecies[0]);
-                        }
+                   //     }
                         // TODO: 25.12.2023
                         // TODO: 09.11.2023  close
                         response.body().source().close();

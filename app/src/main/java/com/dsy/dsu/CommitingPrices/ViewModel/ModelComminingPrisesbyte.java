@@ -12,30 +12,24 @@ import com.dsy.dsu.BusinessLogicAll.Class_Generations_PUBLIC_CURRENT_ID;
 import com.dsy.dsu.CommitingPrices.Model.SendAndGetData.GetJsonOt1cComminhgPrices;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.util.concurrent.AtomicDouble;
 
-import org.checkerframework.checker.units.qual.A;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.Objects;
-import java.util.concurrent.Callable;
-import java.util.concurrent.CompletableFuture;
-import java.util.function.Function;
 
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers;
 import io.reactivex.rxjava3.core.Completable;
-import io.reactivex.rxjava3.functions.Action;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Predicate;
 import io.reactivex.rxjava3.functions.Supplier;
 import io.reactivex.rxjava3.schedulers.Schedulers;
 
-public class Modell extends  ViewModel {
+public class ModelComminingPrisesbyte extends  ViewModel {
     // TODO: 25.12.2023
     private   MutableLiveData<Bundle> mutableLiveData= new MutableLiveData<>();
     private Context context;
     long PublicId;
-    public Modell(long id,  Context context) {
+    public ModelComminingPrisesbyte(long id, Context context) {
         try{
         this.context = context;
         this.PublicId = id;

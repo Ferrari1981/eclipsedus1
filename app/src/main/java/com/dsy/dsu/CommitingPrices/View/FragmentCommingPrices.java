@@ -12,9 +12,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dsy.dsu.CommitingPrices.Model.SendAndGetData.GetJsonOt1cComminhgPrices;
 import com.dsy.dsu.CommitingPrices.ViewModel.ModelFactory;
-import com.dsy.dsu.CommitingPrices.ViewModel.Modell;
+import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesString;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.R;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -29,7 +28,7 @@ public class FragmentCommingPrices extends Fragment {
     @Inject
     ObjectMapper getHiltJaksonObjectMapper;
 
-   private Modell modell;
+   private ModelComminingPrisesString modelComminingPrisesString;
 
 
 
@@ -48,17 +47,17 @@ public class FragmentCommingPrices extends Fragment {
         super.onCreate(savedInstanceState);
         try{
        // TODO: 25.12.2023 код создание Фабрики VieModel
-            modell = new ViewModelProvider(this,  new ModelFactory(5l,getContext())).get(Modell.class );
+            modelComminingPrisesString = new ViewModelProvider(this,  new ModelFactory(5l,getContext())).get(ModelComminingPrisesString.class );
 
             // TODO: 25.12.2023  предварительный код  получение данныз от 1с
             // TODO: 25.12.2023  получение данныз от 1с согласования цен String
-            StartingLiveDataJsonString startingLiveDataJsonString =new StartingLiveDataJsonString(modell,getContext());
+            StartingLiveDataJsonString startingLiveDataJsonString =new StartingLiveDataJsonString(modelComminingPrisesString,getContext());
             // TODO: 25.12.2023 запуска callback
             startingLiveDataJsonString.getLiveDataCallBacks(this);
 
 
             // TODO: 25.12.2023  запускаем получение Данных
-            modell.livedatastartSetJsonSting("http://192.168.254.218/dds_copy/hs/jsonto1ccena/listofdocuments",getHiltJaksonObjectMapper);
+            modelComminingPrisesString.livedatastartSetJsonSting("http://192.168.254.218/dds_copy/hs/jsonto1ccena/listofdocuments",getHiltJaksonObjectMapper);
 
             Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
@@ -79,7 +78,10 @@ public class FragmentCommingPrices extends Fragment {
         cComminhgPrices.DeserializerJson1cComminhgPrices(getContext(),inputStream1сСогласования,getHiltJaksonObjectMapper);*/
 
 
-
+            Log.d(this.getClass().getName(),"\n"
+                    + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
 
     } catch (Exception e) {
         e.printStackTrace();
