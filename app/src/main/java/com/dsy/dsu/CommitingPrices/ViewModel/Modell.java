@@ -10,11 +10,13 @@ import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import org.jetbrains.annotations.NotNull;
+
 import java.io.Closeable;
 
 public class Modell extends  ViewModel {
     // TODO: 25.12.2023
-    private   MutableLiveData<String> data= new MutableLiveData<>();;
+    private   MutableLiveData<Long> data= new MutableLiveData<>();;
     private Context context;
 
     public Modell(long id,  Context context) {
@@ -22,13 +24,25 @@ public class Modell extends  ViewModel {
         this.context = context;
     }
 
-    public LiveData<String> getData() {
+    public LiveData<Long> getData() {
         Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                 " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
         return data;
     }
+
+    public  void setData(@NotNull Long l){
+        // TODO: 25.12.2023 set
+        data.setValue(l);
+        Log.d(this.getClass().getName(),"\n"
+                + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
+    }
+
+
+
 
     @Override
     protected void onCleared() {

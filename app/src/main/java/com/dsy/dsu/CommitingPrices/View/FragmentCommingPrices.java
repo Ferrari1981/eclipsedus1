@@ -56,10 +56,10 @@ public class FragmentCommingPrices extends Fragment {
             GetJsonOt1cComminhgPrices cComminhgPrices=new GetJsonOt1cComminhgPrices();
 
          /*InputStream inputStream1сСогласования=
-                    cComminhgPrices.startingGetJsonOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5,getHiltJaksonObjectMapper);
+                    cComminhgPrices.startingGetJsonOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5,getHiltJaksonObjectMapper);*/
 
             String string1сСогласования=
-                    cComminhgPrices.startingGetStringOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5,getHiltJaksonObjectMapper);*/
+                    cComminhgPrices.startingGetStringOt1cComminhgPrices(getContext(),"http://192.168.254.218/dds_copy/hs/jsonto1ccena/listofdocuments",5,getHiltJaksonObjectMapper);
 
 
         /*    InputStream inputStream1сСогласования = getResources().openRawResource(R.raw.dsu1_keys);
@@ -70,11 +70,11 @@ public class FragmentCommingPrices extends Fragment {
 // TODO: 25.12.2023 код создание модели
 
             Modell commitPricesViewModel = new ViewModelProvider(this,  new ModelFactory(5l,getContext())).get(Modell.class );
-            LiveData<String> liveData1 = commitPricesViewModel.getData();
+            LiveData<Long> liveData1 = commitPricesViewModel.getData();
 
-            liveData1.observe(this, new Observer<String>() {
+            liveData1.observe(this, new Observer<Long>() {
                 @Override
-                public void onChanged(String s) {
+                public void onChanged(Long s) {
                     Log.d(this.getClass().getName(),"\n"
                             + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                             " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
@@ -82,8 +82,7 @@ public class FragmentCommingPrices extends Fragment {
                 }
             });
 
-   
-
+            commitPricesViewModel.setData(34343434l);
 
             Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
