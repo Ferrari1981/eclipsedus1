@@ -162,7 +162,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                         public Response intercept(Chain chain) throws IOException {
                             Request originalRequest = chain.request();
                             Request.Builder builder = originalRequest.newBuilder()
-                                    .header("dsu1user", String.valueOf(PublicId))//TODO old ПубличныйIDДляФрагмента   или 8
+                                    .header("user", String.valueOf(PublicId))//TODO old ПубличныйIDДляФрагмента   или 8
                                     .header("Authorization",
                                             Credentials.basic("dsu1Admin", "dsu1Admin"));
                             Request newRequest = builder.build();
@@ -177,7 +177,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
 
 
 // TODO: 22.12.2023 генерируем даным для 1с согласование цен
-            LinkedHashMap<String,Long> linkedHashMapОтпавркаНа1с=new LinkedHashMap<>();
+          /*  LinkedHashMap<String,Long> linkedHashMapОтпавркаНа1с=new LinkedHashMap<>();
             linkedHashMapОтпавркаНа1с.put("dsu1user",PublicId.longValue());
             byte[] dataforsend1cCommitPay=    GenetarJsonGet1cComminhgPrices(context,linkedHashMapОтпавркаНа1с,objectMapper);
 
@@ -187,9 +187,12 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
 
             Request requestGet1cСогласованииЦен = new Request.Builder()
                     .post(bodyДляОтправки1cСогласования)
-                    .url(adress).build();
+                    .url(adress).build();*/
+
+            Request requestet1cСогласованииЦен = new Request.Builder().get().url(adress).build();
+
             // TODO  Call callGET = client.newCall(requestGET);
-            okHttpClient1cСогласованиеЦен.newCall(requestGet1cСогласованииЦен).enqueue(new Callback() {
+            okHttpClient1cСогласованиеЦен.newCall(requestet1cСогласованииЦен).enqueue(new Callback() {
                 @Override
                 public void onFailure(@NonNull Call call, @NonNull IOException e) {
                     Log.e(this.getClass().getName(), "  ERROR call  " + call + "  e" + e.toString());
@@ -201,6 +204,12 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                 @Override
                 public void onResponse(@NonNull Call call, @NonNull Response response) throws IOException {
                     try{
+
+                        Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()
+                                + "   response.isSuccessful() " +  response.isSuccessful());
+
                         if (response.isSuccessful()) {
                             String  ПришедшегоПотока =    response.header("stream_size");
                             ПришедшегоПотока =     Optional.ofNullable(ПришедшегоПотока).map(String::valueOf).orElse("0");

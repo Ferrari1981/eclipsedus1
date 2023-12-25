@@ -1,43 +1,47 @@
 package com.dsy.dsu.CommitingPrices.ViewModel;
 
-import android.app.Application;
 import android.content.Context;
+import android.os.Bundle;
 import android.util.Log;
 
-import androidx.annotation.NonNull;
-import androidx.lifecycle.AndroidViewModel;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import org.jetbrains.annotations.NotNull;
 
-import java.io.Closeable;
 import java.util.Objects;
 
 public class Modell extends  ViewModel {
     // TODO: 25.12.2023
-    private   MutableLiveData<Long> data= new MutableLiveData<>();;
+    private   MutableLiveData<Bundle> mutableLiveData= new MutableLiveData<>();
     private Context context;
-
+    long PublicId;
     public Modell(long id,  Context context) {
-        this.data = data;
         this.context = context;
+        this.PublicId = id;
     }
 
-    public LiveData<Long> getData() {
-        Log.d(this.getClass().getName(),"\n"
+    public LiveData<Bundle> livedatastartGetJsonSting() {
+        Log.d(context.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                 " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
-        return data;
+        return mutableLiveData;
     }
 
-    public  void setData(@NotNull Long l){
+    public  void livedatastartSetJsonSting(@NotNull String adress,@NotNull Integer PublicId,@NotNull ObjectMapper getHiltJaksonObjectMapper){
         // TODO: 25.12.2023 set
-      Number d=  Objects.requireNonNullElse(l,0);
-        data.setValue(d.longValue());
-        Log.d(this.getClass().getName(),"\n"
+      String validadress=  Objects.requireNonNullElse(adress,"");
+      if(!validadress.isEmpty()){
+          Bundle bundle=new Bundle();
+          bundle.putString("adress",adress);
+          mutableLiveData.setValue(bundle);
+
+      }
+        Log.d(context.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                 " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
@@ -49,7 +53,7 @@ public class Modell extends  ViewModel {
     @Override
     protected void onCleared() {
         // clean up resources
-        Log.d(this.getClass().getName(),"\n"
+        Log.d(context.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                 " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());

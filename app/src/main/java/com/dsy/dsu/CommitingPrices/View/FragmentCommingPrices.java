@@ -55,9 +55,8 @@ public class FragmentCommingPrices extends Fragment {
          /*InputStream inputStream1сСогласования=
                     cComminhgPrices.startingGetJsonOt1cComminhgPrices(getContext(),"http://80.70.108.165:55255/dds_copy/ru",5,getHiltJaksonObjectMapper);*/
 
-        /*    String string1сСогласования=
-                    cComminhgPrices.startingGetStringOt1cComminhgPrices(getContext(),"http://192.168.254.218/dds_copy/hs/jsonto1ccena/listofdocuments",5,getHiltJaksonObjectMapper);*/
-
+            String string1сСогласования=
+                    cComminhgPrices.startingGetStringOt1cComminhgPrices(getContext(),"http://192.168.254.218/dds_copy/hs/jsonto1ccena/listofdocuments",8,getHiltJaksonObjectMapper);
 
         /*    InputStream inputStream1сСогласования = getResources().openRawResource(R.raw.dsu1_keys);
 
@@ -65,13 +64,18 @@ public class FragmentCommingPrices extends Fragment {
 
 
 // TODO: 25.12.2023 код создание Фабрики VieModel
-            Modell commitPricesViewModel = new ViewModelProvider(this,  new ModelFactory(5l,getContext())).get(Modell.class );
-            StartingGetViewModel startingGetViewModel =new StartingGetViewModel(commitPricesViewModel);
-            startingGetViewModel.startGetViewModel(this);
+           Modell commitPricesViewModel = new ViewModelProvider(this,  new ModelFactory(5l,getContext())).get(Modell.class );
 
-            // TODO: 25.12.2023
 
-            commitPricesViewModel.setData(null);
+            // TODO: 25.12.2023  получение данныз от 1с согласования цен String
+            StartingGetJsonSting startingGetJsonSting =new StartingGetJsonSting(commitPricesViewModel);
+            // TODO: 25.12.2023 запуска callback
+            startingGetJsonSting.getCallBacks(this);
+
+
+            // TODO: 25.12.2023  запускаем получение Данных
+            commitPricesViewModel.livedatastartSetJsonSting("http://80.70.108.165:55255/dds_copy/ru",5,getHiltJaksonObjectMapper);
+
 
 
 
