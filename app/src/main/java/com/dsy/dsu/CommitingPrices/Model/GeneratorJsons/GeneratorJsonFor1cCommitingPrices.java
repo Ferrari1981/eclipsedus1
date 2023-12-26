@@ -1,4 +1,4 @@
-package com.dsy.dsu.CommitingPrices.Model.businesslogic.GeneratorJsonFor1C;
+package com.dsy.dsu.CommitingPrices.Model.startingViewModels.GeneratorJsonFor1C;
 
 import android.content.Context;
 import android.os.Bundle;

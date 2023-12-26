@@ -18,6 +18,9 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.WindowManager;
 
+import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesByte;
+import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesString;
+import com.dsy.dsu.CommitingPrices.ViewModel.ModelFactory;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.R;
 
@@ -31,7 +34,9 @@ public class MainActivityCommitingPrices extends AppCompatActivity {
     private FragmentTransaction fragmentTransaction;
     private Fragment fragmentCommitPrices;
     private  Bl bl;
+ protected    ModelComminingPrisesString modelComminingPrisesString;
 
+    protected  ModelComminingPrisesByte modelComminingPrisesByte;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +53,11 @@ public class MainActivityCommitingPrices extends AppCompatActivity {
             // TODO: 21.12.2023 inisia
             fragmentManager =  getSupportFragmentManager();
 
+
+            // TODO: 25.12.2023 код создание две Фабрики VieModel
+            modelComminingPrisesString = new ViewModelProvider(this,  new ModelFactory(5l,this)).get(ModelComminingPrisesString.class );
+
+            modelComminingPrisesByte = new ViewModelProvider(this,  new ModelFactory(5l,this)).get(ModelComminingPrisesByte.class );
 
             // TODO: 25.12.2023 запускам бизнес логику
              bl=    new Bl();

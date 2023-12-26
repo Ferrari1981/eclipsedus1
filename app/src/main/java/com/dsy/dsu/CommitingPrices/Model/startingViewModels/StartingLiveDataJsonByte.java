@@ -1,4 +1,4 @@
-package com.dsy.dsu.CommitingPrices.View;
+package com.dsy.dsu.CommitingPrices.Model.startingViewModels;
 
 
 import android.annotation.SuppressLint;
@@ -10,21 +10,24 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
+import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesByte;
 import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesString;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.InputStream;
+import java.io.Serializable;
 import java.util.Objects;
 
 // TODO: 25.12.2023  бизнес логика
-public class StartingLiveDataJsonString {
-   private ModelComminingPrisesString commitPricesViewModel;
+public class StartingLiveDataJsonByte {
+   private ModelComminingPrisesByte modelComminingPrisesByte;
   private   Context context;
     @SuppressLint("SuspiciousIndentation")
-    public StartingLiveDataJsonString(@NotNull ModelComminingPrisesString commitPricesViewModel, @NotNull Context context) {
+    public StartingLiveDataJsonByte(@NotNull  ModelComminingPrisesByte modelComminingPrisesByte , @NotNull Context context) {
         try{
-        this.commitPricesViewModel = commitPricesViewModel;
+        this.modelComminingPrisesByte = modelComminingPrisesByte;
         this.context = context;
             Log.d(this.getClass().getName(),"\n"
                     + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
@@ -39,9 +42,9 @@ public class StartingLiveDataJsonString {
     }
     }
 
-    void getLiveDataCallBacks(@NotNull  LifecycleOwner lifecycleOwner){
+   public void getLiveDataCallBacks(@NotNull  LifecycleOwner lifecycleOwner){
         try{
-        LiveData<Bundle> liveData1 = commitPricesViewModel.livedatastartGetJsonSting();
+        LiveData<Bundle> liveData1 = modelComminingPrisesByte.livedatastartGetJsonByte();
         liveData1.observe((LifecycleOwner) lifecycleOwner, new Observer<Bundle>() {
             @Override
             public void onChanged(Bundle bundle) {
@@ -49,12 +52,12 @@ public class StartingLiveDataJsonString {
                 Bundle validadress=   Objects.requireNonNullElse(bundle,new Bundle());
                 if(!validadress.isEmpty()) {
                     // TODO: 25.12.2023  пришел ответ в livedata от VieModel
-              String   string1сСогласования = validadress.getString("string1сСогласования");
+                    InputStream getInputStreamComminhgPrices=(InputStream) validadress.getSerializable("getInputStreamComminhgPrices");
 
                     Log.d(this.getClass().getName(),"\n"
                             + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                             " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+ " string1сСогласования " + string1сСогласования);
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+ " getInputStreamComminhgPrices " + getInputStreamComminhgPrices);
 
                 }
                 Log.d(this.getClass().getName(),"\n"

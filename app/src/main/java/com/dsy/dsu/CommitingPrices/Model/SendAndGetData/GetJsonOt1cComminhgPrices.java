@@ -6,15 +6,12 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 
-import com.dsy.dsu.CommitingPrices.Model.businesslogic.GeneratorJsonFor1C.DeserializeJsonCommingPrices;
-import com.dsy.dsu.CommitingPrices.Model.businesslogic.GeneratorJsonFor1C.GeneratorJsonFor1cCommitingPrices;
+import com.dsy.dsu.CommitingPrices.Model.startingViewModels.GeneratorJsonFor1C.DeserializeJsonCommingPrices;
+import com.dsy.dsu.CommitingPrices.Model.startingViewModels.GeneratorJsonFor1C.GeneratorJsonFor1cCommitingPrices;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
-import com.google.common.io.ByteSource;
-
-import org.jetbrains.annotations.NotNull;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -33,10 +30,8 @@ import okhttp3.Callback;
 import okhttp3.Credentials;
 import okhttp3.Dispatcher;
 import okhttp3.Interceptor;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
-import okhttp3.RequestBody;
 import okhttp3.Response;
 
 public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent {
