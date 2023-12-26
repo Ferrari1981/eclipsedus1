@@ -152,7 +152,7 @@ class MyRecycleViewIsNullAdapter extends RecyclerView.Adapter<MyViewHolderCommin
 
             }
             // TODO: 22.03.2022 is nnull
-            myViewHolderComminingPrices = new MyViewHolderComminingPrices(ViewIsNUll);
+            myViewHolderComminingPrices = new MyViewHolderComminingPrices(ViewIsNUll ,context);
             // TODO: 26.12.2023
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +

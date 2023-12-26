@@ -1,5 +1,6 @@
 package com.dsy.dsu.CommitingPrices.View;
 
+import android.content.Context;
 import android.util.Log;
 import android.view.View;
 import android.widget.ProgressBar;
@@ -14,6 +15,8 @@ import com.dsy.dsu.R;
 import com.google.android.material.button.MaterialButton;
 import com.google.android.material.card.MaterialCardView;
 
+import org.jetbrains.annotations.NotNull;
+
 
 public class MyViewHolderComminingPrices extends RecyclerView.ViewHolder {
     // TODO: 28.02.2022
@@ -24,21 +27,24 @@ public class MyViewHolderComminingPrices extends RecyclerView.ViewHolder {
     private TableLayout tableLayoutcommitpayfiles,tableLayoutcommitpay;
     protected ProgressBar progressbarfilepay;
 
+    private  Context context;
+
     // TODO: 02.03.2022
-    public MyViewHolderComminingPrices(@NonNull View itemView) {
+    public MyViewHolderComminingPrices(@NonNull View itemView, @NotNull Context context) {
         super(itemView);
         try{
             // TODO: 02.03.2022
             МетодИнициализацииКомпонетовЗаданияCardView(itemView);
-            // TODO: 01.03.2022
-            Log.d(this.getClass().getName(), "  private class MyViewHolderДляЧата extends RecyclerView.ViewHolder  itemView   " + itemView);
+
+            Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n");
         } catch (Exception e) {
             e.printStackTrace();
-            ///метод запись ошибок в таблицу
             Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
                     + Thread.currentThread().getStackTrace()[2].getLineNumber());
             // TODO: 01.09.2021 метод вызова
-            new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(),
+            new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(),
                     this.getClass().getName(), Thread.currentThread().getStackTrace()[2].getMethodName(),
                     Thread.currentThread().getStackTrace()[2].getLineNumber());
         }
@@ -47,7 +53,7 @@ public class MyViewHolderComminingPrices extends RecyclerView.ViewHolder {
     // TODO: 14.03.2022
     private void МетодИнициализацииКомпонетовЗаданияCardView(@NonNull View itemView) {
         try {
-            if ( asyncTaskLoader!=null &&  asyncTaskLoader.isReset()) {
+           // if ( asyncTaskLoader!=null &&  asyncTaskLoader.isReset()) {
                 Log.d(this.getClass().getName(), " отработоатл new SubClassBuccessLogin_ГлавныйКлассБизнесЛогикиФрагмент1 itemView   " + itemView);
                 textView1 = itemView.findViewById(R.id.text0_valuepay);
                 textView2 = itemView.findViewById(R.id.text1_valuepay);
@@ -67,18 +73,20 @@ public class MyViewHolderComminingPrices extends RecyclerView.ViewHolder {
                 tableLayoutcommitpayfiles = itemView.findViewById(R.id.tableLayoutcommitpayfiles);
                 tableLayoutcommitpay = itemView.findViewById(R.id.tableLayoutcommitpay);
                 progressbarfilepay = itemView.findViewById(R.id.progressbarfilepay);
-            }
+           // }
 
-            Log.d(this.getClass().getName(), " отработоатл new SubClassBuccessLogin_ГлавныйКлассБизнесЛогикиФрагмент1 materialCardView   " + cardviewmatireacommitpay);
+            Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n");
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
                     + Thread.currentThread().getStackTrace()[2].getLineNumber());
             // TODO: 01.09.2021 метод вызова
-            new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(),
+            new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(),
                     this.getClass().getName(), Thread.currentThread().getStackTrace()[2].getMethodName(),
                     Thread.currentThread().getStackTrace()[2].getLineNumber());
         }
-        /////
+
     }
-} // TODO: 28.02.2022 конец  MyViewHolderДляЧата
+}
