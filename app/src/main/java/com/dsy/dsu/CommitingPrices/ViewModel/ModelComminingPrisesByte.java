@@ -94,7 +94,7 @@ public class ModelComminingPrisesByte  extends ViewModel {
     public  void livedatastartSetJsonByte(@NotNull String adress, @NotNull ObjectMapper getHiltJaksonObjectMapper){
         // TODO: 25.12.2023 set
         try{
-            Bundle bundle = new Bundle();
+            Bundle bundleByte = new Bundle();
             Completable.fromSupplier(new Supplier<Bundle>() {
                         @Override
                         public Bundle get() throws Throwable {
@@ -109,13 +109,13 @@ public class ModelComminingPrisesByte  extends ViewModel {
                                         adress, 8, getHiltJaksonObjectMapper);
 
                                 // TODO: 26.12.2023 добавление byte для согласование цен
-                                if (getbyteComminhgPrices.length>0) {
+                                if (getbyteComminhgPrices.length==0) {
                                     // TODO: 26.12.2023
-                                    bundle.putByteArray("getbyteComminhgPrices", getbyteComminhgPrices);
+                                    bundleByte.putByteArray("getbyteComminhgPrices", getbyteComminhgPrices);
                                 }else {
                                     // TODO: 26.12.2023
                                     // TODO: 26.12.2023
-                                    bundle.putSerializable("getbyteComminhgPrices","нет данных".getBytes());
+                                    bundleByte.putByteArray("getbyteComminhgPrices","".getBytes());
                                 }
 
                                 Log.d(this.getClass().getName(),"\n"
@@ -129,16 +129,16 @@ public class ModelComminingPrisesByte  extends ViewModel {
                             Log.d(this.getClass().getName(),"\n"
                                     + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + " bundleByte " +bundleByte);
 
 
-                            return bundle;
+                            return bundleByte;
                         }
                     }).subscribeOn(Schedulers.single())
                     .observeOn(AndroidSchedulers.mainThread())
                     .doOnComplete(()->{
                         // TODO: 25.12.2023  полученый результат обнолвяем экран
-                        mutableLiveData.setValue(bundle);
+                        mutableLiveData.setValue(bundleByte);
                         Log.d(this.getClass().getName(),"\n"
                                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +

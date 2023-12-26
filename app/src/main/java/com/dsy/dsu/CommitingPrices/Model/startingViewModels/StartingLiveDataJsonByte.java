@@ -54,6 +54,23 @@ public class StartingLiveDataJsonByte {
                     // TODO: 25.12.2023  пришел ответ в livedata от VieModel
                     byte[] getbyteComminhgPrices=  validadress.getByteArray("getbyteComminhgPrices");
 
+                    // TODO: 26.12.2023  
+                    if (getbyteComminhgPrices.length>0){
+
+                        // TODO: 26.12.2023 пришли байты
+                        Log.d(this.getClass().getName(),"\n"
+                                + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+ " getbyteComminhgPrices " + getbyteComminhgPrices);
+                    }else {
+
+                        // TODO: 26.12.2023 пришли байты
+                        Log.d(this.getClass().getName(),"\n"
+                                + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+ " getbyteComminhgPrices " + getbyteComminhgPrices);
+                    }
+
                     Log.d(this.getClass().getName(),"\n"
                             + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                             " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
