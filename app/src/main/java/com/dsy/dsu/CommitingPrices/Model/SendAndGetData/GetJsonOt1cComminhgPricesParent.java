@@ -13,7 +13,7 @@ import io.reactivex.rxjava3.annotations.NonNull;
 
 public abstract  class GetJsonOt1cComminhgPricesParent {
 
-  public abstract InputStream getInputStreamComminhgPrices(@NotNull Context context, @NotNull String adress, @NotNull Integer PublicId,
+  public abstract byte[] getByteComminhgPrices(@NotNull Context context, @NotNull String adress, @NotNull Integer PublicId,
                                                            @NotNull ObjectMapper objectMapper);
 
   public abstract String getStringComminhgPrices(@NotNull Context context, @NotNull String adress, @NotNull Integer PublicId,

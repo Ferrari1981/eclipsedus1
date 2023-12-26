@@ -105,12 +105,18 @@ public class ModelComminingPrisesByte  extends ViewModel {
                                         new Class_Generations_PUBLIC_CURRENT_ID().ПолучениеПубличногоТекущегоПользователяID(context);
 
                                 // TODO: 25.12.2023  Запускаем получее данных на сервеи 1с  byte
-                                InputStream getInputStreamComminhgPrices = new GetJsonOt1cComminhgPrices().getInputStreamComminhgPrices(context,
-                                        adress, 8, getHiltJaksonObjectMapper);
-                                bundle.putSerializable("getInputStreamComminhgPrices", (Serializable) getInputStreamComminhgPrices);
+                                byte[] getbyteComminhgPrices = new GetJsonOt1cComminhgPrices().getByteComminhgPrices(context,
+                                        adress, ПубличныйID, getHiltJaksonObjectMapper);
 
                                 // TODO: 26.12.2023 добавление byte для согласование цен
-                                bundle.putSerializable("getInputStreamComminhgPrices", (Serializable) getInputStreamComminhgPrices);
+                                if (getbyteComminhgPrices.length>0) {
+                                    // TODO: 26.12.2023
+                                    bundle.putByteArray("getbyteComminhgPrices", getbyteComminhgPrices);
+                                }else {
+                                    // TODO: 26.12.2023
+                                    // TODO: 26.12.2023
+                                    bundle.putSerializable("getbyteComminhgPrices","нет данных".getBytes());
+                                }
 
                                 Log.d(this.getClass().getName(),"\n"
                                         + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +

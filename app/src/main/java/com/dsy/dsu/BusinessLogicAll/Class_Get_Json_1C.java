@@ -145,12 +145,11 @@ public InputStream   МетодПолучемJSONОт1СДляСогласова
                     Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                             " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                             " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "     inputStream1c " + inputStream1c[0]);
-
+                }
                     // TODO: 09.11.2023  close
                     response.body().source().close();
                     //TODO
                     dispatcher.executorService().shutdown();
-                }
             } catch (Exception e) {
                 e.printStackTrace();
                 Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
@@ -575,12 +574,13 @@ public InputStream   МетодПолучемJSONОт1СДляСогласова
                                         Optional.ofNullable(response.header("GZIPOutputStream")).map(String::new).orElse("false"));
 
                             newFileBinaty1c[0] =   response.body().source().readByteArray();
-                                // TODO: 10.11.2023 exit
-                                response.body().source().close();
+
 
                                 Log.d(this.getClass().getName(), "   newFileBinaty1c[0]  " + newFileBinaty1c[0] +
                                         "  responsePOST.code()" + response.code());
                             }
+                            // TODO: 10.11.2023 exit
+                            response.body().source().close();
                             dispatcher.executorService().shutdown();
 
                         } catch (Exception e) {

@@ -12,6 +12,7 @@ import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.google.common.io.ByteSource;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -44,9 +45,9 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
 
 
     @Override
-    public InputStream getInputStreamComminhgPrices(@NonNull Context context, @NonNull String adress, @NonNull Integer PublicId, @NonNull ObjectMapper objectMapper) {
+    public  byte[] getByteComminhgPrices(@NonNull Context context, @NonNull String adress, @NonNull Integer PublicId, @NonNull ObjectMapper objectMapper) {
         // TODO: 26.12.2023
-        final InputStream[] getInputStreamComminhgPrices = {null};
+        final byte[][] getbyteComminhgPrices = {null};
         try{
         OkHttpClient okHttpClient1cСогласованиеЦенbyte = new OkHttpClient().newBuilder().addInterceptor(new Interceptor() {
                     @Override
@@ -54,6 +55,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                         Request originalRequest = chain.request();
                         Request.Builder builder = originalRequest.newBuilder()
                                 .header("user", String.valueOf(PublicId))//TODO old ПубличныйIDДляФрагмента   или 8
+                                .header("uuid", new String())//TODO old ПубличныйIDДляФрагмента   или 8
                                 .header("Authorization",
                                         Credentials.basic("dsu1Admin", "dsu1Admin"));
                         Request newRequest = builder.build();
@@ -95,19 +97,24 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
 
 
                         // TODO: 26.12.2023
-                        getInputStreamComminhgPrices[0] =  response.body().source().inputStream();
-                        // TODO: 07.10.2023 end
-                /*        BufferedReader РидерОтСервераМетодаGET;//
-
-                        РидерОтСервераМетодаGET = new BufferedReader(new InputStreamReader(inputStreamОтПинга, StandardCharsets.UTF_8));
-
-                        StringBuffer БуферСамиДанныеОтСервера= РидерОтСервераМетодаGET.lines().collect(StringBuffer::new, (sb, i) -> sb.append(i),
-                                StringBuffer::append);*/
+                        getbyteComminhgPrices[0] =    response.body().source().readByteArray();
 
                         Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                                 " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()
-                                + "     getInputStreamComminhgPrices " + getInputStreamComminhgPrices[0].available());
+                                + "      getbyteComminhgPrices[0]  " + getbyteComminhgPrices[0] .length);
+
+                  /*      // TODO: 07.10.2023 end
+
+                     //inputStream1c[0] = new ByteArrayInputStream( asByteBuffer);
+                      ///  getInputStreamComminhgPrices[0] = ByteSource.wrap(asByteBuffer).openBufferedStream();
+                        BufferedReader       РидерОтСервераМетодаGET = new BufferedReader(new InputStreamReader(getInputStreamComminhgPrices[0], StandardCharsets.UTF_8));
+                        StringBuffer БуферСамиДанныеОтСервера= РидерОтСервераМетодаGET.lines().collect(StringBuffer::new, (sb, i) -> sb.append(i),
+                                StringBuffer::append);
+                        Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()
+                                + "     getInputStreamComminhgPrices " + getInputStreamComminhgPrices[0].available());*/
                     }
 
                     response.body().source().close();
@@ -141,7 +148,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
         new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
                 Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
     }
-        return getInputStreamComminhgPrices[0];
+        return getbyteComminhgPrices[0];
     }
 
 
@@ -158,6 +165,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                             Request originalRequest = chain.request();
                             Request.Builder builder = originalRequest.newBuilder()
                                     .header("user", String.valueOf(PublicId))//TODO old ПубличныйIDДляФрагмента   или 8
+                                    .header("uuid", String.valueOf("1930901025347382624"))//TODO old ПубличныйIDДляФрагмента   или 8
                                     .header("Authorization",
                                             Credentials.basic("dsu1Admin", "dsu1Admin"));
                             Request newRequest = builder.build();
@@ -201,9 +209,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                         // TODO: 26.12.2023
                         InputStream inputStreamОтПинга =  response.body().source().inputStream();
                         // TODO: 07.10.2023 end
-                        BufferedReader РидерОтСервераМетодаGET;//
-
-                            РидерОтСервераМетодаGET = new BufferedReader(new InputStreamReader(inputStreamОтПинга, StandardCharsets.UTF_8));
+                         BufferedReader     РидерОтСервераМетодаGET = new BufferedReader(new InputStreamReader(inputStreamОтПинга, StandardCharsets.UTF_8));
 
                        StringBuffer БуферСамиДанныеОтСервера= РидерОтСервераМетодаGET.lines().collect(StringBuffer::new, (sb, i) -> sb.append(i),
                                 StringBuffer::append);

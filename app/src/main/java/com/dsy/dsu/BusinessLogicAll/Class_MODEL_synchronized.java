@@ -659,9 +659,9 @@ import okio.BufferedSink;
                                         +  " РазмерПришедшегоПотока[0] " + РазмерПришедшегоПотока[0]);
                         }
                         Log.d(this.getClass().getName(), "БуферРезультатПингасСервером " + БуферРезультатПингасСервером +  " РазмерПришедшегоПотока[0] " + РазмерПришедшегоПотока[0]);
+                    }
                         // TODO: 31.05.2022
                         dispatcherПинг.executorService().shutdown();
-                    }
                 } catch (Exception e) {
                     e.printStackTrace();
                     Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() + " Линия  :"
@@ -3877,8 +3877,9 @@ Class_GRUD_SQL_Operations classGrudSqlOperationsУдалениеДанныхЧе
                                             " БуферПубличный " +БуферПубличный);
                                     // TODO: 31.05.2022
                                 }
-                                dispatcherПроверкаЛогиниПароль.executorService().shutdown();
+
                             }
+                            dispatcherПроверкаЛогиниПароль.executorService().shutdown();
                         } catch (Exception e) {
                             e.printStackTrace();
                             Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +

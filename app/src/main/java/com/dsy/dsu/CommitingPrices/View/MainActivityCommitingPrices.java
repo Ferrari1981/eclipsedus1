@@ -21,6 +21,7 @@ import android.view.WindowManager;
 import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesByte;
 import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesString;
 import com.dsy.dsu.CommitingPrices.ViewModel.ModelFactory;
+import com.dsy.dsu.CommitingPrices.ViewModel.ModelFactoryByte;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.R;
 
@@ -57,7 +58,7 @@ public class MainActivityCommitingPrices extends AppCompatActivity {
             // TODO: 25.12.2023 код создание две Фабрики VieModel
             modelComminingPrisesString = new ViewModelProvider(this,  new ModelFactory(5l,this)).get(ModelComminingPrisesString.class );
 
-            modelComminingPrisesByte = new ViewModelProvider(this,  new ModelFactory(5l,this)).get(ModelComminingPrisesByte.class );
+            modelComminingPrisesByte = new ViewModelProvider(this,  new ModelFactoryByte(5l,this)).get(ModelComminingPrisesByte.class );
 
             // TODO: 25.12.2023 запускам бизнес логику
              bl=    new Bl();

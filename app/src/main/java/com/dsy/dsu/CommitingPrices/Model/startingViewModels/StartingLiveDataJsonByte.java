@@ -52,12 +52,12 @@ public class StartingLiveDataJsonByte {
                 Bundle validadress=   Objects.requireNonNullElse(bundle,new Bundle());
                 if(!validadress.isEmpty()) {
                     // TODO: 25.12.2023  пришел ответ в livedata от VieModel
-                    InputStream getInputStreamComminhgPrices=(InputStream) validadress.getSerializable("getInputStreamComminhgPrices");
+                    byte[] getbyteComminhgPrices=  validadress.getByteArray("getbyteComminhgPrices");
 
                     Log.d(this.getClass().getName(),"\n"
                             + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                             " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+ " getInputStreamComminhgPrices " + getInputStreamComminhgPrices);
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+ " getbyteComminhgPrices " + getbyteComminhgPrices);
 
                 }
                 Log.d(this.getClass().getName(),"\n"
