@@ -56,7 +56,7 @@ public class MainActivityCommitingPrices extends AppCompatActivity {
 
 
             // TODO: 25.12.2023 код создание две Фабрики VieModel
-            modelComminingPrisesString = new ViewModelProvider(this,  new ModelFactory(5l,this)).get(ModelComminingPrisesString.class );
+          //  modelComminingPrisesString = new ViewModelProvider(this,  new ModelFactory(5l,this)).get(ModelComminingPrisesString.class );
 
             modelComminingPrisesByte = new ViewModelProvider(this,  new ModelFactoryByte(5l,this)).get(ModelComminingPrisesByte.class );
 

@@ -54,7 +54,7 @@ public class StartingLiveDataJsonByte {
                     // TODO: 25.12.2023  пришел ответ в livedata от VieModel
                     byte[] getbyteComminhgPrices=  validadress.getByteArray("getbyteComminhgPrices");
 
-                    // TODO: 26.12.2023  
+                    // TODO: 26.12.2023  когда данные пришли от 1с согласования цен
                     if (getbyteComminhgPrices.length>0){
 
                         // TODO: 26.12.2023 пришли байты

@@ -109,7 +109,7 @@ public class ModelComminingPrisesByte  extends ViewModel {
                                         adress, 8, getHiltJaksonObjectMapper);
 
                                 // TODO: 26.12.2023 добавление byte для согласование цен
-                                if (getbyteComminhgPrices.length==0) {
+                                if (getbyteComminhgPrices.length>0) {
                                     // TODO: 26.12.2023
                                     bundleByte.putByteArray("getbyteComminhgPrices", getbyteComminhgPrices);
                                 }else {
