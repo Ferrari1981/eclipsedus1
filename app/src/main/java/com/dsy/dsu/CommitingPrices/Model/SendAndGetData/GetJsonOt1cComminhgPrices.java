@@ -55,7 +55,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                         Request originalRequest = chain.request();
                         Request.Builder builder = originalRequest.newBuilder()
                                 .header("user", String.valueOf(PublicId))//TODO old ПубличныйIDДляФрагмента   или 8
-                                .header("uuid", new String())//TODO old ПубличныйIDДляФрагмента   или 8
+                                .header("uuid", String.valueOf(0))//TODO old ПубличныйIDДляФрагмента   или 8
                                 .header("Authorization",
                                         Credentials.basic("dsu1Admin", "dsu1Admin"));
                         Request newRequest = builder.build();

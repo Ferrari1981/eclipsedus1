@@ -49,10 +49,10 @@ public class FragmentCommingPrices extends Fragment {
         super.onCreate(savedInstanceState);
         try{
             // TODO: 26.12.2023  запускаем получение данных из модели как string как byte
-         new BiznesLogicainnerFragment().   getmodelString();
+        // new BiznesLogicainnerFragment().   getmodelString();
 
-    /*        // TODO: 26.12.2023  запускаем получение данных из модели как string как String
-            new BiznesLogicainnerFragment().    getmodelByte();*/
+            // TODO: 26.12.2023  запускаем получение данных из модели как string как String
+            new BiznesLogicainnerFragment().    getmodelByte();
 
             Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +

@@ -106,7 +106,7 @@ public class ModelComminingPrisesByte  extends ViewModel {
 
                                 // TODO: 25.12.2023  Запускаем получее данных на сервеи 1с  byte
                                 byte[] getbyteComminhgPrices = new GetJsonOt1cComminhgPrices().getByteComminhgPrices(context,
-                                        adress, ПубличныйID, getHiltJaksonObjectMapper);
+                                        adress, 8, getHiltJaksonObjectMapper);
 
                                 // TODO: 26.12.2023 добавление byte для согласование цен
                                 if (getbyteComminhgPrices.length>0) {
