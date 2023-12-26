@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModel;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
 import android.content.Context;
@@ -38,6 +39,8 @@ public class MainActivityCommitingPrices extends AppCompatActivity {
  protected    ModelComminingPrisesString modelComminingPrisesString;
 
     protected  ModelComminingPrisesByte modelComminingPrisesByte;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

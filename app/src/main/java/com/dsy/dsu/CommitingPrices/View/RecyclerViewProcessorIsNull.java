@@ -9,45 +9,40 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dsy.dsu.CommitsPayments.Fragment1_List_CommitPay;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.R;
-import com.fasterxml.jackson.databind.JsonNode;
-import com.google.common.util.concurrent.AtomicDouble;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.LinkedBlockingQueue;
 
 // TODO: 09.11.2023 ВТОРОЯ Rereview
-class MyRecycleViewIsNullAdapter extends RecyclerView.Adapter<MyViewHolderComminingPrices> {
+class RecyclerViewProcessorIsNull extends RecyclerView.Adapter<MyViewHolderComminingPrices> {
 
     private    Context context;
     private   MyViewHolderComminingPrices myViewHolderComminingPrices;
     private ConcurrentHashMap<String,String> concurrentHashMapIsNull=new ConcurrentHashMap();
     private  Boolean StepProssecorData1c;
 
-    public MyRecycleViewIsNullAdapter(@NotNull ConcurrentHashMap<String,String> concurrentHashMapIsNull
-            ,@NotNull Boolean StepProssecorData1c, @NotNull Context context) {
+    public RecyclerViewProcessorIsNull(@NotNull ConcurrentHashMap<String,String> concurrentHashMapIsNull
+            , @NotNull Boolean StepProssecorData1c, @NotNull Context context) {
         // TODO: 26.12.2023
         try{
-          this.  concurrentHashMapIsNull=concurrentHashMapIsNull;
-        this.context = context;
-        this.StepProssecorData1c = StepProssecorData1c;
-        Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n" +
-                 " concurrentHashMapIsNull " +concurrentHashMapIsNull);
-    } catch (Exception e) {
-        e.printStackTrace();
-        Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-        new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
-                Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
-    }
+            this.  concurrentHashMapIsNull=concurrentHashMapIsNull;
+            this.context = context;
+            this.StepProssecorData1c = StepProssecorData1c;
+            Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n" +
+                    " concurrentHashMapIsNull " +concurrentHashMapIsNull);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                    " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+            new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
+                    Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+        }
 
     }
 
@@ -207,18 +202,18 @@ class MyRecycleViewIsNullAdapter extends RecyclerView.Adapter<MyViewHolderCommin
         int КоличесвоСтрок=0;
         try{
             // TODO: 26.12.2023 count rows
-         КоличесвоСтрок = concurrentHashMapIsNull.size();
-        Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
-                + " КоличесвоСтрок " +КоличесвоСтрок);
-    } catch (Exception e) {
-        e.printStackTrace();
-        Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-        new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
-                Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
-    }
+            КоличесвоСтрок = concurrentHashMapIsNull.size();
+            Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
+                    + " КоличесвоСтрок " +КоличесвоСтрок);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                    " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+            new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
+                    Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+        }
         // TODO: 28.02.2022
         return КоличесвоСтрок ;
     }

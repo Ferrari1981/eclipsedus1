@@ -6,13 +6,18 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.dsy.dsu.CommitingPrices.Model.startingRecycleViews.StartRecycleViewIsNull;
 import com.dsy.dsu.CommitingPrices.Model.startingViewModels.StartingLiveDataJsonByte;
 import com.dsy.dsu.CommitingPrices.Model.startingViewModels.StartingLiveDataJsonString;
 import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesByte;
@@ -33,6 +38,12 @@ public class FragmentCommingPrices extends Fragment {
     @Inject
     ObjectMapper getHiltJaksonObjectMapper;
 
+    private RecyclerView recyclerViewСогласование1С;
+
+    private FragmentManager fragmentManager;
+    private FragmentTransaction fragmentTransaction;
+
+    private LifecycleOwner lifecycleOwner;
 
     public FragmentCommingPrices() {
         // Required empty public constructor
@@ -48,9 +59,18 @@ public class FragmentCommingPrices extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         try{
+
+            Bundle data=      getArguments();
+            fragmentManager = getActivity(). getSupportFragmentManager();
+            fragmentTransaction = fragmentManager.beginTransaction();
+            lifecycleOwner=this;
+
+
+
+           // StartRecycleViewIsNull startRecycleViewIsNull=new StartRecycleViewIsNull(getContext());
+
             // TODO: 26.12.2023  запускаем получение данных из модели как string как byte
         // new BiznesLogicainnerFragment().   getmodelString();
-
             // TODO: 26.12.2023  запускаем получение данных из модели как string как String
             new BiznesLogicainnerFragment().    getmodelByte();
 
@@ -72,7 +92,11 @@ public class FragmentCommingPrices extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
+        View viewCommintPrices=null;
         try{
+                viewCommintPrices = inflater.inflate(R.layout.activity_main_fragmentcommitprices, container, false);
+
+
         Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
@@ -85,13 +109,28 @@ public class FragmentCommingPrices extends Fragment {
                 Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
     }
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_comming_prices, container, false);
+        //return inflater.inflate(R.layout.fragment_comming_prices, container, false);
+        return viewCommintPrices;
     }
+
+
+
+
+
+
+
+
+
+
+
+
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         try{
+            recyclerViewСогласование1С = view.findViewById(R.id.recycleviewcommitpay);
+
         Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
@@ -104,6 +143,20 @@ public class FragmentCommingPrices extends Fragment {
                 Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
     }
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
  class BiznesLogicainnerFragment{
 
