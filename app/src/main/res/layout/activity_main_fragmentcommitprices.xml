@@ -118,6 +118,19 @@
 
 
 
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_above="@+id/prograessbar_commintingprices"
+                    android:layout_below="@+id/searchview_commintingprices"
+                    android:layout_centerHorizontal="true"
+                    android:background="#FFFFFF"
+                    android:visibility="visible"
+                    android:minHeight="550dp"
+                    tools:ignore="MissingConstraints">
+
+
+
 
                 <androidx.recyclerview.widget.RecyclerView
                     android:id="@+id/recycleview_comminingpprices"
@@ -135,7 +148,7 @@
 
                     tools:ignore="MissingConstraints" />
 
-
+                </androidx.core.widget.NestedScrollView>
 
 
 

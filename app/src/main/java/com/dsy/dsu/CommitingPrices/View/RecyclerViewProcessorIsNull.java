@@ -18,20 +18,18 @@ import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 
 // TODO: 09.11.2023 ВТОРОЯ Rereview
-class RecyclerViewProcessorIsNull extends RecyclerView.Adapter<MyViewHolderComminingPrices> {
+public class RecyclerViewProcessorIsNull extends RecyclerView.Adapter<MyViewHolderComminingPrices2> {
 
     private    Context context;
-    private   MyViewHolderComminingPrices myViewHolderComminingPrices;
-    private ConcurrentHashMap<String,String> concurrentHashMapIsNull=new ConcurrentHashMap();
-    private  Boolean StepProssecorData1c;
+    private MyViewHolderComminingPrices2 myViewHolderComminingPrices2;
+    private ConcurrentHashMap<String,Boolean> concurrentHashMapIsNull ;
 
-    public RecyclerViewProcessorIsNull(@NotNull ConcurrentHashMap<String,String> concurrentHashMapIsNull
-            , @NotNull Boolean StepProssecorData1c, @NotNull Context context) {
+
+    public RecyclerViewProcessorIsNull(@NotNull ConcurrentHashMap<String,Boolean> concurrentHashMapIsNull,@NotNull Context context) {
         // TODO: 26.12.2023
         try{
             this.  concurrentHashMapIsNull=concurrentHashMapIsNull;
             this.context = context;
-            this.StepProssecorData1c = StepProssecorData1c;
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n" +
@@ -48,7 +46,7 @@ class RecyclerViewProcessorIsNull extends RecyclerView.Adapter<MyViewHolderCommi
 
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolderComminingPrices holder, @NonNull int position, @NonNull List<Object> payloads) {
+    public void onBindViewHolder(@NonNull MyViewHolderComminingPrices2 holder, @NonNull int position, @NonNull List<Object> payloads) {
         try {
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
@@ -75,25 +73,25 @@ class RecyclerViewProcessorIsNull extends RecyclerView.Adapter<MyViewHolderCommi
     }
 
     @Override
-    public void onViewRecycled(@NonNull MyViewHolderComminingPrices holder) {
+    public void onViewRecycled(@NonNull MyViewHolderComminingPrices2 holder) {
         super.onViewRecycled(holder);
     }
 
     @Override
-    public boolean onFailedToRecycleView(@NonNull MyViewHolderComminingPrices holder) {
+    public boolean onFailedToRecycleView(@NonNull MyViewHolderComminingPrices2 holder) {
         // TODO: 03.11.2023 Parent
         return super.onFailedToRecycleView(holder);
 
     }
 
     @Override
-    public void onViewAttachedToWindow(@NonNull MyViewHolderComminingPrices holder) {
+    public void onViewAttachedToWindow(@NonNull MyViewHolderComminingPrices2 holder) {
         super.onViewAttachedToWindow(holder);
 
     }
 
     @Override
-    public void onViewDetachedFromWindow(@NonNull MyViewHolderComminingPrices holder) {
+    public void onViewDetachedFromWindow(@NonNull MyViewHolderComminingPrices2 holder) {
         super.onViewDetachedFromWindow(holder);
     }
 
@@ -134,10 +132,12 @@ class RecyclerViewProcessorIsNull extends RecyclerView.Adapter<MyViewHolderCommi
 
     @NonNull
     @Override
-    public MyViewHolderComminingPrices  onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolderComminingPrices2 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View ViewIsNUll = null;
         try {
-            if (StepProssecorData1c ) {
+          Boolean StatusProccessrNull=  concurrentHashMapIsNull.get("RecyclerViewProcessorIsNull");
+
+            if (StatusProccessrNull ) {
                 ViewIsNUll = LayoutInflater.from(parent.getContext())
                         .inflate(R.layout.simple_for_commitpay_cardview1empty_in_prossering, parent, false);
 
@@ -147,12 +147,13 @@ class RecyclerViewProcessorIsNull extends RecyclerView.Adapter<MyViewHolderCommi
 
             }
             // TODO: 22.03.2022 is nnull
-            myViewHolderComminingPrices = new MyViewHolderComminingPrices(ViewIsNUll ,context);
+            myViewHolderComminingPrices2 = new MyViewHolderComminingPrices2(ViewIsNUll);
             // TODO: 26.12.2023
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
-                    + "   ViewIsNUll" + ViewIsNUll + " StepProssecorData1c " +StepProssecorData1c);
+                    + "   ViewIsNUll" + ViewIsNUll + " StatusProccessrNull " +
+                    " " +StatusProccessrNull);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -161,12 +162,12 @@ class RecyclerViewProcessorIsNull extends RecyclerView.Adapter<MyViewHolderCommi
             new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
                     Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
         }
-        return myViewHolderComminingPrices;
+        return myViewHolderComminingPrices2;
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolderComminingPrices holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolderComminingPrices2 holder, int position) {
         try {
 
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +

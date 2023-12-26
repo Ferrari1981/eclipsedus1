@@ -797,7 +797,7 @@ import okio.BufferedSink;
                                             " PUBLIC_CONTENT.ПубличноеПарольДлСервлета " + ПубличноеПароль);
                                     Request originalRequest = chain.request();
                                     Request.Builder builder = originalRequest.newBuilder()
-                                            .header("Content-Type", "application/json ;charset=UTF-8")
+                                            .header("Content-Type", "application/octet-stream ;charset=UTF-8")
                                             .header("Accept-Encoding", "gzip,deflate,sdch")
                                             .header("Connection", "Keep-Alive")
                                             .header("Accept-Language", "ru-RU")
@@ -814,7 +814,8 @@ import okio.BufferedSink;
                     ///  MediaType JSON = MediaType.parse("application/json; charset=utf-16");
 
                     Log.i(context.getClass().getName(), "ГенерацияJSONОтAndroid.toString()" + ГенерацияJSONОтAndroid.toString());
-                      MediaType JSON = MediaType.parse("application/json; charset=utf-16");
+                    // MediaType JSON = MediaType.parse("application/json; charset=utf-16");
+                      MediaType JSON = MediaType.parse("application/octet-stream; charset=utf-8");
 
 
 

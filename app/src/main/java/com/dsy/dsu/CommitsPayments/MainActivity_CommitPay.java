@@ -23,6 +23,9 @@ import com.dsy.dsu.R;
 
 import java.io.Serializable;
 
+import dagger.hilt.android.AndroidEntryPoint;
+
+@AndroidEntryPoint
 public class MainActivity_CommitPay extends FragmentActivity  implements  BinderService1cCommitPay{
     private Activity activity;
     private FragmentManager fragmentManagerДляСогласование;

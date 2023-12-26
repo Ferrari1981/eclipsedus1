@@ -428,7 +428,7 @@ public InputStream   МетодПолучемJSONОт1СДляСогласова
             byte[] dataforsend1cCommitPay= metodGeneraotrSimpleFor1cPayCommit(ПолученныйНомерДокументаСогласования, ПередаемСтатусСогласования,НомерТекущегоДокумента,jsonGenerator);
 
             RequestBody bodyДляОтправки1cСогласования =
-                    RequestBody.create(MediaType.parse("application/json; charset=utf-8"),dataforsend1cCommitPay);
+                    RequestBody.create(MediaType.parse("application/octet-stream; charset=utf-8"),dataforsend1cCommitPay);
           //  RequestBody bodyДляОтправки1cСогласования = RequestBody.create(MediaType.parse("application/json; charset=utf-8"),stringBufferСгенерированыйJSONДляОтпрвкиНа1С.toString());
 
             Request requestPOST = new Request.Builder()
