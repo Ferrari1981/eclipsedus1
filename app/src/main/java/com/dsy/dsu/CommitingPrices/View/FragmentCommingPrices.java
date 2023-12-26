@@ -1,6 +1,5 @@
 package com.dsy.dsu.CommitingPrices.View;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -9,7 +8,6 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentTransaction;
 import androidx.lifecycle.LifecycleOwner;
-import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.util.Log;
@@ -17,16 +15,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.dsy.dsu.CommitingPrices.Model.startingRecycleViews.StartRecycleViewIsNull;
 import com.dsy.dsu.CommitingPrices.Model.startingViewModels.StartingLiveDataJsonByte;
 import com.dsy.dsu.CommitingPrices.Model.startingViewModels.StartingLiveDataJsonString;
 import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesByte;
-import com.dsy.dsu.CommitingPrices.ViewModel.ModelFactory;
 import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesString;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.R;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.common.util.concurrent.AtomicDouble;
 
 import javax.inject.Inject;
 
@@ -38,7 +33,7 @@ public class FragmentCommingPrices extends Fragment {
     @Inject
     ObjectMapper getHiltJaksonObjectMapper;
 
-    private RecyclerView recyclerViewСогласование1С;
+    private RecyclerView recycleview_comminingpprices;
 
     private FragmentManager fragmentManager;
     private FragmentTransaction fragmentTransaction;
@@ -72,7 +67,7 @@ public class FragmentCommingPrices extends Fragment {
             // TODO: 26.12.2023  запускаем получение данных из модели как string как byte
         // new BiznesLogicainnerFragment().   getmodelString();
             // TODO: 26.12.2023  запускаем получение данных из модели как string как String
-            new BiznesLogicainnerFragment().    getmodelByte();
+          //  new BiznesLogicainnerFragment().    getmodelByte();
 
             Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
@@ -129,12 +124,13 @@ public class FragmentCommingPrices extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         try{
-            recyclerViewСогласование1С = view.findViewById(R.id.recycleviewcommitpay);
+            recycleview_comminingpprices = view.findViewById(R.id.recycleview_comminingpprices);
 
         Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
+                " recycleview_comminingpprices " +recycleview_comminingpprices);
     } catch (Exception e) {
         e.printStackTrace();
         Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +

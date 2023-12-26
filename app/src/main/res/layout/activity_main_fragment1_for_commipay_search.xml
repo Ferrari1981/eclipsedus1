@@ -72,22 +72,35 @@
 
 
 
-
-
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recycleviewcommitpay"
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_above="@+id/prograessbarcommitpaydown"
             android:layout_below="@+id/searchview_commitpay"
             android:layout_centerHorizontal="true"
             android:background="#FFFFFF"
-            android:minHeight="550dp"
             android:visibility="visible"
-            android:layout_margin="2dp"
-            android:padding="2dp"
-            tools:ignore="MissingConstraints" />
+            android:minHeight="550dp"
+            tools:ignore="MissingConstraints">
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycleviewcommitpay"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/prograessbarcommitpaydown"
+                android:layout_below="@+id/searchview_commitpay"
+                android:layout_centerHorizontal="true"
+                android:background="#FFFFFF"
+                android:minHeight="550dp"
+                android:visibility="visible"
+                android:layout_margin="2dp"
+                android:padding="2dp"
+                tools:ignore="MissingConstraints" />
+
+        </androidx.core.widget.NestedScrollView>
+
+
+
 
 
 
