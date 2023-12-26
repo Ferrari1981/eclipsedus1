@@ -16,14 +16,18 @@ import com.google.common.io.ByteSource;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.io.Serializable;
 import java.io.StringWriter;
 import java.lang.reflect.Type;
+import java.nio.charset.StandardCharsets;
 import java.util.LinkedHashMap;
 import java.util.Optional;
 import java.util.concurrent.TimeUnit;
+import java.util.zip.GZIPInputStream;
 
 import okhttp3.Call;
 import okhttp3.Callback;
@@ -192,7 +196,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                                 " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()
                                 + "   response.isSuccessful() " +  response.isSuccessful());
 
-                     //   if (response.isSuccessful()) {
+                     if (response.isSuccessful()) {
                             String  ПришедшегоПотока =    response.header("stream_size");
                             ПришедшегоПотока =     Optional.ofNullable(ПришедшегоПотока).map(String::valueOf).orElse("0");
                             Long РазмерПришедшегоПотока = Long.parseLong(ПришедшегоПотока  );
@@ -202,17 +206,22 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                                     .map(String::new).orElse("false"));
 
 
-                            ByteString asByteBuffer=    response.body().source().readByteString();
+                        // TODO: 26.12.2023
+                        InputStream inputStreamОтПинга =  response.body().source().inputStream();
+                        // TODO: 07.10.2023 end
+                        BufferedReader РидерОтСервераМетодаGET;//
 
-                            stringCommingPrecies[0] =asByteBuffer.toString();
+                            РидерОтСервераМетодаGET = new BufferedReader(new InputStreamReader(inputStreamОтПинга, StandardCharsets.UTF_8));
+
+                       StringBuffer БуферСамиДанныеОтСервера= РидерОтСервераМетодаGET.lines().collect(StringBuffer::new, (sb, i) -> sb.append(i),
+                                StringBuffer::append);
 
                             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()
                                     + "     stringCommingPrecies[0] " +  stringCommingPrecies[0]);
-                   //     }
-                        // TODO: 25.12.2023
-                        // TODO: 09.11.2023  close
+                     }
+
                         response.body().source().close();
                         //TODO
                         dispatcher.executorService().shutdown();
