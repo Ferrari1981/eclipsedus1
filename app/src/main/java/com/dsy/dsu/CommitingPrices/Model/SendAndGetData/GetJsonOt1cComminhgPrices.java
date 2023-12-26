@@ -165,7 +165,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                             Request originalRequest = chain.request();
                             Request.Builder builder = originalRequest.newBuilder()
                                     .header("user", String.valueOf(PublicId))//TODO old ПубличныйIDДляФрагмента   или 8
-                                    .header("uuid", String.valueOf("1930901025347382624"))//TODO old ПубличныйIDДляФрагмента   или 8
+                                    .header("uuid", String.valueOf("1930901025250343212"))//TODO old ПубличныйIDДляФрагмента   или 8
                                     .header("Authorization",
                                             Credentials.basic("dsu1Admin", "dsu1Admin"));
                             Request newRequest = builder.build();
@@ -196,7 +196,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                                 " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()
                                 + "   response.isSuccessful() " +  response.isSuccessful());
 
-                     if (response.isSuccessful()) {
+                    // if (response.isSuccessful()) {
                             String  ПришедшегоПотока =    response.header("stream_size");
                             ПришедшегоПотока =     Optional.ofNullable(ПришедшегоПотока).map(String::valueOf).orElse("0");
                             Long РазмерПришедшегоПотока = Long.parseLong(ПришедшегоПотока  );
@@ -207,7 +207,9 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
 
 
                         // TODO: 26.12.2023
-                        InputStream inputStreamОтПинга =  response.body().source().inputStream();
+                     byte[]    getbyteComminhgPrices =    response.body().source().readByteArray();
+                      InputStream   inputStreamОтПинга  = ByteSource.wrap(getbyteComminhgPrices).openBufferedStream();
+
                         // TODO: 07.10.2023 end
                          BufferedReader     РидерОтСервераМетодаGET = new BufferedReader(new InputStreamReader(inputStreamОтПинга, StandardCharsets.UTF_8));
 
@@ -218,7 +220,7 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()
                                     + "     stringCommingPrecies[0] " +  stringCommingPrecies[0]);
-                     }
+                  //   }
 
                         response.body().source().close();
                         //TODO
