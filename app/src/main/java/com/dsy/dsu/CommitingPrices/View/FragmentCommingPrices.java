@@ -1,5 +1,6 @@
 package com.dsy.dsu.CommitingPrices.View;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -20,6 +21,7 @@ import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesString;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.R;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.common.util.concurrent.AtomicDouble;
 
 import javax.inject.Inject;
 
@@ -30,9 +32,6 @@ public class FragmentCommingPrices extends Fragment {
 
     @Inject
     ObjectMapper getHiltJaksonObjectMapper;
-
-
-
 
 
     public FragmentCommingPrices() {
@@ -50,8 +49,10 @@ public class FragmentCommingPrices extends Fragment {
         super.onCreate(savedInstanceState);
         try{
             // TODO: 26.12.2023  запускаем получение данных из модели как string как byte
-            getmodelString();
-           // getmodelByte();
+         new BiznesLogicainnerFragment().   getmodelString();
+
+    /*        // TODO: 26.12.2023  запускаем получение данных из модели как string как String
+            new BiznesLogicainnerFragment().    getmodelByte();*/
 
             Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
@@ -67,73 +68,6 @@ public class FragmentCommingPrices extends Fragment {
     }
 
     }
-
-
-
-
-
-
-    // TODO: 26.12.2023 получение данных в виде String
-    private void getmodelString() {
-        try{
-        ModelComminingPrisesString modelComminingPrisesString =((MainActivityCommitingPrices)getActivity()).modelComminingPrisesString;
-        // TODO: 25.12.2023  предварительный код  получение данныз от 1с
-        // TODO: 25.12.2023  получение данныз от 1с согласования цен String
-        StartingLiveDataJsonString startingLiveDataJsonString =new StartingLiveDataJsonString(modelComminingPrisesString,getContext());
-        // TODO: 25.12.2023 запуска callback
-        startingLiveDataJsonString.getLiveDataCallBacks(this);
-        
-        // TODO: 25.12.2023  запускаем получение Данных
-        modelComminingPrisesString.livedatastartSetJsonSting("http://192.168.254.218/dds_copy/hs/jsonto1ccena/listofdocuments",getHiltJaksonObjectMapper);
-        
-        Log.d(this.getClass().getName(),"\n"
-                + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
-    } catch (Exception e) {
-        e.printStackTrace();
-        Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-        new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
-                Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
-    }
-    }
-
-
-    // TODO: 26.12.2023 получение данных в виде String
-    private void getmodelByte() {
-        try{
-            // ModelComminingPrisesString modelComminingPrisesString =((MainActivityCommitingPrices)getActivity()).modelComminingPrisesString;
-            ModelComminingPrisesByte modelComminingPrisesByte =((MainActivityCommitingPrices)getActivity()).modelComminingPrisesByte;
-
-
-            // TODO: 25.12.2023  предварительный код  получение данныз от 1с
-            // TODO: 25.12.2023  получение данныз от 1с согласования цен String
-            StartingLiveDataJsonByte startingLiveDataJsonByte =new StartingLiveDataJsonByte(modelComminingPrisesByte,getContext());
-            // TODO: 25.12.2023 запуска callback
-            startingLiveDataJsonByte.getLiveDataCallBacks(this);
-
-
-            // TODO: 25.12.2023  запускаем получение Данных
-            modelComminingPrisesByte.livedatastartSetJsonByte("http://192.168.254.218/dds_copy/hs/jsonto1ccena/listofdocuments",getHiltJaksonObjectMapper);
-
-            Log.d(this.getClass().getName(),"\n"
-                    + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                    " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-            new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
-                    Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
-        }
-    }
-    
-    
-    
-    
-    
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -170,4 +104,70 @@ public class FragmentCommingPrices extends Fragment {
                 Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
     }
     }
+
+ class BiznesLogicainnerFragment{
+
+
+     // TODO: 26.12.2023 получение данных в виде String
+     private void getmodelString() {
+         try{
+             ModelComminingPrisesString modelComminingPrisesString =((MainActivityCommitingPrices)getActivity()).modelComminingPrisesString;
+             // TODO: 25.12.2023  предварительный код  получение данныз от 1с
+             // TODO: 25.12.2023  получение данныз от 1с согласования цен String
+             StartingLiveDataJsonString startingLiveDataJsonString =new StartingLiveDataJsonString(modelComminingPrisesString,getContext());
+             // TODO: 25.12.2023 запуска callback
+             startingLiveDataJsonString.getLiveDataCallBacks(getActivity());
+
+             // TODO: 25.12.2023  запускаем получение Данных
+             modelComminingPrisesString.livedatastartSetJsonSting("http://192.168.254.218/dds_copy/hs/jsonto1ccena/listofdocuments",getHiltJaksonObjectMapper);
+
+             Log.d(this.getClass().getName(),"\n"
+                     + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
+         } catch (Exception e) {
+             e.printStackTrace();
+             Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                     " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+             new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
+                     Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+         }
+     }
+
+
+     // TODO: 26.12.2023 получение данных в виде String
+     private void getmodelByte() {
+         try{
+             // ModelComminingPrisesString modelComminingPrisesString =((MainActivityCommitingPrices)getActivity()).modelComminingPrisesString;
+             ModelComminingPrisesByte modelComminingPrisesByte =((MainActivityCommitingPrices)getActivity()).modelComminingPrisesByte;
+
+
+             // TODO: 25.12.2023  предварительный код  получение данныз от 1с
+             // TODO: 25.12.2023  получение данныз от 1с согласования цен String
+             StartingLiveDataJsonByte startingLiveDataJsonByte =new StartingLiveDataJsonByte(modelComminingPrisesByte,getContext());
+             // TODO: 25.12.2023 запуска callback
+             startingLiveDataJsonByte.getLiveDataCallBacks(getActivity());
+
+
+             // TODO: 25.12.2023  запускаем получение Данных
+             modelComminingPrisesByte.livedatastartSetJsonByte("http://192.168.254.218/dds_copy/hs/jsonto1ccena/listofdocuments",getHiltJaksonObjectMapper);
+
+             Log.d(this.getClass().getName(),"\n"
+                     + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
+         } catch (Exception e) {
+             e.printStackTrace();
+             Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                     " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+             new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
+                     Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+         }
+     }
+
+
+
+
+ }
+    // TODO: 26.12.2023 END
 }
