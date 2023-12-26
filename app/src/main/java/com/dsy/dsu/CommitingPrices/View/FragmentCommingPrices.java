@@ -49,6 +49,13 @@ public class FragmentCommingPrices extends Fragment {
        // TODO: 25.12.2023 код создание Фабрики VieModel
             modelComminingPrisesString = new ViewModelProvider(this,  new ModelFactory(5l,getContext())).get(ModelComminingPrisesString.class );
 
+
+
+
+
+
+
+
             // TODO: 25.12.2023  предварительный код  получение данныз от 1с
             // TODO: 25.12.2023  получение данныз от 1с согласования цен String
             StartingLiveDataJsonString startingLiveDataJsonString =new StartingLiveDataJsonString(modelComminingPrisesString,getContext());

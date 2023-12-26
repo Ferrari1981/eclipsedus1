@@ -13,18 +13,18 @@ import io.reactivex.rxjava3.annotations.NonNull;
 
 public abstract  class GetJsonOt1cComminhgPricesParent {
 
-  public abstract InputStream startingGetJsonOt1cComminhgPrices(@NotNull Context context, @NotNull String adress, @NotNull Integer PublicId,
-                                                                @NotNull ObjectMapper objectMapper);
+  public abstract InputStream getInputStreamComminhgPrices(@NotNull Context context, @NotNull String adress, @NotNull Integer PublicId,
+                                                           @NotNull ObjectMapper objectMapper);
 
-  public abstract String startingGetStringOt1cComminhgPrices(@NotNull Context context, @NotNull String adress, @NotNull Integer PublicId,
-                                                             @NotNull ObjectMapper objectMapper);
+  public abstract String getStringComminhgPrices(@NotNull Context context, @NotNull String adress, @NotNull Integer PublicId,
+                                                 @NotNull ObjectMapper objectMapper);
 
-  public  abstract byte[] GenetarJsonGet1cComminhgPrices( @NotNull Context context, @NotNull LinkedHashMap<String,Long> linkedHashMapОтпавркаНа1с,
-                                                          @NonNull ObjectMapper objectMapper);
+  public  abstract byte[] getGeneratorJsonComminhgPrices(@NotNull Context context, @NotNull LinkedHashMap<String,Long> linkedHashMapОтпавркаНа1с,
+                                                         @NonNull ObjectMapper objectMapper);
 
 
 
-  public  abstract Integer DeserializerJson1cComminhgPrices( @NotNull Context context, @NotNull InputStream inputStream, @NonNull ObjectMapper objectMapper);
+  public  abstract Integer getDeserializerJson1cComminhgPrices(@NotNull Context context, @NotNull InputStream inputStream, @NonNull ObjectMapper objectMapper);
 
 
 }

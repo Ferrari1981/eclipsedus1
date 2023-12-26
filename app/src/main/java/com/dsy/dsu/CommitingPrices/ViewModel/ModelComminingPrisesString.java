@@ -26,8 +26,8 @@ import io.reactivex.rxjava3.schedulers.Schedulers;
 
 public class ModelComminingPrisesString extends  ViewModel {
     // TODO: 25.12.2023
-    private   MutableLiveData<Bundle> mutableLiveData= new MutableLiveData<>();
-    private Context context;
+      MutableLiveData<Bundle> mutableLiveData= new MutableLiveData<>();
+     Context context;
     long PublicId;
     public ModelComminingPrisesString(long id, Context context) {
         try{
@@ -41,6 +41,29 @@ public class ModelComminingPrisesString extends  ViewModel {
                 Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
     }
     }
+
+
+
+
+    @Override
+    protected void onCleared() {
+        // clean up resources
+        try{
+            Log.d(context.getClass().getName(),"\n"
+                    + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                    " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+            new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
+                    Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+        }
+    }
+
+
+
 
     public LiveData<Bundle> livedatastartGetJsonSting() {
         try{
@@ -74,7 +97,7 @@ public class ModelComminingPrisesString extends  ViewModel {
                                 new Class_Generations_PUBLIC_CURRENT_ID().ПолучениеПубличногоТекущегоПользователяID(context);
                         // TODO: 25.12.2023  Запускаем получее данных на сервеи 1с  String
                         String string1сСогласования =
-                                new GetJsonOt1cComminhgPrices().startingGetStringOt1cComminhgPrices(context,
+                                new GetJsonOt1cComminhgPrices().getStringComminhgPrices(context,
                                         adress, 8, getHiltJaksonObjectMapper);
                         bundle.putString("string1сСогласования", string1сСогласования);
                     }
@@ -147,21 +170,4 @@ public class ModelComminingPrisesString extends  ViewModel {
 
 
 
-
-    @Override
-    protected void onCleared() {
-        // clean up resources
-        try{
-        Log.d(context.getClass().getName(),"\n"
-                + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
-    } catch (Exception e) {
-        e.printStackTrace();
-        Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-        new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
-                Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
-    }
-    }
 }
