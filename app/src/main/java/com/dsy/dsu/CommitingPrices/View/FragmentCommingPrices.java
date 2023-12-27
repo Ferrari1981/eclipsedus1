@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.DividerItemDecoration;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.os.Handler;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -20,6 +21,7 @@ import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 
+import com.dsy.dsu.CommitingPrices.Model.Handler.HandlerCommintPrices;
 import com.dsy.dsu.CommitingPrices.Model.startingViewModels.StartingLiveDataJsonByte;
 import com.dsy.dsu.CommitingPrices.Model.startingViewModels.StartingLiveDataJsonString;
 import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesByte;
@@ -27,6 +29,7 @@ import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesString;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.R;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.google.android.gms.common.api.Api;
 
 import org.reactivestreams.Subscriber;
 import org.reactivestreams.Subscription;
@@ -39,8 +42,10 @@ import dagger.hilt.android.AndroidEntryPoint;
 import io.reactivex.rxjava3.core.Completable;
 import io.reactivex.rxjava3.core.CompletableObserver;
 import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.core.Observable;
 import io.reactivex.rxjava3.disposables.Disposable;
 import io.reactivex.rxjava3.functions.Action;
+import io.reactivex.rxjava3.functions.BiFunction;
 import io.reactivex.rxjava3.functions.Consumer;
 import io.reactivex.rxjava3.functions.Supplier;
 
@@ -62,6 +67,8 @@ public class FragmentCommingPrices extends Fragment {
 
 
     private Animation animationДляСогласования;
+
+    Handler handler;
 
 
     public FragmentCommingPrices() {
@@ -142,133 +149,19 @@ public class FragmentCommingPrices extends Fragment {
         try{
             recycleview_comminingpprices = view.findViewById(R.id.recycleview_comminingpprices);
 
-            // TODO: 27.12.2023  начинаем запуск is null
-
-            // TODO: 26.12.2023
-/*            biznesLogicainnerFragment.startIsNullRecyreView( );
-
-            biznesLogicainnerFragment.  МетодИнициализацииRecycleViewДляЗадач();*/
 
 
-
-            //create our application node to emit since it's an entity as well
-            final Flowable  flowableInitRecyreView = Flowable.fromSupplier(new Supplier<Object>() {
-                @Override
-                public Object get() throws Throwable {
-                    // TODO: 26.12.2023
-             biznesLogicainnerFragment.startIsNullRecyreView( );
+              // TODO: 27.12.2023  начинаем запуск is null
+            biznesLogicainnerFragment.startIsNullRecyreView( );
 
             biznesLogicainnerFragment.  МетодИнициализацииRecycleViewДляЗадач();
-                    Log.d(this.getClass().getName(),"\n"
-                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                            " recycleview_comminingpprices " +recycleview_comminingpprices);
-                    return recycleview_comminingpprices;
-                }
-            }).doOnError(new Consumer<Throwable>() {
-                @Override
-                public void accept(Throwable throwable) throws Throwable {
-                    throwable.printStackTrace();
-                    Log.e(this.getClass().getName(), "Ошибка " + throwable + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                            " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-                    new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(throwable.toString(), this.getClass().getName(),
-                            Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
-                }
-            }).doOnComplete(new Action() {
-                @Override
-                public void run() throws Throwable {
-                    Log.d(this.getClass().getName(),"\n"
-                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                            " recycleview_comminingpprices " +recycleview_comminingpprices);
-                }
-            });
-
-            //create our application node to emit since it's an entity as well
-            final Flowable  flowableGetDataFron1cCominitPricers = Flowable.fromSupplier(new Supplier<Object>() {
-                @Override
-                public Object get() throws Throwable {
-                    // TODO: 26.12.2023
-                    biznesLogicainnerFragment.  getmodelByte();
-                    Log.d(this.getClass().getName(),"\n"
-                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                            " recycleview_comminingpprices " +recycleview_comminingpprices);
-                    return recycleview_comminingpprices;
-                }
-            }).doOnError(new Consumer<Throwable>() {
-                @Override
-                public void accept(Throwable throwable) throws Throwable {
-                    throwable.printStackTrace();
-                    Log.e(this.getClass().getName(), "Ошибка " + throwable + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                            " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-                    new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(throwable.toString(), this.getClass().getName(),
-                            Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
-                }
-            }).doOnComplete(new Action() {
-                @Override
-                public void run() throws Throwable {
-                    Log.d(this.getClass().getName(),"\n"
-                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                            " recycleview_comminingpprices " +recycleview_comminingpprices);
-                }
-            });
-
-
-            Flowable.merge(flowableInitRecyreView,flowableGetDataFron1cCominitPricers).subscribe(new Subscriber() {
-                @Override
-                public void onSubscribe(Subscription s) {
-
-                    Log.d(this.getClass().getName(),"\n"
-                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                            " recycleview_comminingpprices " +recycleview_comminingpprices);
-                }
-
-                @Override
-                public void onNext(Object o) {
-
-                    Log.d(this.getClass().getName(),"\n"
-                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                            " recycleview_comminingpprices " +recycleview_comminingpprices);
-                }
-
-                @Override
-                public void onError(Throwable t) {
-
-                    Log.d(this.getClass().getName(),"\n"
-                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                            " recycleview_comminingpprices " +recycleview_comminingpprices);
-                }
-
-                @Override
-                public void onComplete() {
-
-                    Log.d(this.getClass().getName(),"\n"
-                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                            " recycleview_comminingpprices " +recycleview_comminingpprices);
-                }
-            });
-
-
 
             Log.d(this.getClass().getName(),"\n"
                     + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
                     " recycleview_comminingpprices " +recycleview_comminingpprices);
+
 
     } catch (Exception e) {
         e.printStackTrace();
@@ -285,6 +178,8 @@ public class FragmentCommingPrices extends Fragment {
         super.onStart();
  try{
 
+     // TODO: 26.12.2023
+     biznesLogicainnerFragment.getmodelByte();
 
         Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
@@ -397,8 +292,9 @@ public class FragmentCommingPrices extends Fragment {
         public void completeIsNullRecyreView() {
             try{
                 if (myRecycleViewIsNullAdapters!=null) {
-                    myRecycleViewIsNullAdapters.arrayListIsNull1cData.clear();
-                    myRecycleViewIsNullAdapters.arrayListIsNull1cData.add(false);
+                    ArrayList<Boolean> arrayListIsNull1cData=new ArrayList<>();
+                    arrayListIsNull1cData.add(false);
+                    myRecycleViewIsNullAdapters.arrayListIsNull1cData=arrayListIsNull1cData;
                     myRecycleViewIsNullAdapters.notifyDataSetChanged();
                     RecyclerView.Adapter recyclerViewAdapter=         recycleview_comminingpprices.getAdapter();
                     recycleview_comminingpprices.swapAdapter(recyclerViewAdapter,true);

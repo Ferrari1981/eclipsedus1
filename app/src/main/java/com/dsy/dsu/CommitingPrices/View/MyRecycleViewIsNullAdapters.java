@@ -2,12 +2,14 @@ package com.dsy.dsu.CommitingPrices.View;// TODO: 27.12.2023 Recyreview is null
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.os.Build;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.dsy.dsu.CommitingPrices.View.FragmentCommingPrices;
@@ -167,11 +169,6 @@ public  class MyRecycleViewIsNullAdapters extends RecyclerView.Adapter<MyViewHol
             // TODO: 22.03.2022
             viewHolders = new MyViewHolders(viewГлавныйВидДляRecyclleViewДляСогласованияISNull,context);
 
-
-
-
-
-          
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
@@ -192,10 +189,12 @@ public  class MyRecycleViewIsNullAdapters extends RecyclerView.Adapter<MyViewHol
 
     }
 
+
+    @RequiresApi(api = Build.VERSION_CODES.P)
+    @SuppressLint("RecyclerView")
     @Override
     public void onBindViewHolder(@NonNull MyViewHolders holder, int position) {
         try {
-
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
