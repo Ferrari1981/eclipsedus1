@@ -10,25 +10,25 @@ import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.LiveData;
 import androidx.lifecycle.Observer;
 
+import com.dsy.dsu.CommitingPrices.View.FragmentCommingPrices;
 import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesByte;
-import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesString;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 
 import org.jetbrains.annotations.NotNull;
 
-import java.io.InputStream;
-import java.io.Serializable;
 import java.util.Objects;
 
 // TODO: 25.12.2023  бизнес логика
 public class StartingLiveDataJsonByte {
    private ModelComminingPrisesByte modelComminingPrisesByte;
   private   Context context;
+  private   FragmentCommingPrices.BiznesLogicainnerFragment biznesLogicainnerFragment;
     @SuppressLint("SuspiciousIndentation")
-    public StartingLiveDataJsonByte(@NotNull  ModelComminingPrisesByte modelComminingPrisesByte , @NotNull Context context) {
+    public StartingLiveDataJsonByte(@NotNull  ModelComminingPrisesByte modelComminingPrisesByte , @NotNull Context context,@NotNull FragmentCommingPrices.BiznesLogicainnerFragment biznesLogicainnerFragment) {
         try{
         this.modelComminingPrisesByte = modelComminingPrisesByte;
         this.context = context;
+        this.biznesLogicainnerFragment = biznesLogicainnerFragment;
             Log.d(this.getClass().getName(),"\n"
                     + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
@@ -50,12 +50,12 @@ public class StartingLiveDataJsonByte {
             public void onChanged(Bundle bundle) {
                 // TODO: 25.12.2023
                 Bundle validadress=   Objects.requireNonNullElse(bundle,new Bundle());
-                if(!validadress.isEmpty()) {
+
                     // TODO: 25.12.2023  пришел ответ в livedata от VieModel
                     byte[] getbyteComminhgPrices=  validadress.getByteArray("getbyteComminhgPrices");
 
                     // TODO: 26.12.2023  когда данные пришли от 1с согласования цен
-                    if (getbyteComminhgPrices.length>0){
+                    if (getbyteComminhgPrices.length==0){
 
                         // TODO: 26.12.2023 пришли байты
                         Log.d(this.getClass().getName(),"\n"
@@ -63,6 +63,9 @@ public class StartingLiveDataJsonByte {
                                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                                 " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+ " getbyteComminhgPrices " + getbyteComminhgPrices);
                     }else {
+
+
+                        biznesLogicainnerFragment.completeIsNullRecyreView();
 
                         // TODO: 26.12.2023 пришли байты
                         Log.d(this.getClass().getName(),"\n"
@@ -77,11 +80,6 @@ public class StartingLiveDataJsonByte {
                             " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+ " getbyteComminhgPrices " + getbyteComminhgPrices);
 
                 }
-                Log.d(this.getClass().getName(),"\n"
-                        + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                        " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                        " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
-            }
         });
 
     } catch (Exception e) {

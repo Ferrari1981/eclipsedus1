@@ -1,6 +1,5 @@
 package com.dsy.dsu.CommitingPrices.View;
 
-import android.content.Context;
 import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 
@@ -20,30 +19,30 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.ProgressBar;
-import android.widget.TableLayout;
-import android.widget.TextView;
 
 import com.dsy.dsu.CommitingPrices.Model.startingViewModels.StartingLiveDataJsonByte;
 import com.dsy.dsu.CommitingPrices.Model.startingViewModels.StartingLiveDataJsonString;
 import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesByte;
 import com.dsy.dsu.CommitingPrices.ViewModel.ModelComminingPrisesString;
-import com.dsy.dsu.CommitsPayments.Fragment1_List_CommitPay;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.R;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.google.android.material.button.MaterialButton;
-import com.google.android.material.card.MaterialCardView;
 
-import org.jetbrains.annotations.NotNull;
+import org.reactivestreams.Subscriber;
+import org.reactivestreams.Subscription;
 
 import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.inject.Inject;
 
 import dagger.hilt.android.AndroidEntryPoint;
+import io.reactivex.rxjava3.core.Completable;
+import io.reactivex.rxjava3.core.CompletableObserver;
+import io.reactivex.rxjava3.core.Flowable;
+import io.reactivex.rxjava3.disposables.Disposable;
+import io.reactivex.rxjava3.functions.Action;
+import io.reactivex.rxjava3.functions.Consumer;
+import io.reactivex.rxjava3.functions.Supplier;
 
 @AndroidEntryPoint
 public class FragmentCommingPrices extends Fragment {
@@ -146,15 +145,131 @@ public class FragmentCommingPrices extends Fragment {
             // TODO: 27.12.2023  начинаем запуск is null
 
             // TODO: 26.12.2023
-            biznesLogicainnerFragment.startingInsertRecyreViewIsNull(true);
+/*            biznesLogicainnerFragment.startIsNullRecyreView( );
+
+            biznesLogicainnerFragment.  МетодИнициализацииRecycleViewДляЗадач();*/
+
+
+
+            //create our application node to emit since it's an entity as well
+            final Flowable  flowableInitRecyreView = Flowable.fromSupplier(new Supplier<Object>() {
+                @Override
+                public Object get() throws Throwable {
+                    // TODO: 26.12.2023
+             biznesLogicainnerFragment.startIsNullRecyreView( );
 
             biznesLogicainnerFragment.  МетодИнициализацииRecycleViewДляЗадач();
+                    Log.d(this.getClass().getName(),"\n"
+                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
+                            " recycleview_comminingpprices " +recycleview_comminingpprices);
+                    return recycleview_comminingpprices;
+                }
+            }).doOnError(new Consumer<Throwable>() {
+                @Override
+                public void accept(Throwable throwable) throws Throwable {
+                    throwable.printStackTrace();
+                    Log.e(this.getClass().getName(), "Ошибка " + throwable + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                            " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                    new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(throwable.toString(), this.getClass().getName(),
+                            Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+                }
+            }).doOnComplete(new Action() {
+                @Override
+                public void run() throws Throwable {
+                    Log.d(this.getClass().getName(),"\n"
+                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
+                            " recycleview_comminingpprices " +recycleview_comminingpprices);
+                }
+            });
+
+            //create our application node to emit since it's an entity as well
+            final Flowable  flowableGetDataFron1cCominitPricers = Flowable.fromSupplier(new Supplier<Object>() {
+                @Override
+                public Object get() throws Throwable {
+                    // TODO: 26.12.2023
+                    biznesLogicainnerFragment.  getmodelByte();
+                    Log.d(this.getClass().getName(),"\n"
+                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
+                            " recycleview_comminingpprices " +recycleview_comminingpprices);
+                    return recycleview_comminingpprices;
+                }
+            }).doOnError(new Consumer<Throwable>() {
+                @Override
+                public void accept(Throwable throwable) throws Throwable {
+                    throwable.printStackTrace();
+                    Log.e(this.getClass().getName(), "Ошибка " + throwable + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                            " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                    new Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(throwable.toString(), this.getClass().getName(),
+                            Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+                }
+            }).doOnComplete(new Action() {
+                @Override
+                public void run() throws Throwable {
+                    Log.d(this.getClass().getName(),"\n"
+                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
+                            " recycleview_comminingpprices " +recycleview_comminingpprices);
+                }
+            });
+
+
+            Flowable.merge(flowableInitRecyreView,flowableGetDataFron1cCominitPricers).subscribe(new Subscriber() {
+                @Override
+                public void onSubscribe(Subscription s) {
+
+                    Log.d(this.getClass().getName(),"\n"
+                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
+                            " recycleview_comminingpprices " +recycleview_comminingpprices);
+                }
+
+                @Override
+                public void onNext(Object o) {
+
+                    Log.d(this.getClass().getName(),"\n"
+                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
+                            " recycleview_comminingpprices " +recycleview_comminingpprices);
+                }
+
+                @Override
+                public void onError(Throwable t) {
+
+                    Log.d(this.getClass().getName(),"\n"
+                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
+                            " recycleview_comminingpprices " +recycleview_comminingpprices);
+                }
+
+                @Override
+                public void onComplete() {
+
+                    Log.d(this.getClass().getName(),"\n"
+                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
+                            " recycleview_comminingpprices " +recycleview_comminingpprices);
+                }
+            });
+
+
 
             Log.d(this.getClass().getName(),"\n"
-                + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                " recycleview_comminingpprices " +recycleview_comminingpprices);
+                    + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
+                    " recycleview_comminingpprices " +recycleview_comminingpprices);
+
     } catch (Exception e) {
         e.printStackTrace();
         Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
@@ -186,7 +301,7 @@ public class FragmentCommingPrices extends Fragment {
     }
 
     // TODO: 26.12.2023  бизнес логика самого Фрагмента CommintPrices
-    class BiznesLogicainnerFragment{
+    public class BiznesLogicainnerFragment{
 
 
      // TODO: 26.12.2023 получение данных в виде String
@@ -217,7 +332,7 @@ public class FragmentCommingPrices extends Fragment {
 
 
      // TODO: 26.12.2023 получение данных в виде String
-     private void getmodelByte() {
+     public void getmodelByte() {
          try{
              // ModelComminingPrisesString modelComminingPrisesString =((MainActivityCommitingPrices)getActivity()).modelComminingPrisesString;
              ModelComminingPrisesByte modelComminingPrisesByte =((MainActivityCommitingPrices)getActivity()).modelComminingPrisesByte;
@@ -225,7 +340,7 @@ public class FragmentCommingPrices extends Fragment {
 
              // TODO: 25.12.2023  предварительный код  получение данныз от 1с
              // TODO: 25.12.2023  получение данныз от 1с согласования цен String
-             StartingLiveDataJsonByte startingLiveDataJsonByte =new StartingLiveDataJsonByte(modelComminingPrisesByte,getContext());
+             StartingLiveDataJsonByte startingLiveDataJsonByte =new StartingLiveDataJsonByte(modelComminingPrisesByte,getContext(),   biznesLogicainnerFragment);
              // TODO: 25.12.2023 запуска callback
              startingLiveDataJsonByte.getLiveDataCallBacks(getActivity());
 
@@ -250,19 +365,20 @@ public class FragmentCommingPrices extends Fragment {
 // TODO: 26.12.2023 download one NULL data from 1c  Согласование Цен
 
 
-        void startingInsertRecyreViewIsNull(@NotNull Boolean СтатусЗагрузки ) {
+        public void startIsNullRecyreView( ) {
             try {
-                    ArrayList<Boolean>arrayListIsNull1cData=new ArrayList<>();
-                    arrayListIsNull1cData.add(СтатусЗагрузки);
-                    myRecycleViewIsNullAdapters = new MyRecycleViewIsNullAdapters(arrayListIsNull1cData,getContext());
+                if (myRecycleViewIsNullAdapters==null) {
+                    ArrayList<Boolean> arrayListIsNull1cData = new ArrayList<>();
+                    arrayListIsNull1cData.add(true);
+                    myRecycleViewIsNullAdapters = new MyRecycleViewIsNullAdapters(arrayListIsNull1cData, getContext(),biznesLogicainnerFragment);
                     myRecycleViewIsNullAdapters.notifyDataSetChanged();
                     recycleview_comminingpprices.setAdapter(myRecycleViewIsNullAdapters);
                     recycleview_comminingpprices.getAdapter().notifyDataSetChanged();
-                Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                        " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                        " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n" +"myRecycleViewIsNullAdapters  "
-                        + myRecycleViewIsNullAdapters);
-
+                    Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n" + "myRecycleViewIsNullAdapters  "
+                            + myRecycleViewIsNullAdapters);
+                }
 
                 Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                         " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
@@ -276,6 +392,38 @@ public class FragmentCommingPrices extends Fragment {
                         Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
             }
         }
+
+
+        public void completeIsNullRecyreView() {
+            try{
+                if (myRecycleViewIsNullAdapters!=null) {
+                    myRecycleViewIsNullAdapters.arrayListIsNull1cData.clear();
+                    myRecycleViewIsNullAdapters.arrayListIsNull1cData.add(false);
+                    myRecycleViewIsNullAdapters.notifyDataSetChanged();
+                    RecyclerView.Adapter recyclerViewAdapter=         recycleview_comminingpprices.getAdapter();
+                    recycleview_comminingpprices.swapAdapter(recyclerViewAdapter,true);
+                    recycleview_comminingpprices.getAdapter().notifyDataSetChanged();
+                }
+                Log.d(this.getClass().getName(), "\n" + " class " +
+                        Thread.currentThread().getStackTrace()[2].getClassName()
+                        + "\n" +
+                        " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                        " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"  + " myRecycleViewIsNullAdapters " +myRecycleViewIsNullAdapters);
+            } catch (Exception e) {
+                e.printStackTrace();
+                Log.e(getContext().getClass().getName(),
+                        "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                                " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                new   Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(),
+                        this.getClass().getName().toString(), Thread.currentThread().getStackTrace()[2].getMethodName().toString(),
+                        Thread.currentThread().getStackTrace()[2].getLineNumber());
+            }
+
+        }
+
+
+
+
 
 
 

@@ -1,5 +1,6 @@
 package com.dsy.dsu.CommitingPrices.View;// TODO: 27.12.2023 Recyreview is null
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -21,14 +22,19 @@ import java.util.function.Supplier;
 
 // TODO: 09.11.2023 ВТОРОЯ Rereview
 public  class MyRecycleViewIsNullAdapters extends RecyclerView.Adapter<MyViewHolders> {
-    private ArrayList<Boolean> arrayListIsNull1cData=new ArrayList<>();
-    Context context;
-    MyViewHolders viewHolders;
-    public MyRecycleViewIsNullAdapters(@NotNull ArrayList<Boolean>arrayListIsNull1cData,@NotNull Context context) {
+    protected ArrayList<Boolean> arrayListIsNull1cData=new ArrayList<>();
+  private   Context context;
+  private   MyViewHolders viewHolders;
+    private FragmentCommingPrices.BiznesLogicainnerFragment biznesLogicainnerFragment;
+    @SuppressLint("SuspiciousIndentation")
+    public MyRecycleViewIsNullAdapters(@NotNull ArrayList<Boolean>arrayListIsNull1cData,
+                                       @NotNull Context context,
+                                       @NotNull FragmentCommingPrices.BiznesLogicainnerFragment biznesLogicainnerFragment) {
         // super();
         try{
         this.arrayListIsNull1cData = arrayListIsNull1cData;
         this.context = context;
+        this.biznesLogicainnerFragment = biznesLogicainnerFragment;
             Log.d(this.getClass().getName(),"\n"
                     + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
@@ -131,6 +137,7 @@ public  class MyRecycleViewIsNullAdapters extends RecyclerView.Adapter<MyViewHol
     }
 
 
+    @SuppressLint("SuspiciousIndentation")
     @NonNull
     @Override
     public MyViewHolders onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -139,16 +146,31 @@ public  class MyRecycleViewIsNullAdapters extends RecyclerView.Adapter<MyViewHol
 // TODO: 27.12.2023 загрузка когда нет данных  
         Boolean СтатусЗагрузки=    arrayListIsNull1cData.stream().findFirst().get();
         
-          if (СтатусЗагрузки==false) {
+          if (СтатусЗагрузки ) {
             viewГлавныйВидДляRecyclleViewДляСогласованияISNull = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.simple_for_commitpay_cardview1empty_in_prossering, parent, false);
+
+              Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                      " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                      " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
+                      + "   viewГлавныйВидДляRecyclleViewДляСогласованияISNull" + viewГлавныйВидДляRecyclleViewДляСогласованияISNull);
         }else {
               
             viewГлавныйВидДляRecyclleViewДляСогласованияISNull = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.simple_for_commitpay_dont_jsonot1c, parent, false);
+
+              Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                      " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                      " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
+                      + "   viewГлавныйВидДляRecyclleViewДляСогласованияISNull" + viewГлавныйВидДляRecyclleViewДляСогласованияISNull);
             }
             // TODO: 22.03.2022
             viewHolders = new MyViewHolders(viewГлавныйВидДляRecyclleViewДляСогласованияISNull,context);
+
+
+
+
+
           
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
@@ -162,6 +184,10 @@ public  class MyRecycleViewIsNullAdapters extends RecyclerView.Adapter<MyViewHol
             new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
                     Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
         }
+        Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
+                + "   viewГлавныйВидДляRecyclleViewДляСогласованияISNull" + viewГлавныйВидДляRecyclleViewДляСогласованияISNull);
         return viewHolders;
 
     }

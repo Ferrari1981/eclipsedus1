@@ -95,80 +95,49 @@ public class ModelComminingPrisesByte  extends ViewModel {
         // TODO: 25.12.2023 set
         try{
             Bundle bundleByte = new Bundle();
-            Completable.fromSupplier(new Supplier<Bundle>() {
-                        @Override
-                        public Bundle get() throws Throwable {
-                            String validadress=  Objects.requireNonNullElse(adress,"");
-                            if(!validadress.isEmpty()) {
-                                // TODO: 25.12.2023  get PUBLIC id
-                                Integer ПубличныйID =
-                                        new Class_Generations_PUBLIC_CURRENT_ID().ПолучениеПубличногоТекущегоПользователяID(context);
+            String validadress=  Objects.requireNonNullElse(adress,"");
+            if(!validadress.isEmpty()) {
+                // TODO: 25.12.2023  get PUBLIC id
+                Integer ПубличныйID =
+                        new Class_Generations_PUBLIC_CURRENT_ID().ПолучениеПубличногоТекущегоПользователяID(context);
 
-                                // TODO: 25.12.2023  Запускаем получее данных на сервеи 1с  byte
-                                byte[] getbyteComminhgPrices = new GetJsonOt1cComminhgPrices().getByteComminhgPrices(context,
-                                        adress, 8, getHiltJaksonObjectMapper);
+                // TODO: 25.12.2023  Запускаем получее данных на сервеи 1с  byte
+                byte[] getbyteComminhgPrices = new GetJsonOt1cComminhgPrices().getByteComminhgPrices(context,
+                        adress, 8, getHiltJaksonObjectMapper);
 
-                                // TODO: 26.12.2023 добавление byte для согласование цен
-                                if (getbyteComminhgPrices.length>0) {
-                                    // TODO: 26.12.2023
-                                    bundleByte.putByteArray("getbyteComminhgPrices", getbyteComminhgPrices);
-                                }else {
-                                    // TODO: 26.12.2023
-                                    // TODO: 26.12.2023
-                                    bundleByte.putByteArray("getbyteComminhgPrices","".getBytes());
-                                }
+                // TODO: 26.12.2023 добавление byte для согласование цен
+                if (getbyteComminhgPrices.length>0) {
+                    // TODO: 26.12.2023
+                    bundleByte.putByteArray("getbyteComminhgPrices", getbyteComminhgPrices);
 
-                                Log.d(this.getClass().getName(),"\n"
-                                        + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                                        " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                                        " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
-                                
-                                
-                           
-                            }
-                            Log.d(this.getClass().getName(),"\n"
-                                    + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + " bundleByte " +bundleByte);
+                    // TODO: 26.12.2023
+                    Log.d(this.getClass().getName(),"\n"
+                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                }else {
+                    // TODO: 26.12.2023
+                    // TODO: 26.12.2023
+                    bundleByte.putByteArray("getbyteComminhgPrices","".getBytes());
+
+                    // TODO: 26.12.2023
+                    Log.d(this.getClass().getName(),"\n"
+                            + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                            " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                            " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                }
 
 
-                            return bundleByte;
-                        }
-                    }).subscribeOn(Schedulers.single())
-                    .observeOn(AndroidSchedulers.mainThread())
-                    .doOnComplete(()->{
-                        // TODO: 25.12.2023  полученый результат обнолвяем экран
-                        mutableLiveData.setValue(bundleByte);
-                        Log.d(this.getClass().getName(),"\n"
-                                + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber());
+                // TODO: 25.12.2023  полученый результат обнолвяем экран
+                mutableLiveData.setValue(bundleByte);
 
-                    })
-                    .doOnError(new Consumer<Throwable>() {
-                        @Override
-                        public void accept(Throwable throwable) throws Throwable {
-                            Log.e(this.getClass().getName(), "Ошибка " + throwable + " Метод :" +
-                                    Thread.currentThread().getStackTrace()[2].getMethodName() +
-                                    " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-                            new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(throwable.toString(),
-                                    this.getClass().getName(),
-                                    Thread.currentThread().getStackTrace()[2].getMethodName(),
-                                    Thread.currentThread().getStackTrace()[2].getLineNumber());
-                        }
-                    }).onErrorComplete(new Predicate<Throwable>() {
-                        @Override
-                        public boolean test(Throwable throwable) throws Throwable {
-                            Log.e(this.getClass().getName(), "Ошибка " +throwable + " Метод :" +
-                                    Thread.currentThread().getStackTrace()[2].getMethodName() +
-                                    " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-                            new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(throwable.toString(),
-                                    this.getClass().getName(),
-                                    Thread.currentThread().getStackTrace()[2].getMethodName(),
-                                    Thread.currentThread().getStackTrace()[2].getLineNumber());
-                            return false;
-                        }
-                    }).subscribe();
+            }
+            Log.d(this.getClass().getName(),"\n"
+                    + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + " bundleByte " +bundleByte);
+
+
             
         } catch (Exception e) {
             e.printStackTrace();

@@ -15,6 +15,7 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.security.KeyStore;
 import java.security.SecureRandom;
+import java.security.cert.Certificate;
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
 import java.util.Date;
@@ -55,8 +56,18 @@ public class GetssFactory2 extends  BissennsLogica {
             // Get the file of our certificate
            caFileInputStream = context.getResources().openRawResource(R.raw.certificate_bks_31);
             // We're going to put our certificates in a Keystore
-            KeyStore keyStore = KeyStore.getInstance("BKS");
+            KeyStore keyStore = KeyStore.getInstance("BKS", "BC");
             keyStore.load(caFileInputStream, "secret".toCharArray());
+
+
+
+            TrustManagerFactory trustManagerFactory=TrustManagerFactory.getInstance(TrustManagerFactory.getDefaultAlgorithm());
+            trustManagerFactory.init(keyStore);
+
+
+
+
+
 
             // Create a KeyManagerFactory with our specific algorithm our our public keys
             // Most of the cases is gonna be "X509"
