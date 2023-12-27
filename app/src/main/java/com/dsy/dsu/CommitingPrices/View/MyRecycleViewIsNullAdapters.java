@@ -19,11 +19,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TODO: 09.11.2023 ВТОРОЯ Rereview
-public  class MyRecycleViewIsNullAdapter extends RecyclerView.Adapter<MyViewHolder> {
+public  class MyRecycleViewIsNullAdapters extends RecyclerView.Adapter<MyViewHolders> {
     private ArrayList<String> arrayListIsNull1cData=new ArrayList<>();
     Context context;
-    MyViewHolder viewHolder;
-    public MyRecycleViewIsNullAdapter(@NotNull ArrayList<String>arrayListIsNull1cData,@NotNull Context context) {
+    MyViewHolders viewHolder;
+    public MyRecycleViewIsNullAdapters(@NotNull ArrayList<String>arrayListIsNull1cData,@NotNull Context context) {
         // super();
         this.arrayListIsNull1cData = arrayListIsNull1cData;
         this.context = context;
@@ -33,7 +33,7 @@ public  class MyRecycleViewIsNullAdapter extends RecyclerView.Adapter<MyViewHold
 
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, @NonNull int position, @NonNull List<Object> payloads) {
+    public void onBindViewHolder(@NonNull MyViewHolders holder, @NonNull int position, @NonNull List<Object> payloads) {
         try {
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
@@ -62,25 +62,25 @@ public  class MyRecycleViewIsNullAdapter extends RecyclerView.Adapter<MyViewHold
     }
 
     @Override
-    public void onViewRecycled(@NonNull MyViewHolder holder) {
+    public void onViewRecycled(@NonNull MyViewHolders holder) {
         super.onViewRecycled(holder);
     }
 
     @Override
-    public boolean onFailedToRecycleView(@NonNull MyViewHolder holder) {
+    public boolean onFailedToRecycleView(@NonNull MyViewHolders holder) {
         // TODO: 03.11.2023 Parent
         return super.onFailedToRecycleView(holder);
 
     }
 
     @Override
-    public void onViewAttachedToWindow(@NonNull MyViewHolder holder) {
+    public void onViewAttachedToWindow(@NonNull MyViewHolders holder) {
         super.onViewAttachedToWindow(holder);
 
     }
 
     @Override
-    public void onViewDetachedFromWindow(@NonNull MyViewHolder holder) {
+    public void onViewDetachedFromWindow(@NonNull MyViewHolders holder) {
         super.onViewDetachedFromWindow(holder);
     }
 
@@ -120,7 +120,7 @@ public  class MyRecycleViewIsNullAdapter extends RecyclerView.Adapter<MyViewHold
 
     @NonNull
     @Override
-    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public MyViewHolders onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View viewГлавныйВидДляRecyclleViewДляСогласованияISNull = null;
         try {
 
@@ -137,7 +137,7 @@ public  class MyRecycleViewIsNullAdapter extends RecyclerView.Adapter<MyViewHold
             // }
 
             // TODO: 22.03.2022
-            viewHolder = new MyViewHolder(viewГлавныйВидДляRecyclleViewДляСогласованияISNull,context);
+            viewHolder = new MyViewHolders(viewГлавныйВидДляRecyclleViewДляСогласованияISNull,context);
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
@@ -155,7 +155,7 @@ public  class MyRecycleViewIsNullAdapter extends RecyclerView.Adapter<MyViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolders holder, int position) {
         try {
 
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +

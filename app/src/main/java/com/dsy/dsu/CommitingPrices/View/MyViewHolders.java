@@ -18,7 +18,7 @@ import com.google.android.material.card.MaterialCardView;
 import org.jetbrains.annotations.NotNull;
 
 // TODO: 28.02.2022 начало  MyViewHolderДляЧата
-public class MyViewHolder extends RecyclerView.ViewHolder {// TODO: 28.02.2022 начало  MyViewHolderДляЧата
+public class MyViewHolders extends RecyclerView.ViewHolder {// TODO: 28.02.2022 начало  MyViewHolderДляЧата
     // TODO: 28.02.2022
     private TextView textView1, textView2, textView3, textView4, textView5Намеклатура, textorganizationvalue, textvalueSUM;
     private      TextView textViewКонтрагент,textViewЦФО,textViewДДС,TextViewНамелклатура;
@@ -29,7 +29,7 @@ public class MyViewHolder extends RecyclerView.ViewHolder {// TODO: 28.02.2022 �
     Context context;
 
     // TODO: 02.03.2022
-    public MyViewHolder(@NonNull View itemView, @NotNull Context context) {
+    public MyViewHolders(@NonNull View itemView, @NotNull Context context) {
         super(itemView);
         try{
             this.context=context;

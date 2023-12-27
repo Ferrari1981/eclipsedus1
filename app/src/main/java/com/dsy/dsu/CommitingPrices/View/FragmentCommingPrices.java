@@ -63,6 +63,15 @@ public class FragmentCommingPrices extends Fragment {
     private BiznesLogicainnerFragment.MyRecycleViewIsNullAdapter myRecycleViewIsNullAdapter;
     private BiznesLogicainnerFragment.MyViewHolder myViewHolder;
 
+
+
+    private  MyRecycleViewIsNullAdapters myRecycleViewIsNullAdapters;
+    private  MyViewHolders myViewHolders;
+
+
+
+
+
     private Animation animationДляСогласования;
 
 
@@ -258,12 +267,12 @@ public class FragmentCommingPrices extends Fragment {
         void startingInsertRecyreViewIsNull() {
             try {
 
-                if (myRecycleViewIsNullAdapter==null) {
+                if (myRecycleViewIsNullAdapters==null) {
                     ArrayList<String>arrayListIsNull1cData=new ArrayList<>();
                     arrayListIsNull1cData.add("IsNull1cPayCommit");
-                    myRecycleViewIsNullAdapter = new MyRecycleViewIsNullAdapter(arrayListIsNull1cData,getContext());
-                    myRecycleViewIsNullAdapter.notifyDataSetChanged();
-                    recycleview_comminingpprices.setAdapter(myRecycleViewIsNullAdapter);
+                    myRecycleViewIsNullAdapters = new MyRecycleViewIsNullAdapters(arrayListIsNull1cData,getContext());
+                    myRecycleViewIsNullAdapters.notifyDataSetChanged();
+                    recycleview_comminingpprices.setAdapter(myRecycleViewIsNullAdapters);
                     recycleview_comminingpprices.getAdapter().notifyDataSetChanged();
                 }
                 Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
