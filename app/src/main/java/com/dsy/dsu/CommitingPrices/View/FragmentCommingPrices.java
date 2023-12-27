@@ -261,7 +261,7 @@ public class FragmentCommingPrices extends Fragment {
                 if (myRecycleViewIsNullAdapter==null) {
                     ArrayList<String>arrayListIsNull1cData=new ArrayList<>();
                     arrayListIsNull1cData.add("IsNull1cPayCommit");
-                    myRecycleViewIsNullAdapter = new MyRecycleViewIsNullAdapter(arrayListIsNull1cData);
+                    myRecycleViewIsNullAdapter = new MyRecycleViewIsNullAdapter(arrayListIsNull1cData,getContext());
                     myRecycleViewIsNullAdapter.notifyDataSetChanged();
                     recycleview_comminingpprices.setAdapter(myRecycleViewIsNullAdapter);
                     recycleview_comminingpprices.getAdapter().notifyDataSetChanged();
@@ -341,9 +341,11 @@ public class FragmentCommingPrices extends Fragment {
         // TODO: 09.11.2023 ВТОРОЯ Rereview
         class MyRecycleViewIsNullAdapter extends RecyclerView.Adapter<MyViewHolder> {
             private ArrayList<String> arrayListIsNull1cData=new ArrayList<>();
-            public MyRecycleViewIsNullAdapter(@NotNull ArrayList<String>arrayListIsNull1cData) {
+            Context context;
+            public MyRecycleViewIsNullAdapter(@NotNull ArrayList<String>arrayListIsNull1cData,@NotNull Context context) {
                 // super();
                 this.arrayListIsNull1cData = arrayListIsNull1cData;
+                this.context = context;
                 Log.i(this.getClass().getName(), " arrayListIsNull1cData.size() " + arrayListIsNull1cData.size());
 
             }
@@ -456,7 +458,7 @@ public class FragmentCommingPrices extends Fragment {
                    // }
 
                     // TODO: 22.03.2022
-                    myViewHolder = new MyViewHolder(viewГлавныйВидДляRecyclleViewДляСогласованияISNull);
+                    myViewHolder = new MyViewHolder(viewГлавныйВидДляRecyclleViewДляСогласованияISNull,getContext());
                     Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                             " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                             " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
@@ -535,11 +537,13 @@ public class FragmentCommingPrices extends Fragment {
             private      MaterialButton КнопкаСогласованиеОтказ,КнопкаУспешноеСогласования;
             private     TableLayout tableLayoutcommitpayfiles,tableLayoutcommitpay;
             protected ProgressBar progressbarfilepay;
+            Context context;
 
             // TODO: 02.03.2022
-            public MyViewHolder(@NonNull View itemView) {
+            public MyViewHolder(@NonNull View itemView,@NotNull Context context) {
                 super(itemView);
                 try{
+                    this.context=context;
                     // TODO: 02.03.2022
                     МетодИнициализацииКомпонетовЗаданияCardView(itemView);
                     // TODO: 01.03.2022

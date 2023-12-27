@@ -1,5 +1,4 @@
-/*
-package com.dsy.dsu.CommitingPrices.View;
+package com.dsy.dsu.CommitingPrices.View;// TODO: 27.12.2023 Recyreview is null
 
 import android.content.Context;
 import android.util.Log;
@@ -10,48 +9,37 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.dsy.dsu.CommitingPrices.View.FragmentCommingPrices;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.R;
 
 import org.jetbrains.annotations.NotNull;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
 
 // TODO: 09.11.2023 ВТОРОЯ Rereview
-public class RecyclerViewProcessorIsNull extends RecyclerView.Adapter<MyViewHolderComminingPrices2> {
-
-    private    Context context;
-    private MyViewHolderComminingPrices2 myViewHolderComminingPrices2;
-    private ConcurrentHashMap<String,Boolean> concurrentHashMapIsNull ;
-
-
-    public RecyclerViewProcessorIsNull(@NotNull ConcurrentHashMap<String,Boolean> concurrentHashMapIsNull,@NotNull Context context) {
-        // TODO: 26.12.2023
-        try{
-            this.  concurrentHashMapIsNull=concurrentHashMapIsNull;
-            this.context = context;
-            Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n" +
-                    " concurrentHashMapIsNull " +concurrentHashMapIsNull);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                    " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-            new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
-                    Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
-        }
+public  class MyRecycleViewIsNullAdapter extends RecyclerView.Adapter<MyViewHolder> {
+    private ArrayList<String> arrayListIsNull1cData=new ArrayList<>();
+    Context context;
+    MyViewHolder viewHolder;
+    public MyRecycleViewIsNullAdapter(@NotNull ArrayList<String>arrayListIsNull1cData,@NotNull Context context) {
+        // super();
+        this.arrayListIsNull1cData = arrayListIsNull1cData;
+        this.context = context;
+        Log.i(this.getClass().getName(), " arrayListIsNull1cData.size() " + arrayListIsNull1cData.size());
 
     }
 
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolderComminingPrices2 holder, @NonNull int position, @NonNull List<Object> payloads) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, @NonNull int position, @NonNull List<Object> payloads) {
         try {
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"+"   onBindViewHolder  position" + position);
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n" +"arrayListIsNull1cData "
+                    + arrayListIsNull1cData + " position " +position);
+            // TODO: 30.03.2022
         } catch (Exception e) {
             e.printStackTrace();
             Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
@@ -74,25 +62,25 @@ public class RecyclerViewProcessorIsNull extends RecyclerView.Adapter<MyViewHold
     }
 
     @Override
-    public void onViewRecycled(@NonNull MyViewHolderComminingPrices2 holder) {
+    public void onViewRecycled(@NonNull MyViewHolder holder) {
         super.onViewRecycled(holder);
     }
 
     @Override
-    public boolean onFailedToRecycleView(@NonNull MyViewHolderComminingPrices2 holder) {
+    public boolean onFailedToRecycleView(@NonNull MyViewHolder holder) {
         // TODO: 03.11.2023 Parent
         return super.onFailedToRecycleView(holder);
 
     }
 
     @Override
-    public void onViewAttachedToWindow(@NonNull MyViewHolderComminingPrices2 holder) {
+    public void onViewAttachedToWindow(@NonNull MyViewHolder holder) {
         super.onViewAttachedToWindow(holder);
 
     }
 
     @Override
-    public void onViewDetachedFromWindow(@NonNull MyViewHolderComminingPrices2 holder) {
+    public void onViewDetachedFromWindow(@NonNull MyViewHolder holder) {
         super.onViewDetachedFromWindow(holder);
     }
 
@@ -115,9 +103,8 @@ public class RecyclerViewProcessorIsNull extends RecyclerView.Adapter<MyViewHold
         Log.i(this.getClass().getName(), "      holder.textView1  position " + position);
         try {
             // TODO: 30.03.2022
-            Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n");
+            Log.i(this.getClass().getName(), "   getItemViewType  position" + position);
+            // TODO: 30.03.2022
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -133,28 +120,28 @@ public class RecyclerViewProcessorIsNull extends RecyclerView.Adapter<MyViewHold
 
     @NonNull
     @Override
-    public MyViewHolderComminingPrices2 onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View ViewIsNUll = null;
+    public MyViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+        View viewГлавныйВидДляRecyclleViewДляСогласованияISNull = null;
         try {
-          Boolean StatusProccessrNull=  concurrentHashMapIsNull.get("RecyclerViewProcessorIsNull");
 
-            if (StatusProccessrNull ) {
-                ViewIsNUll = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.simple_for_commitpay_cardview1empty_in_prossering, parent, false);
 
-            }else {
-                ViewIsNUll = LayoutInflater.from(parent.getContext())
-                        .inflate(R.layout.simple_for_commitpay_dont_jsonot1c, parent, false);
+            ///if (asyncTaskLoader.isStarted() ) {
+            viewГлавныйВидДляRecyclleViewДляСогласованияISNull = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.simple_for_commitpay_cardview1empty_in_prossering, parent, false);
 
-            }
-            // TODO: 22.03.2022 is nnull
-            myViewHolderComminingPrices2 = new MyViewHolderComminingPrices2(ViewIsNUll);
-            // TODO: 26.12.2023
+
+            // }else {
+            viewГлавныйВидДляRecyclleViewДляСогласованияISNull = LayoutInflater.from(parent.getContext())
+                    .inflate(R.layout.simple_for_commitpay_dont_jsonot1c, parent, false);
+
+            // }
+
+            // TODO: 22.03.2022
+            viewHolder = new MyViewHolder(viewГлавныйВидДляRecyclleViewДляСогласованияISNull,context);
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
-                    + "   ViewIsNUll" + ViewIsNUll + " StatusProccessrNull " +
-                    " " +StatusProccessrNull);
+                    + "   viewГлавныйВидДляRecyclleViewДляСогласованияISNull" + viewГлавныйВидДляRecyclleViewДляСогласованияISNull);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -163,12 +150,12 @@ public class RecyclerViewProcessorIsNull extends RecyclerView.Adapter<MyViewHold
             new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
                     Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
         }
-        return myViewHolderComminingPrices2;
+        return viewHolder;
 
     }
 
     @Override
-    public void onBindViewHolder(@NonNull MyViewHolderComminingPrices2 holder, int position) {
+    public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
         try {
 
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
@@ -201,22 +188,17 @@ public class RecyclerViewProcessorIsNull extends RecyclerView.Adapter<MyViewHold
     @Override
     public int getItemCount() {
         // TODO: 02.03.2022
-        int КоличесвоСтрок=0;
-        try{
-            // TODO: 26.12.2023 count rows
-            КоличесвоСтрок = concurrentHashMapIsNull.size();
-            Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
-                    + " КоличесвоСтрок " +КоличесвоСтрок);
-        } catch (Exception e) {
-            e.printStackTrace();
-            Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
-                    " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
-            new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
-                    Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
+        int КоличесвоСтрок;
+        if (arrayListIsNull1cData.size()>0) {
+            КоличесвоСтрок = arrayListIsNull1cData.size();
+            Log.d(this.getClass().getName(), "arrayListIsNull1cData.size() " + arrayListIsNull1cData.size() + " КоличесвоСтрок " +КоличесвоСтрок);
+        } else {
+            КоличесвоСтрок=1;
+            Log.d(this.getClass().getName(), "arrayListIsNull1cData.size() " + arrayListIsNull1cData.size() + " холостой ход КоличесвоСтрок " +КоличесвоСтрок);
         }
+        Log.d(this.getClass().getName(), "arrayListIsNull1cData.size() " + arrayListIsNull1cData.size() + " КоличесвоСтрок " +КоличесвоСтрок);
+
         // TODO: 28.02.2022
         return КоличесвоСтрок ;
     }
-}*/
+}//TODO  конец два22
