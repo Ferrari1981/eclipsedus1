@@ -9,9 +9,9 @@ import android.view.ViewGroup;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.dsy.dsu.CommitingPrices.View.FragmentCommingPrices;
 import com.dsy.dsu.Errors.Class_Generation_Errors;
 import com.dsy.dsu.R;
+import com.fasterxml.jackson.databind.JsonNode;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -19,20 +19,21 @@ import java.util.ArrayList;
 import java.util.List;
 
 // TODO: 09.11.2023 ВТОРОЯ Rereview
-public  class MyRecycleViewIsNullAdapters extends RecyclerView.Adapter<MyViewHolders> {
-    private ArrayList<String> arrayListIsNull1cData=new ArrayList<>();
+public  class MyRecycleViewIsAdapters extends RecyclerView.Adapter<MyViewHolders> {
+
+    private JsonNode jsonNode;
     Context context;
     MyViewHolders viewHolders;
-    public MyRecycleViewIsNullAdapters(@NotNull ArrayList<String>arrayListIsNull1cData,@NotNull Context context) {
+    public MyRecycleViewIsAdapters(@NotNull JsonNode jsonNode, @NotNull Context context) {
         // super();
         try{
-        this.arrayListIsNull1cData = arrayListIsNull1cData;
+        this.jsonNode = jsonNode;
         this.context = context;
-            Log.d(this.getClass().getName(),"\n"
-                    + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
-                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                    " arrayListIsNull1cData.size() " + arrayListIsNull1cData.size());
+        Log.d(this.getClass().getName(),"\n"
+                + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
+                " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
+                " jsonNode.size() " + jsonNode.size());
     } catch (Exception e) {
         e.printStackTrace();
         Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
@@ -41,7 +42,8 @@ public  class MyRecycleViewIsNullAdapters extends RecyclerView.Adapter<MyViewHol
                 Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
     }
 
-    }
+
+}
 
 
     @Override
@@ -49,8 +51,8 @@ public  class MyRecycleViewIsNullAdapters extends RecyclerView.Adapter<MyViewHol
         try {
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
-                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n" +"arrayListIsNull1cData "
-                    + arrayListIsNull1cData + " position " +position);
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n" +"jsonNode "
+                    + jsonNode + " position " +position);
             // TODO: 30.03.2022
         } catch (Exception e) {
             e.printStackTrace();
@@ -133,27 +135,53 @@ public  class MyRecycleViewIsNullAdapters extends RecyclerView.Adapter<MyViewHol
     @NonNull
     @Override
     public MyViewHolders onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View viewГлавныйВидДляRecyclleViewДляСогласованияISNull = null;
+        View viewComminigPrices = null;
         try {
 
 
-            ///if (asyncTaskLoader.isStarted() ) {
+   /*         ///if (asyncTaskLoader.isStarted() ) {
             viewГлавныйВидДляRecyclleViewДляСогласованияISNull = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.simple_for_commitpay_cardview1empty_in_prossering, parent, false);
 
 
             // }else {
             viewГлавныйВидДляRecyclleViewДляСогласованияISNull = LayoutInflater.from(parent.getContext())
-                    .inflate(R.layout.simple_for_commitpay_dont_jsonot1c, parent, false);
+                    .inflate(R.layout.simple_for_commitpay_dont_jsonot1c, parent, false);*/
 
             // }
 
+
+
+                             /*   viewГлавныйВидДляRecyclleViewДляСогласования = LayoutInflater.from(parent.getContext())
+                                        .inflate(R.layout.simple_for_commitpay_cardview1, parent, false);//todo old simple_for_takst_cardview1*/
+                             /*   viewГлавныйВидДляRecyclleViewДляСогласования = LayoutInflater.from(parent.getContext())
+                                        .inflate(R.layout.simple_for_commitpay_cardview_file, parent, false);//todo old simple_for_takst_cardview1*/
+                              /*  viewГлавныйВидДляRecyclleViewДляСогласования = LayoutInflater.from(parent.getContext())
+                                        .inflate(R.layout.simple_for_commitpay_cardview_grid_file, parent, false);//todo old simple_for_takst_cardview1*/
+            viewComminigPrices = LayoutInflater.from(parent.getContext())
+                            .inflate(R.layout.simple_for_commitpay_cardview_grid_file, parent, false);//todo old simple_for_takst_cardview1
+
+
+            viewComminigPrices = LayoutInflater.from(parent.getContext())
+                            .inflate(R.layout.simple_for_commitpay_cardview1empty, parent, false);//todo old simple_for_takst_cardview1
+
+
+
+            viewComminigPrices = LayoutInflater.from(parent.getContext())
+                            .inflate(R.layout.simple_for_commitpay_cardview1empty_in_prossering, parent, false);
+
+            viewComminigPrices = LayoutInflater.from(parent.getContext())
+                            .inflate(R.layout.simple_for_commitpay_dont_jsonot1c, parent, false);
+
+
+
             // TODO: 22.03.2022
-            viewHolders = new MyViewHolders(viewГлавныйВидДляRecyclleViewДляСогласованияISNull,context);
+            viewHolders = new MyViewHolders(viewComminigPrices,context);
+            // TODO: 27.12.2023
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"
-                    + "   viewГлавныйВидДляRecyclleViewДляСогласованияISNull" + viewГлавныйВидДляRecyclleViewДляСогласованияISNull);
+                    + "   viewComminigPrices" + viewComminigPrices);
 
         } catch (Exception e) {
             e.printStackTrace();
@@ -202,18 +230,18 @@ public  class MyRecycleViewIsNullAdapters extends RecyclerView.Adapter<MyViewHol
         // TODO: 02.03.2022
         int КоличесвоСтрок = 0;
         try{
-        if (arrayListIsNull1cData.size()>0) {
-            КоличесвоСтрок = arrayListIsNull1cData.size();
-            Log.d(this.getClass().getName(), "arrayListIsNull1cData.size() " + arrayListIsNull1cData.size() + " КоличесвоСтрок " +КоличесвоСтрок);
+        if (jsonNode!=null && jsonNode.size()>0) {
+            КоличесвоСтрок = jsonNode.size();
+            Log.d(this.getClass().getName(), "jsonNode.size() " + jsonNode.size() + " КоличесвоСтрок " +КоличесвоСтрок);
         } else {
             КоличесвоСтрок=1;
-            Log.d(this.getClass().getName(), "arrayListIsNull1cData.size() " + arrayListIsNull1cData.size() + " холостой ход КоличесвоСтрок " +КоличесвоСтрок);
+            Log.d(this.getClass().getName(), "jsonNode.size() " + jsonNode.size() + " холостой ход КоличесвоСтрок " +КоличесвоСтрок);
         }
         Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                 " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                 " line " + Thread.currentThread().getStackTrace()[2].getLineNumber()+
-                " КоличесвоСтрок " + КоличесвоСтрок);
+                " jsonNode.size() " + jsonNode.size());
     } catch (Exception e) {
         e.printStackTrace();
         Log.e(this.getClass().getName(), "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
@@ -221,7 +249,6 @@ public  class MyRecycleViewIsNullAdapters extends RecyclerView.Adapter<MyViewHol
         new Class_Generation_Errors(context).МетодЗаписиВЖурналНовойОшибки(e.toString(), this.getClass().getName(),
                 Thread.currentThread().getStackTrace()[2].getMethodName(), Thread.currentThread().getStackTrace()[2].getLineNumber());
     }
-
         // TODO: 28.02.2022
         return КоличесвоСтрок ;
     }
