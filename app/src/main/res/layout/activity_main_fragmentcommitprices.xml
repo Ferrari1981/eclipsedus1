@@ -158,32 +158,28 @@
                     android:layout_above="@+id/bottomnavigationw_commintingprices"
                     android:layout_width="match_parent"
                     android:indeterminateTint="#858888"
-                    android:layout_margin="1dp"
-                    android:padding="1dp"
                     android:layout_height="6dp"
                     android:scaleY="3"
                     android:scaleX="1"
                     android:layout_centerHorizontal="true"
                     android:indeterminate="true"
-                    android:background="@drawable/disayn_line_tablerow7"
                     android:visibility="visible" />
 
 
                 <com.google.android.material.bottomnavigation.BottomNavigationView
                     android:id="@+id/bottomnavigationw_commintingprices"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp"
+                    android:layout_height="55dp"
                     android:layout_alignParentBottom="true"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginStart="2dp"
-                    android:layout_marginTop="2dp"
-                    android:layout_marginEnd="2dp"
-                    android:layout_marginBottom="2dp"
-                    android:background="#FFD5D9DA"
+                    android:layout_margin="5dp"
+                    android:padding="2dp"
+
+                    android:background="@drawable/style_for_newstypespinners_ietm8"
                     android:scrollbarFadeDuration="@integer/config_navAnimTime"
-                    android:translationZ="5dp"
+                    android:translationZ="1dp"
                     app:itemIconTint="#0E0E0E"
-                    app:menu="@menu/manu_navigator_buttom_for_commitpay_search"
+                    app:menu="@menu/manu_navigator_buttom_for_comminingprices"
                     app:popupTheme="@style/fortasknavigator"
                     tools:ignore="MissingConstraints" />
             </RelativeLayout>

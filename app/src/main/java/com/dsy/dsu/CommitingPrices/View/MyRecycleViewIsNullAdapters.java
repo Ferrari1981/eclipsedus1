@@ -17,13 +17,14 @@ import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Supplier;
 
 // TODO: 09.11.2023 ВТОРОЯ Rereview
 public  class MyRecycleViewIsNullAdapters extends RecyclerView.Adapter<MyViewHolders> {
-    private ArrayList<String> arrayListIsNull1cData=new ArrayList<>();
+    private ArrayList<Boolean> arrayListIsNull1cData=new ArrayList<>();
     Context context;
     MyViewHolders viewHolders;
-    public MyRecycleViewIsNullAdapters(@NotNull ArrayList<String>arrayListIsNull1cData,@NotNull Context context) {
+    public MyRecycleViewIsNullAdapters(@NotNull ArrayList<Boolean>arrayListIsNull1cData,@NotNull Context context) {
         // super();
         try{
         this.arrayListIsNull1cData = arrayListIsNull1cData;
@@ -135,21 +136,20 @@ public  class MyRecycleViewIsNullAdapters extends RecyclerView.Adapter<MyViewHol
     public MyViewHolders onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View viewГлавныйВидДляRecyclleViewДляСогласованияISNull = null;
         try {
-
-
-            ///if (asyncTaskLoader.isStarted() ) {
+// TODO: 27.12.2023 загрузка когда нет данных  
+        Boolean СтатусЗагрузки=    arrayListIsNull1cData.stream().findFirst().get();
+        
+          if (СтатусЗагрузки==false) {
             viewГлавныйВидДляRecyclleViewДляСогласованияISNull = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.simple_for_commitpay_cardview1empty_in_prossering, parent, false);
-
-
-            // }else {
+        }else {
+              
             viewГлавныйВидДляRecyclleViewДляСогласованияISNull = LayoutInflater.from(parent.getContext())
                     .inflate(R.layout.simple_for_commitpay_dont_jsonot1c, parent, false);
-
-            // }
-
+            }
             // TODO: 22.03.2022
             viewHolders = new MyViewHolders(viewГлавныйВидДляRecyclleViewДляСогласованияISNull,context);
+          
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"

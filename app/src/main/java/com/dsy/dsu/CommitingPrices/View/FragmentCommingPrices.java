@@ -146,7 +146,7 @@ public class FragmentCommingPrices extends Fragment {
             // TODO: 27.12.2023  начинаем запуск is null
 
             // TODO: 26.12.2023
-            biznesLogicainnerFragment.startingInsertRecyreViewIsNull();
+            biznesLogicainnerFragment.startingInsertRecyreViewIsNull(true);
 
             biznesLogicainnerFragment.  МетодИнициализацииRecycleViewДляЗадач();
 
@@ -250,10 +250,10 @@ public class FragmentCommingPrices extends Fragment {
 // TODO: 26.12.2023 download one NULL data from 1c  Согласование Цен
 
 
-        void startingInsertRecyreViewIsNull() {
+        void startingInsertRecyreViewIsNull(@NotNull Boolean СтатусЗагрузки ) {
             try {
-                    ArrayList<String>arrayListIsNull1cData=new ArrayList<>();
-                    arrayListIsNull1cData.add("IsNull1cPayCommit");
+                    ArrayList<Boolean>arrayListIsNull1cData=new ArrayList<>();
+                    arrayListIsNull1cData.add(СтатусЗагрузки);
                     myRecycleViewIsNullAdapters = new MyRecycleViewIsNullAdapters(arrayListIsNull1cData,getContext());
                     myRecycleViewIsNullAdapters.notifyDataSetChanged();
                     recycleview_comminingpprices.setAdapter(myRecycleViewIsNullAdapters);
