@@ -24,7 +24,9 @@ public class StartingLiveDataJsonByte {
   private   Context context;
   private   FragmentCommingPrices.BiznesLogicainnerFragment biznesLogicainnerFragment;
     @SuppressLint("SuspiciousIndentation")
-    public StartingLiveDataJsonByte(@NotNull  ModelComminingPrisesByte modelComminingPrisesByte , @NotNull Context context,@NotNull FragmentCommingPrices.BiznesLogicainnerFragment biznesLogicainnerFragment) {
+    public StartingLiveDataJsonByte(@NotNull  ModelComminingPrisesByte modelComminingPrisesByte ,
+                                    @NotNull Context context,
+                                    @NotNull FragmentCommingPrices.BiznesLogicainnerFragment biznesLogicainnerFragment) {
         try{
         this.modelComminingPrisesByte = modelComminingPrisesByte;
         this.context = context;
@@ -66,6 +68,8 @@ public class StartingLiveDataJsonByte {
 
 
                         biznesLogicainnerFragment.completeIsNullRecyreView();
+
+                        biznesLogicainnerFragment.   dontvissiblePrograssBar();
 
                         // TODO: 26.12.2023 пришли байты
                         Log.d(this.getClass().getName(),"\n"

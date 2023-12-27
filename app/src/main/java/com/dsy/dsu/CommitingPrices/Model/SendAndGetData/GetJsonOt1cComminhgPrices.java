@@ -62,8 +62,8 @@ public class GetJsonOt1cComminhgPrices extends  GetJsonOt1cComminhgPricesParent 
                         return chain.proceed(newRequest);
                     }
                 }).connectTimeout(3, TimeUnit.SECONDS)
-                .writeTimeout(2, TimeUnit.MINUTES)
-                .readTimeout(2, TimeUnit.MINUTES)
+                .writeTimeout(10, TimeUnit.SECONDS)
+                .readTimeout(10, TimeUnit.SECONDS)
                 .build();
         // TODO: 25.10.2022 Диспечер
         Dispatcher dispatcher=  okHttpClient1cСогласованиеЦенbyte.dispatcher();

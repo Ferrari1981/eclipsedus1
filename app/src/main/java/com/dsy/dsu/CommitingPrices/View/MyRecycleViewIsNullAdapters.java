@@ -169,6 +169,13 @@ public  class MyRecycleViewIsNullAdapters extends RecyclerView.Adapter<MyViewHol
             // TODO: 22.03.2022
             viewHolders = new MyViewHolders(viewГлавныйВидДляRecyclleViewДляСогласованияISNull,context);
 
+
+            if (СтатусЗагрузки ) {
+                // TODO: 26.12.2023
+                biznesLogicainnerFragment.getmodelByte();
+            }
+
+
             Log.d(this.getClass().getName(), "\n" + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
                     " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
                     " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"

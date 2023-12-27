@@ -20,6 +20,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
+import android.widget.ProgressBar;
 
 import com.dsy.dsu.CommitingPrices.Model.Handler.HandlerCommintPrices;
 import com.dsy.dsu.CommitingPrices.Model.startingViewModels.StartingLiveDataJsonByte;
@@ -68,7 +69,7 @@ public class FragmentCommingPrices extends Fragment {
 
     private Animation animationДляСогласования;
 
-    Handler handler;
+    private ProgressBar prograessbar_commintingprices ;
 
 
     public FragmentCommingPrices() {
@@ -148,8 +149,7 @@ public class FragmentCommingPrices extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         try{
             recycleview_comminingpprices = view.findViewById(R.id.recycleview_comminingpprices);
-
-
+            prograessbar_commintingprices= view.findViewById(R.id.prograessbar_commintingprices);
 
               // TODO: 27.12.2023  начинаем запуск is null
             biznesLogicainnerFragment.startIsNullRecyreView( );
@@ -178,8 +178,8 @@ public class FragmentCommingPrices extends Fragment {
         super.onStart();
  try{
 
-     // TODO: 26.12.2023
-     biznesLogicainnerFragment.getmodelByte();
+/*     // TODO: 26.12.2023
+     biznesLogicainnerFragment.getmodelByte();*/
 
         Log.d(this.getClass().getName(),"\n"
                 + " class " + Thread.currentThread().getStackTrace()[2].getClassName() + "\n" +
@@ -292,7 +292,7 @@ public class FragmentCommingPrices extends Fragment {
         public void completeIsNullRecyreView() {
             try{
                 if (myRecycleViewIsNullAdapters!=null) {
-                    ArrayList<Boolean> arrayListIsNull1cData=new ArrayList<>();
+                  ArrayList<Boolean> arrayListIsNull1cData=new ArrayList<>();
                     arrayListIsNull1cData.add(false);
                     myRecycleViewIsNullAdapters.arrayListIsNull1cData=arrayListIsNull1cData;
                     myRecycleViewIsNullAdapters.notifyDataSetChanged();
@@ -300,6 +300,10 @@ public class FragmentCommingPrices extends Fragment {
                     recycleview_comminingpprices.swapAdapter(recyclerViewAdapter,true);
                     recycleview_comminingpprices.getAdapter().notifyDataSetChanged();
                 }
+
+
+
+
                 Log.d(this.getClass().getName(), "\n" + " class " +
                         Thread.currentThread().getStackTrace()[2].getClassName()
                         + "\n" +
@@ -317,11 +321,28 @@ public class FragmentCommingPrices extends Fragment {
 
         }
 
+        public void dontvissiblePrograssBar() {
+            // TODO: 27.12.2023
+            try{
+            prograessbar_commintingprices.setVisibility(View.INVISIBLE);
+                prograessbar_commintingprices.requestLayout();
+                prograessbar_commintingprices.refreshDrawableState();
 
-
-
-
-
+            Log.d(this.getClass().getName(), "\n" + " class " +
+                    Thread.currentThread().getStackTrace()[2].getClassName()
+                    + "\n" +
+                    " metod " + Thread.currentThread().getStackTrace()[2].getMethodName() + "\n" +
+                    " line " + Thread.currentThread().getStackTrace()[2].getLineNumber() + "\n"  + " myRecycleViewIsNullAdapters " +myRecycleViewIsNullAdapters);
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.e(getContext().getClass().getName(),
+                    "Ошибка " + e + " Метод :" + Thread.currentThread().getStackTrace()[2].getMethodName() +
+                            " Линия  :" + Thread.currentThread().getStackTrace()[2].getLineNumber());
+            new   Class_Generation_Errors(getContext()).МетодЗаписиВЖурналНовойОшибки(e.toString(),
+                    this.getClass().getName().toString(), Thread.currentThread().getStackTrace()[2].getMethodName().toString(),
+                    Thread.currentThread().getStackTrace()[2].getLineNumber());
+        }
+        }
 
 
         void МетодИнициализацииRecycleViewДляЗадач() {
