@@ -1,3 +1,4 @@
+/*
 package com.dsy.dsu.CommitingPrices.View;
 
 import android.util.Log;
@@ -67,4 +68,4 @@ public class MyViewHolderComminingPrices2 extends RecyclerView.ViewHolder {
 
 
     }
-}
+}*/

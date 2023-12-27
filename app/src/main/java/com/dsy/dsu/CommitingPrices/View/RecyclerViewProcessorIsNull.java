@@ -1,3 +1,4 @@
+/*
 package com.dsy.dsu.CommitingPrices.View;
 
 import android.content.Context;
@@ -218,4 +219,4 @@ public class RecyclerViewProcessorIsNull extends RecyclerView.Adapter<MyViewHold
         // TODO: 28.02.2022
         return КоличесвоСтрок ;
     }
-}
+}*/
